@@ -1,6 +1,10 @@
 import React from "react";
 import styles from "./Header.module.scss";
-
+import heart from '../../icons/heart.svg';
+import chatIcon from '../../icons/chat-text.svg';
+import plusSquare from '../../icons/plus-square.svg';
+import personCircle from '../../icons/person-circle.svg';
+import boxArrow from '../../icons/box-arrow-right.svg';
 
 const Header = () => {
     return (
@@ -24,31 +28,23 @@ const Header = () => {
                 <ul className={styles['main-nav']}>
                     
                     <li className={styles['main-nav__nav-link']}>
-                    <img src="../../../assets/icons/house-door.svg" />
+                    <img src={heart} alt="hear icon" />
                     </li>
 
                     <li className={styles['main-nav__nav-link main-nav__nav-link--notification']}>
-                    <img src="../../../assets/icons/chat-text.svg" />
+                    <img src={chatIcon} alt="chat icon" />
                     </li>
 
                     <li className={styles['main-nav__nav-link']}>
-                    <img src="../../../assets/icons/plus-square.svg" />
+                    <img src={plusSquare} alt="plus square"/>
                     </li>
 
                     <li className={styles['main-nav__nav-link']}>
-                    <img src="../../../assets/icons/bell.svg" />
+                    <img src={personCircle} alt="person circle" />    
                     </li>
 
                     <li className={styles['main-nav__nav-link']}>
-                    <img src="../../../assets/icons/bell-fill.svg" />
-                    </li>
-
-                    <li className={styles['main-nav__nav-link']}>
-                    <img src="../../../assets/icons/person-circle.svg" />    
-                    </li>
-
-                    <li className={styles['main-nav__nav-link']}>
-                    <img src="../../../assets/icons/box-arrow-right.svg" />
+                    <img src={boxArrow} alt="box arrow" />
                     </li>
                 </ul>
             </div>

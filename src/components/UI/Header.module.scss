@@ -79,7 +79,8 @@ body {
 
       li {
         background-color: white;
-        
+        list-style-type: none;
+
         &:hover {
           background-color: lighten($color-grey, 10%);
         }
