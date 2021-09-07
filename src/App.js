@@ -1,5 +1,6 @@
 import './App.css';
 import Header from './components/UI/Header';
+import PostCard from './components/UI/PostCard';
 
 function App() {
   return (
