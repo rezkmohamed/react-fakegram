@@ -1,14 +1,15 @@
 import React from "react";
 import styles from "./PostCard.module.css";
 import NoProPic from '../../assets/no-pro-pic.png';
+import { Link } from "react-router-dom";
 
 const PostCard = (props) => {
     return (
-        <div>
+        <React.Fragment>
                 <div className={styles["instagram-card"]}>
                     <div className={styles["instagram-card-header"]}>
                     <img src={NoProPic} className={styles["instagram-card-user-image"]} alt=""/>
-                    <a className={styles["instagram-card-user-name"]} href="https://www.instagram.com/followmeto/">followmeto</a>
+                    <a className={styles["instagram-card-user-name"]} href="https://www.instagram.com/followmeto/">profile.test</a>
                     <div className={styles["instagram-card-time"]} >58 min</div>
                     </div>
                 
@@ -26,13 +27,12 @@ const PostCard = (props) => {
                     </div>
                     
                     <div className={styles["instagram-card-footer"]}>
-                    <a className={styles["footer-action-icons"]} href="#" ><i className={styles["fa fa-heart-o"]}></i></a>
+                    <Link className={styles["footer-action-icons"]} href="#" ><i className={styles["fa fa-heart-o"]}></i></Link>
                     <input className={styles["comments-input"]} type="text" placeholder="Aggiungi un commento"/>
-                    <a className={styles["footer-action-icons"]}  href="#"><i className={styles["fa fa-ellipsis-h"]}></i></a>
+                    <Link className={styles["footer-action-icons"]}  href="#"><i className={styles["fa fa-ellipsis-h"]}></i></Link>
                     </div>
-
                 </div>
-        </div>
+        </React.Fragment>
     );
 }
 

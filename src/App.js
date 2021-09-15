@@ -2,7 +2,6 @@ import React from 'react';
 import { Route } from 'react-router';
 import './App.css';
 import Homepage from './components/pages/Homepage/Homepage';
-import PostCard from './components/UI/PostCard';
 
 function App() {
   return (
