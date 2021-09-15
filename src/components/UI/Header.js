@@ -8,47 +8,38 @@ import boxArrow from '../../icons/box-arrow-right.svg';
 
 const Header = () => {
     return (
-        <nav className={styles.navbar}>
-            <div className={styles['inner-wrapper']}>
-                <div className={styles.navbar__logo}>
-                    <p>fakeGram</p>
-                </div>
-
-                <form >
-                    <div className={styles['search-box-wrapper']}>
-                    <input 
-                            type="text" 
-                            className={styles['search-box center']}
-                            placeholder="Cerca"
-                            name="search" />
-                    <i className={styles['fa fa-search search-box-icon']}></i>
-                    </div>
-                </form>
-
-                <ul className={styles['main-nav']}>
-                    
-                    <li className={styles['main-nav__nav-link']}>
-                    <img src={heart} alt="hear icon" />
-                    </li>
-
-                    <li className={styles['main-nav__nav-link main-nav__nav-link--notification']}>
-                    <img src={chatIcon} alt="chat icon" />
-                    </li>
-
-                    <li className={styles['main-nav__nav-link']}>
-                    <img src={plusSquare} alt="plus square"/>
-                    </li>
-
-                    <li className={styles['main-nav__nav-link']}>
-                    <img src={personCircle} alt="person circle" />    
-                    </li>
-
-                    <li className={styles['main-nav__nav-link']}>
-                    <img src={boxArrow} alt="box arrow" />
-                    </li>
-                </ul>
+            <div className={styles.navigation}>
+            <div className={styles.logo}>
+                <a className={styles['no-underline']} href="#">
+                FakeGram
+                </a>
             </div>
-        </nav>
+            <div className={styles['navigation-search-container']}>
+                <i className={styles['fa fa-search']}></i>
+                <input className={styles['search-field']} type="text" placeholder="Search" />
+                <div className={styles['search-container']}>
+                <div className={styles['search-container-box']}>
+                    <div className={styles['search-results']}>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div className={styles['navigation-icons']}>
+                <a target ="_blank" className={styles['navigation-link']}>
+                <img src={heart}/>
+                </a>
+                <a className={styles['navigation-link notifica']}>
+                    <img src={heart}/>
+                </a>
+                <a className={styles['navigation-link']}>
+                <img src={heart} />
+                </a>
+                <a id="signout" className={styles['navigation-link']}>
+                <img src={heart}/>
+                </a>
+            </div>
+            </div>
+
     );
 }
 
