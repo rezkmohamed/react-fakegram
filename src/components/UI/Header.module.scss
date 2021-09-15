@@ -90,6 +90,15 @@ body {
   text-decoration: none;
 }
 
+.navigation-icons {
+  display:flex;
+  justify-content: space-between;
+}
+
+.navigation-icon {
+  padding-left: 15px;
+}
+
 .navigation-link i {
   margin-left: 30px;
   color: black;
