@@ -1,13 +1,14 @@
+import React from 'react';
+import { Route } from 'react-router';
 import './App.css';
-import Header from './components/UI/Header';
+import Homepage from './components/pages/Homepage/Homepage';
 import PostCard from './components/UI/PostCard';
 
 function App() {
   return (
-    <div>
-      <Header />
-      <PostCard />
-    </div>
+    <React.Fragment>
+      <Route path="/" exact component={Homepage}/>
+    </React.Fragment>
   );
 }
 
