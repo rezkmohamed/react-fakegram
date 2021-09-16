@@ -4,6 +4,8 @@ import NoProPic from "../../assets/no-pro-pic.png";
 import SVG from 'react-inlinesvg';
 import classes from './PostCardWithPics.module.scss';
 import globalClasses from '../../assets/global-styles/bootstrap.min.module.css';
+import heartIcon from "../../icons/heart.svg";
+import commentIcon from "../../icons/chat.svg";
 
 
 const PostCardWithPics = (props) => {
@@ -18,7 +20,7 @@ const PostCardWithPics = (props) => {
                                 <circle clip-rule="evenodd" cx="40" cy="24" fill-rule="evenodd" r="4.5"></circle>
                             </SVG>
 
-                            <SVG xmlns="http://www.w3.org/2000/svg" id="like-filled" width="22" height="22" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                            {/* <SVG xmlns="http://www.w3.org/2000/svg" id="like-filled" width="22" height="22" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                             </SVG>
 
@@ -44,7 +46,7 @@ const PostCardWithPics = (props) => {
                             <SVG id="smiley" viewBox="0 0 48 48">
                                 <path d="M24 48C10.8 48 0 37.2 0 24S10.8 0 24 0s24 10.8 24 24-10.8 24-24 24zm0-45C12.4 3 3 12.4 3 24s9.4 21 21 21 21-9.4 21-21S35.6 3 24 3z"></path>
                                 <path d="M34.9 24c0-1.4-1.1-2.5-2.5-2.5s-2.5 1.1-2.5 2.5 1.1 2.5 2.5 2.5 2.5-1.1 2.5-2.5zm-21.8 0c0-1.4 1.1-2.5 2.5-2.5s2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5-2.5-1.1-2.5-2.5zM24 37.3c-5.2 0-8-3.5-8.2-3.7-.5-.6-.4-1.6.2-2.1.6-.5 1.6-.4 2.1.2.1.1 2.1 2.5 5.8 2.5 3.7 0 5.8-2.5 5.8-2.5.5-.6 1.5-.7 2.1-.2.6.5.7 1.5.2 2.1 0 .2-2.8 3.7-8 3.7z"></path>
-                            </SVG>
+                            </SVG> */}
                         </div>
 
                         <article className={classes.instapost}>
@@ -76,7 +78,7 @@ const PostCardWithPics = (props) => {
                             </section>
                             <section className={classes['instapost__action']}>
                                 <button className={`${classes.btn} ${classes['btn-like']}`}>
-                                    <SVG className={classes['like-icon']}>
+                                    {/* <SVG className={classes['like-icon']}>
                                         <use xlinkHref="#like-filled" />
                                     </SVG>
                                     <SVG className={classes['like-icon']}>
@@ -84,12 +86,14 @@ const PostCardWithPics = (props) => {
                                     </SVG>
                                     <SVG className={classes['dislike-icon']}>
                                         <use xlinkHref="#dislike" />
-                                    </SVG>
+                                    </SVG> */}
+                                    <img src={heartIcon} id="like" alt="like icon"/>
                                 </button>
                                 <button className={`${classes.btn} ${classes['btn-comment']}`}>
-                                    <SVG>
+                                    <img src={commentIcon} alt="comment icon"/>
+                                    {/* <SVG>
                                         <use xlinkHref="#comment" />
-                                    </SVG>
+                                    </SVG> */}
                                 </button>
                             </section>
                             <section className={classes['instapost__likes']}>
@@ -101,20 +105,10 @@ const PostCardWithPics = (props) => {
                                     </Link> descrizione del post
                             </section>
                             <section className={classes['instapost__description']}>
-                                <div>
-                                    <Link clasName={`${classes.user} ${classes.instalink}`}>
+                                <Link className={`${classes.user} ${classes.instalink}`}>
                                         nickname
-                                    </Link>
-                                    <span>commento test a caso</span> 
-                                    <span style={{'padding-left': '3px', 'cursor': 'pointer'}} >(<span>
-                                        <SVG xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-hand-thumbs-up" viewBox="0 0 16 16">
-                                            <path d="M8.864.046C7.908-.193 7.02.53 6.956 1.466c-.072 1.051-.23 2.016-.428 2.59-.125.36-.479 1.013-1.04 1.639-.557.623-1.282 1.178-2.131 1.41C2.685 7.288 2 7.87 2 8.72v4.001c0 .845.682 1.464 1.448 1.545 1.07.114 1.564.415 2.068.723l.048.03c.272.165.578.348.97.484.397.136.861.217 1.466.217h3.5c.937 0 1.599-.477 1.934-1.064a1.86 1.86 0 0 0 .254-.912c0-.152-.023-.312-.077-.464.201-.263.38-.578.488-.901.11-.33.172-.762.004-1.149.069-.13.12-.269.159-.403.077-.27.113-.568.113-.857 0-.288-.036-.585-.113-.856a2.144 2.144 0 0 0-.138-.362 1.9 1.9 0 0 0 .234-1.734c-.206-.592-.682-1.1-1.2-1.272-.847-.282-1.803-.276-2.516-.211a9.84 9.84 0 0 0-.443.05 9.365 9.365 0 0 0-.062-4.509A1.38 1.38 0 0 0 9.125.111L8.864.046zM11.5 14.721H8c-.51 0-.863-.069-1.14-.164-.281-.097-.506-.228-.776-.393l-.04-.024c-.555-.339-1.198-.731-2.49-.868-.333-.036-.554-.29-.554-.55V8.72c0-.254.226-.543.62-.65 1.095-.3 1.977-.996 2.614-1.708.635-.71 1.064-1.475 1.238-1.978.243-.7.407-1.768.482-2.85.025-.362.36-.594.667-.518l.262.066c.16.04.258.143.288.255a8.34 8.34 0 0 1-.145 4.725.5.5 0 0 0 .595.644l.003-.001.014-.003.058-.014a8.908 8.908 0 0 1 1.036-.157c.663-.06 1.457-.054 2.11.164.175.058.45.3.57.65.107.308.087.67-.266 1.022l-.353.353.353.354c.043.043.105.141.154.315.048.167.075.37.075.581 0 .212-.027.414-.075.582-.05.174-.111.272-.154.315l-.353.353.353.354c.047.047.109.177.005.488a2.224 2.224 0 0 1-.505.805l-.353.353.353.354c.006.005.041.05.041.17a.866.866 0 0 1-.121.416c-.165.288-.503.56-1.066.56z"/>
-                                        </SVG>
-                                    </span>3)</span>
-                                </div>
+                                    </Link> commento test a caso
                             </section>
-
-
                             <section className={classes['instapost__timestamp']}>
                                 31/03/1999
                             </section>
