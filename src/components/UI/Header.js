@@ -11,7 +11,7 @@ const Header = () => {
     return (
             <div className={styles.navigation}>
                 <div className={styles.logo}>
-                    <Link className={styles['no-underline']} href="#">
+                    <Link to="/profilepage" className={styles['no-underline']} href="#">
                     FakeGram
                     </Link>
                 </div>

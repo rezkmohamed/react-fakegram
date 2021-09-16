@@ -6,7 +6,6 @@ import PostCardWithPics from "../../UI/PostCardWithPics";
 const Homepage = (props) => {
     return(
     <React.Fragment>
-        <Header></Header>
         <br />
         <br />
 
