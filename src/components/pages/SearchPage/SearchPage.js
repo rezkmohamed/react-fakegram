@@ -6,7 +6,7 @@ import globalClasses from "../../../assets/global-styles/bootstrap.min.module.cs
 
 const SearchPage = (props) => {
     return(
-        <div className={`${globalClasses.container} ${classes.container}`}>
+        <div className={`${classes.container}`}>
             <div>
                 <div className={`${globalClasses.media} ${classes.media}`}>
                     <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" 

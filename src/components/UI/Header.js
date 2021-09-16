@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Header.module.scss";
 //import heart from '../../icons/heart.svg';
@@ -7,7 +7,24 @@ import plusSquare from '../../icons/plus-square.svg';
 import personCircle from '../../icons/person-circle.svg';
 import boxArrow from '../../icons/box-arrow-right.svg';
 
+/**
+ * FIXARE IL SUBMIT DI UN NUOVO UTENTE, INDIRIZZANDO ALLA PAGINA DI RICERCA + L'UTENTE CERCATO.
+ */
 const Header = () => {
+    const [searchedUser, setSearchedUser] = useState('');
+
+    const onHandleSearchUser = (event) => {
+        console.log(event.target.value);
+        setSearchedUser(event.target.value);
+
+    }
+
+    const onSubmitSearchUser = (event) => {
+        if(event.key === 'Enter'){
+            console.log('submitted ' + searchedUser);
+        }
+    }
+
     return (
             <div className={styles.navigation}>
                 <div className={styles.logo}>
@@ -17,7 +34,7 @@ const Header = () => {
                 </div>
                 <div className={styles['navigation-search-container']}>
                     <i className={styles['fa fa-search']}></i>
-                    <input className={styles['search-field']} type="text" placeholder="Search" />
+                    <input className={styles['search-field']} value={searchedUser} onChange={onHandleSearchUser} onKeyDown={onSubmitSearchUser} type="text" placeholder="Search" />
                     <div className={styles['search-container']}>
                     <div className={styles['search-container-box']}>
                         <div className={styles['search-results']}>
