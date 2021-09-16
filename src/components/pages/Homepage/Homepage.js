@@ -8,6 +8,8 @@ const Homepage = (props) => {
     <React.Fragment>
         <Header></Header>
         <br />
+        <br />
+
         <PostCardWithPics />
         <PostCardWithPics />
         <PostCardWithPics />

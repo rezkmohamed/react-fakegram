@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import NoProPic from "../../assets/no-pro-pic.png";
 import SVG from 'react-inlinesvg';
 import classes from './PostCardWithPics.module.scss';
+import globalClasses from '../../assets/global-styles/bootstrap.min.module.css';
 
 
 const PostCardWithPics = (props) => {
     return (
         <React.Fragment>
-            <div className="col-12">
+            <div className={globalClasses['col-12']}>
                     <div className={classes.contents}>
                         <div className={classes.hidden}>
                             <SVG id="dots" viewBox="0 0 48 48">
@@ -52,7 +53,7 @@ const PostCardWithPics = (props) => {
                                     <img src={NoProPic} alt="profile pic"/>
                                 </Link>
                                 <div className={classes['profile-name']}>
-                                    <Link className={classes['user instalink']}>
+                                    <Link className={`${classes.user} ${classes.instalink}`}>
                                         nickname
                                     </Link>
                                 </div>
@@ -60,21 +61,21 @@ const PostCardWithPics = (props) => {
 
                             </header>
                             <section className={classes['instapost__image']}>
-                                <img className={classes['img img-0 show']} src={NoProPic} alt="immagine post" />
+                                <img className={`${classes.img} ${classes['img-0']} ${classes.show}`} src={NoProPic} alt="immagine post" />
                                 <div className={classes['like-heart']}>
                                     <SVG>
                                         <use xlinkHref="#dislike" />
                                     </SVG>
                                 </div>
-                                <div className={classes['ctrl ctrl-left hide']}>
+                                <div className={`${classes.ctrl} ${classes['ctrl-left']} ${classes.hide}`}>
                                     <button>
-                                        <i className={classes['fa fa-angle-left']}></i>
+                                        <i className='fa fa-angle-left'></i>
                                     </button>
                                 </div>
-                                <div className={classes['ctrl ctrl-dots']}></div>
+                                <div className={`${classes.ctrl} ${classes['ctrl-dots']}`}></div>
                             </section>
                             <section className={classes['instapost__action']}>
-                                <button className={classes['btn btn-like']}>
+                                <button className={`${classes.btn} ${classes['btn-like']}`}>
                                     <SVG className={classes['like-icon']}>
                                         <use xlinkHref="#like-filled" />
                                     </SVG>
@@ -85,7 +86,7 @@ const PostCardWithPics = (props) => {
                                         <use xlinkHref="#dislike" />
                                     </SVG>
                                 </button>
-                                <button className={classes['btn btn-comment']}>
+                                <button className={`${classes.btn} ${classes['btn-comment']}`}>
                                     <SVG>
                                         <use xlinkHref="#comment" />
                                     </SVG>
@@ -95,13 +96,13 @@ const PostCardWithPics = (props) => {
                                 Piace a <Link  className={classes.instalink}> 450 persone</Link>
                             </section>
                             <section className={classes['instapost__description']}>
-                                <Link className={classes['user instalink']}>
+                                <Link className={`${classes.user} ${classes.instalink}`}>
                                         nickname
                                     </Link> descrizione del post
                             </section>
                             <section className={classes['instapost__description']}>
                                 <div>
-                                    <Link clasName={classes['user instalink']}>
+                                    <Link clasName={`${classes.user} ${classes.instalink}`}>
                                         nickname
                                     </Link>
                                     <span>commento test a caso</span> 
@@ -126,7 +127,7 @@ const PostCardWithPics = (props) => {
                                             rows="1">
                                 </textarea>
                                 <button 
-                                            className={classes['btn btn-send-comment']} 
+                                            className={`${classes.btn} ${classes['btn-send-comment']}`} 
                                             type="submit">
                                     Invia
                                 </button>
