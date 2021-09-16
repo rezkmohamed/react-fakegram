@@ -1,5 +1,5 @@
 import React from "react";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import classes from "./ProfilePage.module.css";
 import globalClasses from "../../../assets/global-styles/bootstrap.min.module.css";
 
@@ -7,7 +7,8 @@ import globalClasses from "../../../assets/global-styles/bootstrap.min.module.cs
 
 const ProfilePage = (props) => {
     return (
-            <div className={globalClasses.container}>
+    <React.Fragment>
+        <div className={globalClasses.container}>
 
             <div className={classes.profile}>
         
@@ -39,7 +40,53 @@ const ProfilePage = (props) => {
                 <span className={classes['profile-real-name']}>profilo.nome</span><p>bio stupida scema e quant'altro 📷✈️🏕️</p>
             </div>
             </div>
+
         </div>
+
+
+        <section className={classes['post-list']}>
+            
+            <Link  className={classes.post}>
+            <figure className={classes['post-image']}>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="" />
+            </figure>
+            <div className={classes['post-overlay']}>
+            </div>
+            </Link>
+        
+        
+            <Link className={classes['post']}>
+                <figure className={classes['post-image']}>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="" />
+                </figure>
+                <div className={classes['post-overlay']}>
+                </div>
+            </Link>
+        
+        
+            <Link className={classes['post']}>
+                <figure className={classes['post-image']}>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="" />
+                </figure>
+                <div className={classes['post-overlay']}>
+                </div>
+            </Link>
+        
+        
+            <Link className={classes['post']}>
+                <figure className={classes['post-image']}>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="" />
+                </figure>
+                <div className={classes['post-overlay']}>
+                </div>
+            </Link>
+
+        
+        </section>
+
+
+
+    </React.Fragment>
     );
 }
 
