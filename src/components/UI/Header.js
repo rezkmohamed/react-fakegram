@@ -16,7 +16,6 @@ const Header = () => {
     const onHandleSearchUser = (event) => {
         console.log(event.target.value);
         setSearchedUser(event.target.value);
-
     }
 
     const onSubmitSearchUser = (event) => {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router';
 import './App.css';
+import Login from './components/pages/auth/login/Login';
 import Homepage from './components/pages/Homepage/Homepage';
 import ProfilePage from './components/pages/ProfilePage/ProfilePage';
 import SearchPage from './components/pages/SearchPage/SearchPage';
@@ -11,6 +12,7 @@ function App() {
     <React.Fragment>
       <Header />
       <Route path="/" exact component={Homepage}/>
+      <Route path="/login" exact component={Login} />
       <Route path="/profilepage" exact component={ProfilePage} />
       <Route path="/searchprofile" exact component={SearchPage} />
     </React.Fragment>
