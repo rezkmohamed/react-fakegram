@@ -2,12 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import classes from "./ProfilePage.module.css";
 import globalClasses from "../../../assets/global-styles/bootstrap.min.module.css";
+import Header from "../../UI/Header";
 
 
 
 const ProfilePage = (props) => {
     return (
     <React.Fragment>
+        <Header />
         <div className={globalClasses.container}>
 
             <div className={classes.profile}>
