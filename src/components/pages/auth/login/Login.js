@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useState } from "react/cjs/react.development";
 import globalClasses from "../../../../assets/global-styles/bootstrap.min.module.css";
 import classes from "./Login.module.css";
@@ -25,13 +25,12 @@ const users = [
     }
 ]
 
-const basicUrl = 'http://localhost:3000/';
-
 
 const Login = (props) => {
     const [errorLogin, setErrorLogin] = useState(false);
     const [inputEmail, setInputEmail] = useState('');
     const [inputPassword, setInputPassword] = useState('');
+    const history = useHistory();
 
 
     const handleInputEmail = (event) => {
@@ -47,7 +46,8 @@ const Login = (props) => {
         for(let user of users){
             if(user.email === inputEmail && user.password === inputPassword){
                 console.log('user authenticated and found');
-                setErrorLogin(false);
+                // setErrorLogin(false);
+                history.push('/');
                 return;
             }
         }

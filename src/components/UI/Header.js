@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styles from "./Header.module.scss";
 //import heart from '../../icons/heart.svg';
 import chatIcon from '../../icons/chat-text.svg';
@@ -12,6 +12,7 @@ import boxArrow from '../../icons/box-arrow-right.svg';
  */
 const Header = () => {
     const [searchedUser, setSearchedUser] = useState('');
+    const history = useHistory('');
 
     const onHandleSearchUser = (event) => {
         console.log(event.target.value);
@@ -21,7 +22,15 @@ const Header = () => {
     const onSubmitSearchUser = (event) => {
         if(event.key === 'Enter'){
             console.log('submitted ' + searchedUser);
+            history.push(`/searchprofile?like=${searchedUser}`);
         }
+    }
+
+    /**
+     * LOGICA DA IMPLEMENTARE
+     */
+    const onHandleLogout = () => {
+        console.log('logging out...');
     }
 
     return (
@@ -61,7 +70,7 @@ const Header = () => {
                     </div>
 
                     <div className={styles['navigation-icon']}>
-                        <Link to="/" id="signout" className={styles['navigation-link']}>
+                        <Link to="/login" id="signout" onClick={onHandleLogout} className={styles['navigation-link']}>
                             <img src={boxArrow} alt="link"/>
                         </Link>
                     </div>
