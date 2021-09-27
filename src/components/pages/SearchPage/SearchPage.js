@@ -65,6 +65,9 @@ const SearchPage = (props) => {
             <div className={`${classes.container}`}>
                 <div>
                     {
+                        error && !isLoading && 'Errro: ' + error.message
+                    }
+                    {
                         isLoading && 'Loading...'
                     }
                     {

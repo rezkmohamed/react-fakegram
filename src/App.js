@@ -14,7 +14,7 @@ function App() {
       <Route path="/" exact component={Homepage}/>
       <Route path="/login" exact component={Login} />
       <Route path="/register" exact component={Register} />
-      <Route path="/profilepage" exact component={ProfilePage} />
+      <Route path="/profiles/:idProfile" exact component={ProfilePage} />
       <Route path="/searchprofile" exact component={SearchPage} />
     </React.Fragment>
   );
