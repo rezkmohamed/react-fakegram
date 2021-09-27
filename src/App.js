@@ -7,6 +7,7 @@ import Homepage from './components/pages/Homepage/Homepage';
 import ProfilePage from './components/pages/ProfilePage/ProfilePage';
 import SearchPage from './components/pages/SearchPage/SearchPage';
 
+
 function App() {
   return (
     <React.Fragment>

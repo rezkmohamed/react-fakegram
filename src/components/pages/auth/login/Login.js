@@ -26,7 +26,7 @@ const users = [
 ]
 
 
-const Login = (props) => {
+const Login = () => {
     const [errorLogin, setErrorLogin] = useState(false);
     const [inputEmail, setInputEmail] = useState('');
     const [inputPassword, setInputPassword] = useState('');

@@ -44,7 +44,8 @@ const ProfilePage = (props) => {
             </div>
 
         </div>
-
+        
+        <hr />
 
         <section className={classes['post-list']}>
             
