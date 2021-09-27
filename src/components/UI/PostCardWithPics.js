@@ -10,7 +10,7 @@ import commentIcon from "../../icons/chat.svg";
 import { useState } from "react/cjs/react.development";
 
 
-const PostCardWithPics = (props) => {
+const PostCardWithPics = ({post}) => {
     const [liked, setLiked] = useState(false);
     const [comments, setComments] = useState([]);
     const [commentInput, setCommentInput] = useState('');
@@ -52,7 +52,7 @@ const PostCardWithPics = (props) => {
 
                             </header>
                             <section className={classes['instapost__image']}>
-                                <img className={`${classes.img} ${classes['img-0']} ${classes.show}`} src={NoProPic} alt="immagine post" />
+                                <img className={`${classes.img} ${classes['img-0']} ${classes.show}`} src={post.urlImg} alt="immagine post" />
                                 <div className={classes['like-heart']}>
                                     <SVG>
                                         <use xlinkHref="#dislike" />
@@ -85,7 +85,7 @@ const PostCardWithPics = (props) => {
                             <section className={classes['instapost__description']}>
                                 <Link className={`${classes.user} ${classes.instalink}`}>
                                         nickname
-                                    </Link> descrizione del post
+                                    </Link> {post.description}
                             </section>
                             <section className={classes['instapost__description']}>
                                 {comments.map(comment => {
