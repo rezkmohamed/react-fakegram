@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback} from "react";
 import Header from '../../UI/Header';
-import PostCard from "../../UI/PostCard";
 import PostCardWithPics from "../../UI/PostCardWithPics";
 
 const urlBase = 'http://localhost:8080/posts';

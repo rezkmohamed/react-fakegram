@@ -84,7 +84,7 @@ const PostCardWithPics = ({post}) => {
                             </section>
                             <section className={classes['instapost__description']}>
                                 <Link className={`${classes.user} ${classes.instalink}`}>
-                                        nickname
+                                        {post.profile.nickname}
                                     </Link> {post.description}
                             </section>
                             <section className={classes['instapost__description']}>
