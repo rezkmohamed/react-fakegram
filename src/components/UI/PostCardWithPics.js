@@ -45,7 +45,7 @@ const PostCardWithPics = ({post}) => {
                                 </Link>
                                 <div className={classes['profile-name']}>
                                     <Link className={`${classes.user} ${classes.instalink}`}>
-                                        nickname
+                                        {post.profile.nickname}
                                     </Link>
                                 </div>
 

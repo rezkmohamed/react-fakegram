@@ -15,6 +15,7 @@ const Homepage = (props) => {
     const [posts, setPosts] = useState([]);
 
     const fetchPosts = useCallback(async() => {
+        setIsLoading(true);
         try {
             const response = await fetch(urlBase);
             if(!response.ok && !response.status !== '204'){
@@ -29,6 +30,8 @@ const Homepage = (props) => {
         } catch (error) {
             
         }
+
+        setIsLoading(false);
     }, []);
 
     useEffect(() => {

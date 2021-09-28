@@ -49,9 +49,32 @@ const ProfilePage = (props) => {
         setIsLoading(false);
     }, [idProfile]);
 
+    const [posts, setPosts] = useState([]);
+    const [isLoadingPosts, setIsLoadingPosts] = useState(true);
+    const urlFetchPosts = 'http://localhost:8080/posts/profile/' + idProfile;
+    const getPostsGallery = useCallback(async () => {
+        setIsLoadingPosts(true);
+
+        try {
+            const response = await fetch(urlFetchPosts);
+            if(!response.ok && !response.status !== '204'){
+                console.log('error: ' + response.status);
+                throw new Error('Error: ' + response.status);
+            }
+            const data = await response.json();
+            console.log(data);
+            setPosts(data);
+        } catch (error) {
+            
+        }
+
+        setIsLoadingPosts(false);
+    }, [urlFetchPosts]);
+
     useEffect(() => {
         getProfile();
-    }, [getProfile]);
+        getPostsGallery();
+    }, [getProfile, getPostsGallery]);
 
 
     return (
@@ -59,11 +82,11 @@ const ProfilePage = (props) => {
         <Header />
         <div className={globalClasses.container}>
 
-{
-    isLoading && 'Loading...'
-}
+        {
+            isLoading && 'Loading...'
+        }
 
-{            
+        {            
             !isLoading &&
             !error &&
             <div className={classes.profile}>
@@ -96,53 +119,30 @@ const ProfilePage = (props) => {
                     <span className={classes['profile-real-name']}>{profile.name}</span><p>{profile.bio}</p>
                 </div>
             </div>
-}
+        }
         </div>
         
         <hr />
 
         <section className={classes['post-list']}>
-            
-            {/* <Link  className={classes.post}>
-            <figure className={classes['post-image']}>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="" />
-            </figure>
-            <div className={classes['post-overlay']}>
-            </div>
-            </Link>
-        
-        
-            <Link className={classes['post']}>
-                <figure className={classes['post-image']}>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="" />
-                </figure>
-                <div className={classes['post-overlay']}>
-                </div>
-            </Link>
-        
-        
-            <Link className={classes['post']}>
-                <figure className={classes['post-image']}>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="" />
-                </figure>
-                <div className={classes['post-overlay']}>
-                </div>
-            </Link>
-        
-        
-            <Link className={classes['post']}>
-                <figure className={classes['post-image']}>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="" />
-                </figure>
-                <div className={classes['post-overlay']}>
-                </div>
-            </Link> */}
-
-        
+            {
+                isLoadingPosts && <p>Loading posts...</p>
+            }
+            {
+                !isLoadingPosts && 
+                posts.map(post => {
+                    return(
+                        <Link key={post.idPost} to={`/posts/detail/${post.idPost}`} className={classes.post}>
+                        <figure className={classes['post-image']}>
+                            <img src={post.urlImg} alt="" />
+                        </figure>
+                        <div className={classes['post-overlay']}>
+                        </div>
+                    </Link>    
+                    );
+                })
+            }        
         </section>
-
-
-
     </React.Fragment>
     );
 }
