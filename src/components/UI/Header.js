@@ -7,9 +7,7 @@ import plusSquare from '../../icons/plus-square.svg';
 import personCircle from '../../icons/person-circle.svg';
 import boxArrow from '../../icons/box-arrow-right.svg';
 
-/**
- * FIXARE IL SUBMIT DI UN NUOVO UTENTE, INDIRIZZANDO ALLA PAGINA DI RICERCA + L'UTENTE CERCATO.
- */
+
 const Header = () => {
     const [searchedUser, setSearchedUser] = useState('');
     const history = useHistory('');
@@ -36,7 +34,7 @@ const Header = () => {
     return (
             <div className={styles.navigation}>
                 <div className={styles.logo}>
-                    <Link to="/profilepage" className={styles['no-underline']} href="#">
+                    <Link to="/" className={styles['no-underline']} href="#">
                     FakeGram
                     </Link>
                 </div>
@@ -58,7 +56,7 @@ const Header = () => {
                     </div>
 
                     <div className={styles['navigation-icon']}>
-                        <Link to="/" className={styles['navigation-link notifica']}>
+                        <Link to="/newpost" className={styles['navigation-link notifica']}>
                             <img src={plusSquare} alt="link"/>
                         </Link>
                     </div>

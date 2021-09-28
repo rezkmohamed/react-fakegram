@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router';
 import './App.css';
+import AddNewPost from './components/pages/AddNewPost/AddNewPost';
 import Login from './components/pages/auth/login/Login';
 import Register from './components/pages/auth/register/Register';
 import DetailPostPage from './components/pages/DetailPostPage/DetailPostPage';
@@ -18,6 +19,7 @@ function App() {
       <Route path="/profiles/:idProfile" exact component={ProfilePage} />
       <Route path="/searchprofile" exact component={SearchPage} />
       <Route path="/posts/detail/:idPost" exact component={DetailPostPage} />
+      <Route path="/newpost" exact component={AddNewPost} />
     </React.Fragment>
   );
 }

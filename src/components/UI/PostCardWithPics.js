@@ -9,7 +9,6 @@ import heartIconFilled from "../../icons/heart-filled.svg";
 import commentIcon from "../../icons/chat.svg";
 import { useState } from "react/cjs/react.development";
 
-
 const PostCardWithPics = ({post}) => {
     const [liked, setLiked] = useState(false);
     const [comments, setComments] = useState([]);
