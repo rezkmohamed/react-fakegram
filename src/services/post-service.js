@@ -21,6 +21,10 @@ export const fetchPosts = () => {
         return posts;
 };
 
+export const fetchPostsByIdProfile = (idProfile) => {
+    
+}
+
 export const fetchPostById = (idPost) => {
     const fetchData = async () => {
         const response = await fetch(urlBase + "detail/" + idPost);
@@ -35,3 +39,4 @@ export const fetchPostById = (idPost) => {
     const post = fetchData();
     return post;
 }
+

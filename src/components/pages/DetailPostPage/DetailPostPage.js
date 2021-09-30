@@ -22,8 +22,6 @@ const DetailPostPage = () => {
             setIsloading(false);
         }).catch(err => console.log(err));
     }, [idPost]);
-
-
     // const getPost = useCallback(async () => {
     //     setIsloading(true);
     //     try {
