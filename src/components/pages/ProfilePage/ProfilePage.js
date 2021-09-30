@@ -1,21 +1,12 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import classes from "./ProfilePage.module.css";
 import globalClasses from "../../../assets/global-styles/bootstrap.min.module.css";
 import Header from "../../UI/Header";
 import { fetchProfileById } from "../../../services/profile-service";
+import { fetchPostsByIdProfile } from "../../../services/post-service";
 
-// const urlBase = 'http://localhost:8080/profiles/';
-// const DEFAULT_IMG = "https://techcommunity.microsoft.com/t5/image/serverpage/image-id/217078i525F6A9EF292601F/image-size/large?v=v2&px=999";
-
-
-
-
-
-const ProfilePage = (props) => {
-    /**
-     * getting idProfile from url
-     */
+const ProfilePage = () => {
     const location = useLocation();
     const startingIndex = location.pathname.lastIndexOf('/');
     const idProfile = location.pathname.substring(startingIndex+1, location.pathname.length);
@@ -23,72 +14,37 @@ const ProfilePage = (props) => {
     const [isLoadingProfile, setIsLoadingProfile] = useState(true);
     const [profile, setProfile] = useState(null);
     const [error, setError] = useState(null);
-
-
     
     const [posts, setPosts] = useState([]);
     const [isLoadingPosts, setIsLoadingPosts] = useState(true);
 
-
     useEffect(() => {
         setIsLoadingProfile(true);
+        setIsLoadingPosts(true);
         setError(null);
+
         fetchProfileById(idProfile)
         .then(profile => {
             setProfile(profile);
             console.log(profile);
             setIsLoadingProfile(false);
+        })
+        .catch(err => {
+            setError("Error");
+            console.log(err);
+            setIsLoadingProfile(false);
+        });
+
+        fetchPostsByIdProfile(idProfile)
+        .then(posts => {
+            setPosts(posts);
+            setIsLoadingPosts(false);
+        })
+        .catch(err => {
+            setError("Error");
+            setIsLoadingPosts(false);
         });
     }, [idProfile]);
-    
-    // const getProfile = useCallback(async () => {
-    //     setIsLoading(true);
-    //     setProfile(null);
-    //     setError(null);
-
-
-    //     console.log('fetching...');
-    //     try {
-    //         const response = await fetch(urlBase + idProfile);
-    //         if(!response.ok && !response.status !== '204'){
-    //             console.log('error: ' + response.status);
-    //             throw new Error('Error: ' + response.status);
-    //         }
-    //         const data = await response.json();
-    //         console.log(data);
-    //         setProfile(data);
-    //     } catch (error) {
-    //         console.log(error.message);
-    //         setError(error.message);
-    //     }
-
-    //     setIsLoading(false);
-    // }, [idProfile]);
-    // const urlFetchPosts = 'http://localhost:8080/posts/profile/' + idProfile;
-    // const getPostsGallery = useCallback(async () => {
-    //     setIsLoadingPosts(true);
-
-    //     try {
-    //         const response = await fetch(urlFetchPosts);
-    //         if(!response.ok && !response.status !== '204'){
-    //             console.log('error: ' + response.status);
-    //             throw new Error('Error: ' + response.status);
-    //         }
-    //         const data = await response.json();
-    //         console.log(data);
-    //         setPosts(data);
-    //     } catch (error) {
-            
-    //     }
-
-    //     setIsLoadingPosts(false);
-    // }, [urlFetchPosts]);
-
-    // useEffect(() => {
-    //     getProfile();
-    //     getPostsGallery();
-    // }, [getProfile, getPostsGallery]);
-
 
     return (
     <React.Fragment>

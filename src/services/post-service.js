@@ -22,7 +22,18 @@ export const fetchPosts = () => {
 };
 
 export const fetchPostsByIdProfile = (idProfile) => {
-    
+    const fetchData = async () => {
+        const response = await fetch(urlBase + "profile/" + idProfile);
+        if(!response.ok){
+            console.log('error: ' + response.status);
+            throw new Error('Error: ' + response.status);
+        }
+        const data = await response.json();
+        return data;
+    }
+
+    const posts = fetchData();
+    return posts;
 }
 
 export const fetchPostById = (idPost) => {
