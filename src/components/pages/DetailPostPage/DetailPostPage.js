@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import Header from "../../UI/Header";
 import PostCardWithPics from "../../UI/PostCardWithPics";
 import classes from "./DetailPostPage.module.scss";
+import { fetchPostById } from "../../../services/post-service";
 
 const URL_FETCH_POST = "http://localhost:8080/posts/detail/";
 
@@ -13,27 +14,36 @@ const DetailPostPage = () => {
     const [isLoading, setIsloading] = useState(true);
     const [post, setPost] = useState(null);
 
-
-    const getPost = useCallback(async () => {
+    useEffect(() => {
         setIsloading(true);
-        try {
-            const response = await fetch(URL_FETCH_POST + idPost);
-            if(!response.ok && !response.status !== '204'){
-                console.log('error: ' + response.status);
-                throw new Error('Error: ' + response.status);
-            }
-            const data = await response.json();
-            console.log(data);
-            setPost(data);
-        } catch (error) {
-            console.log(error.message);
-        }
-        setIsloading(false);
+        fetchPostById(idPost).then(post => {
+            console.log(post);
+            setPost(post);
+            setIsloading(false);
+        }).catch(err => console.log(err));
     }, [idPost]);
 
-    useEffect(() => {
-        getPost();
-    }, [getPost]);
+
+    // const getPost = useCallback(async () => {
+    //     setIsloading(true);
+    //     try {
+    //         const response = await fetch(URL_FETCH_POST + idPost);
+    //         if(!response.ok && !response.status !== '204'){
+    //             console.log('error: ' + response.status);
+    //             throw new Error('Error: ' + response.status);
+    //         }
+    //         const data = await response.json();
+    //         console.log(data);
+    //         setPost(data);
+    //     } catch (error) {
+    //         console.log(error.message);
+    //     }
+    //     setIsloading(false);
+    // }, [idPost]);
+
+    // useEffect(() => {
+    //     getPost();
+    // }, [getPost]);
 
     return(
         <React.Fragment>
