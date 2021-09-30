@@ -34,7 +34,7 @@ const Header = () => {
     return (
             <div className={styles.navigation}>
                 <div className={styles.logo}>
-                    <Link to="/" className={styles['no-underline']} href="#">
+                    <Link to="/" className={styles['no-underline']}>
                     FakeGram
                     </Link>
                 </div>
@@ -50,7 +50,7 @@ const Header = () => {
                 </div>
                 <div className={styles['navigation-icons']}>
                     <div className={styles['navigation-icon']}>
-                        <Link to="/" target ="_blank" className={styles['navigation-link']}>
+                        <Link to="/" className={styles['navigation-link']}>
                             <img src={chatIcon} alt="link"/>
                         </Link>
                     </div>
