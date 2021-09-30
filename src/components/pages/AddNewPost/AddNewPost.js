@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../../UI/Header";
 import globalClasses from "../../../assets/global-styles/bootstrap.min.module.css";
 import classes from './AddNewPost.module.scss';
+import { addNewPost } from "../../../services/post-service";
 
 const AddNewPost = () => {
+    const [imgPost, setImgPost] = useState('');
+    const [postDescription, setPostDescription] = useState('');
+
+    const handleImgPost = (event) => {
+        setImgPost(event.target.value);
+    }
+
+    const handleDescriptionPost = (event) => {
+        setPostDescription(event.target.value);
+    }
+
+    const handleAddNewPost = () => {
+        console.log(imgPost);
+        console.log(postDescription);
+        addNewPost(imgPost, postDescription)
+    }
 
     return(
         <React.Fragment>
@@ -21,24 +38,12 @@ const AddNewPost = () => {
                             </div> */}
 
                                 <h3 className={globalClasses['text-center']}>Aggiungi foto</h3>
-                                {/* <div className={`${globalClasses['custom-file']} ${globalClasses['mb-2']}`}>
-                                    <input 
-                                        type="file"
-                                        className={globalClasses['custom-file-input']}
-                                        name="post-img"
-                                        id="customFile"
-                                        required />
-                                    <label 
-                                        className={globalClasses['custom-file-label']}
-                                        for="customFile">
-                                        <span >Scegli file</span>
-                                        <span >nome file</span>
-                                    </label>
-                                </div> */}
                                 <input
                                         type="text"
                                         className={globalClasses['form-control']}
                                         name="descrizione"
+                                        value={imgPost}
+                                        onChange={handleImgPost}
                                         placeholder="url foto..."
                                         required />
 
@@ -48,10 +53,13 @@ const AddNewPost = () => {
                                         type="text"
                                         className={globalClasses['form-control']}
                                         name="descrizione"
+                                        value={postDescription}
+                                        onChange={handleDescriptionPost}
                                         placeholder="descrizione..."
                                         required />
                                 
-                                <button className={`${globalClasses.btn} ${globalClasses['btn-primary']} ${classes['btn-primary']}`}>Carica il post</button>
+                                <button className={`${globalClasses.btn} ${globalClasses['btn-primary']} ${classes['btn-primary']}`}
+                                onClick={handleAddNewPost}>Carica il post</button>
                     </div>
                     <div className={globalClasses['col-3']}></div>
                 </div>

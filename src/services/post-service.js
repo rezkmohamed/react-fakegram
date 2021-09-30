@@ -51,3 +51,28 @@ export const fetchPostById = (idPost) => {
     return post;
 }
 
+export const addNewPost = (img, description) => {
+    const addPost = async () => {
+        const response = await fetch(urlBase + "save", 
+        {
+            method: 'POST',
+            body: JSON.stringify({
+                img: img,
+                description: description,
+                idProfile: 'a'
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+          
+        });
+
+        if(!response.ok){
+            console.log('error: ' + response.status);
+            throw new Error('Error: ' + response.status);
+        }
+    }
+
+    return addPost();
+}

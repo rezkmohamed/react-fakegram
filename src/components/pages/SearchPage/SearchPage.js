@@ -5,8 +5,6 @@ import globalClasses from "../../../assets/global-styles/bootstrap.min.module.cs
 import Header from "../../UI/Header";
 import { fetchProfilesToSearchByName } from "../../../services/profile-service";
 
-
-
 const SearchPage = (props) => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
