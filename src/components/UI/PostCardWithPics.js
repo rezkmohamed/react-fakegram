@@ -8,11 +8,14 @@ import heartIcon from "../../icons/heart.svg";
 import heartIconFilled from "../../icons/heart-filled.svg";
 import commentIcon from "../../icons/chat.svg";
 import { useState } from "react/cjs/react.development";
+import * as moment from "moment";
+
 
 const PostCardWithPics = ({post}) => {
     const [liked, setLiked] = useState(false);
     const [comments, setComments] = useState([]);
     const [commentInput, setCommentInput] = useState('');
+    post.date = moment(new Date(post.date)).format("MM-DD-YYYY, h:mm:ss a");
 
     const commentInputHandler = (event) => {
         setCommentInput(event.target.value);
@@ -51,7 +54,7 @@ const PostCardWithPics = ({post}) => {
 
                             </header>
                             <section className={classes['instapost__image']}>
-                                <img className={`${classes.img} ${classes['img-0']} ${classes.show}`} src={post.urlImg} alt="immagine post" />
+                                <img className={`${classes.img} ${classes['img-0']} ${classes.show}`} src={post.img} alt="immagine post" />
                                 <div className={classes['like-heart']}>
                                     <SVG>
                                         <use xlinkHref="#dislike" />
@@ -98,7 +101,7 @@ const PostCardWithPics = ({post}) => {
                                 })}
                             </section>
                             <section className={classes['instapost__timestamp']}>
-                                31/03/1999
+                                {post.date}
                             </section>
                             <section className={classes['instapost__add-comment']}>
 

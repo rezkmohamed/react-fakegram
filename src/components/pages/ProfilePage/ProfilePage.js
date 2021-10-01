@@ -36,8 +36,9 @@ const ProfilePage = () => {
         });
 
         fetchPostsByIdProfile(idProfile)
-        .then(posts => {
-            setPosts(posts);
+        .then(postsResponse => {
+            setPosts(postsResponse);
+            console.log(postsResponse);
             setIsLoadingPosts(false);
         })
         .catch(err => {
@@ -105,7 +106,7 @@ const ProfilePage = () => {
                     return(
                         <Link key={post.idPost} to={`/posts/detail/${post.idPost}`} className={classes.post}>
                         <figure className={classes['post-image']}>
-                            <img src={post.urlImg} alt="" />
+                            <img src={post.img} alt="" />
                         </figure>
                         <div className={classes['post-overlay']}>
                         </div>

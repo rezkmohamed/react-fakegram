@@ -9,7 +9,7 @@ const AddNewPost = () => {
     const [postDescription, setPostDescription] = useState('');
 
     const handleImgPost = (event) => {
-        setImgPost(event.target.value);
+        setImgPost(event.target.value.toString());
     }
 
     const handleDescriptionPost = (event) => {
@@ -20,6 +20,11 @@ const AddNewPost = () => {
         console.log(imgPost);
         console.log(postDescription);
         addNewPost(imgPost, postDescription)
+        .then(response => {
+            console.log(response);
+        }).catch(err => {
+            console.log(err);
+        });
     }
 
     return(

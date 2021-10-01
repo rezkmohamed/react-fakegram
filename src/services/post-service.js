@@ -65,7 +65,6 @@ export const addNewPost = (img, description) => {
                 'Content-Type': 'application/json'
                 // 'Content-Type': 'application/x-www-form-urlencoded',
             },
-          
         });
 
         if(!response.ok){
