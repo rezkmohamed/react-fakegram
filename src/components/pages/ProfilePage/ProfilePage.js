@@ -5,7 +5,7 @@ import globalClasses from "../../../assets/global-styles/bootstrap.min.module.cs
 import Header from "../../UI/Header";
 import { fetchProfileById } from "../../../services/profile-service";
 import { fetchPostsByIdProfile } from "../../../services/post-service";
-import { addFollow } from "../../../services/follow-service";
+import { addFollow, checkIsFollowed, deleteFollow } from "../../../services/follow-service";
 
 const ProfilePage = () => {
     const location = useLocation();
@@ -22,6 +22,9 @@ const ProfilePage = () => {
     const [followButtonDisabled, setFollowButtonDisabled] = useState(false);
     const [isFollowed, setIsFollowed] = useState(false);
 
+    /**
+     * INIZIALIZZAZIONE PROFILO
+     */
     useEffect(() => {
         setIsLoadingProfile(true);
         setIsLoadingPosts(true);
@@ -49,20 +52,52 @@ const ProfilePage = () => {
             setError("Error");
             setIsLoadingPosts(false);
         });
-    }, [idProfile]);
 
-    const toggleFollow = () => {
-        setFollowButtonDisabled(true);
-        addFollow('b', idProfile)
-        .then(isOkay => {
-            if(isOkay){
-                setFollowButtonDisabled(false);
-                setIsFollowed(!isFollowed);
+        checkIsFollowed('b', idProfile)
+        .then(response => {
+            console.log(response);
+            if(response){
+                setIsFollowed(true);
             }
         })
         .catch(err => {
             console.log(err);
         })
+    }, [idProfile]);
+
+    const followThisProfile = () => {
+        addFollow('b', idProfile)
+        .then(isOkay => {
+            if(isOkay){
+                setFollowButtonDisabled(false);
+                setIsFollowed(true);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
+
+    const unfollowThisProfile = () => {
+        deleteFollow('b', idProfile)
+        .then(isOkay => {
+            if(isOkay){
+                setFollowButtonDisabled(false);
+                setIsFollowed(false);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
+
+    const toggleFollow = () => {
+        setFollowButtonDisabled(true);
+        if(isFollowed){
+            unfollowThisProfile();
+        } else {
+            followThisProfile();
+        }
     }
 
     return (
