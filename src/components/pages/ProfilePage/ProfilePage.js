@@ -5,6 +5,7 @@ import globalClasses from "../../../assets/global-styles/bootstrap.min.module.cs
 import Header from "../../UI/Header";
 import { fetchProfileById } from "../../../services/profile-service";
 import { fetchPostsByIdProfile } from "../../../services/post-service";
+import { addFollow } from "../../../services/follow-service";
 
 const ProfilePage = () => {
     const location = useLocation();
@@ -17,6 +18,9 @@ const ProfilePage = () => {
     
     const [posts, setPosts] = useState([]);
     const [isLoadingPosts, setIsLoadingPosts] = useState(true);
+
+    const [followButtonDisabled, setFollowButtonDisabled] = useState(false);
+    const [isFollowed, setIsFollowed] = useState(false);
 
     useEffect(() => {
         setIsLoadingProfile(true);
@@ -47,6 +51,20 @@ const ProfilePage = () => {
         });
     }, [idProfile]);
 
+    const toggleFollow = () => {
+        setFollowButtonDisabled(true);
+        addFollow('b', idProfile)
+        .then(isOkay => {
+            if(isOkay){
+                setFollowButtonDisabled(false);
+                setIsFollowed(!isFollowed);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
+
     return (
     <React.Fragment>
         <Header />
@@ -74,7 +92,7 @@ const ProfilePage = () => {
             
                     <h1 className={classes['profile-user-name']}>{profile.nickname}</h1>
             
-                    <button className={classes['profile-edit-btn']} style={{'backgroundColor': 'white'}}>follow</button>
+                    <button className={classes['profile-edit-btn']} style={{'backgroundColor': 'white'}} onClick={toggleFollow} disabled={followButtonDisabled}>{isFollowed ? 'followed' : 'follow'}</button>
 
                     {/* <button className={classes['profile-edit-btn']} style={{'background-color': 'white'}}>modifica</button>         */}
                 </div>
