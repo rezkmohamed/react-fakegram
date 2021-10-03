@@ -1,17 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import NoProPic from "../../assets/no-pro-pic.png";
-import SVG from 'react-inlinesvg';
+// import SVG from 'react-inlinesvg';
 import classes from './PostCardWithPics.module.scss';
 import globalClasses from '../../assets/global-styles/bootstrap.min.module.css';
 import heartIcon from "../../icons/heart.svg";
 import heartIconFilled from "../../icons/heart-filled.svg";
 import commentIcon from "../../icons/chat.svg";
-import { useState } from "react/cjs/react.development";
+import { useEffect, useState } from "react/cjs/react.development";
 import * as moment from "moment";
+import { checkIsLiked, addLikePost, deleteLikePost } from "../../services/like-service";
 
 
 const PostCardWithPics = ({post}) => {
+    const [likeBtnDisabled, setLikeBtnDisabled] = useState(false);
+    const [isCheckingLike, setIsCheckingLike] = useState(true);
     const [liked, setLiked] = useState(false);
     const [comments, setComments] = useState([]);
     const [commentInput, setCommentInput] = useState('');
@@ -28,25 +31,62 @@ const PostCardWithPics = ({post}) => {
         setCommentInput('');
     }
 
+    useEffect(() => {
+        setIsCheckingLike(true);
+        checkIsLiked('a', post.idPost).then(response => {
+            if(response){
+                setLiked(true);
+            } else {
+                setLiked(false);
+            }
+            setIsCheckingLike(false);
+        }).catch(err => {
+            console.log(err);
+            setIsCheckingLike(false);
+        });
+    }, [post]);
+
+    const onToggleLike = () => {
+        setLikeBtnDisabled(true);
+        if(!liked){
+            addLikePost('a', post.idPost).then(response => {
+                setLiked(true);
+                setLikeBtnDisabled(false);
+            }).catch(err => {
+                console.log(err);
+                setLikeBtnDisabled(false);
+            });
+        }
+        else {
+            deleteLikePost('a', post.idPost).then(response => {
+                setLiked(false);
+                setLikeBtnDisabled(false);
+            }).catch(err => {
+                console.log(err);
+                setLikeBtnDisabled(false);
+            });
+        }
+    }
+
     return (
         <React.Fragment>
             <div className={globalClasses['col-12']}>
                     <div className={classes.contents}>
                         <div className={classes.hidden}>
-                            <SVG id="dots" viewBox="0 0 48 48">
+                            {/* <SVG id="dots" viewBox="0 0 48 48">
                                 <circle clip-rule="evenodd" cx="8" cy="24" fill-rule="evenodd" r="4.5"></circle>
                                 <circle clip-rule="evenodd" cx="24" cy="24" fill-rule="evenodd" r="4.5"></circle>
                                 <circle clip-rule="evenodd" cx="40" cy="24" fill-rule="evenodd" r="4.5"></circle>
-                            </SVG>
+                            </SVG> */}
                         </div>
 
                         <article className={classes.instapost}>
                             <header className={classes['instapost__header']}>
-                                <Link className={classes['profile-img']} >
+                                <Link to={`/profiles/${post.profile.id}`} className={classes['profile-img']} >
                                     <img src={NoProPic} alt="profile pic"/>
                                 </Link>
                                 <div className={classes['profile-name']}>
-                                    <Link className={`${classes.user} ${classes.instalink}`}>
+                                    <Link to={`/profiles/${post.profile.id}`} className={`${classes.user} ${classes.instalink}`}>
                                         {post.profile.nickname}
                                     </Link>
                                 </div>
@@ -56,9 +96,9 @@ const PostCardWithPics = ({post}) => {
                             <section className={classes['instapost__image']}>
                                 <img className={`${classes.img} ${classes['img-0']} ${classes.show}`} src={post.img} alt="immagine post" />
                                 <div className={classes['like-heart']}>
-                                    <SVG>
+                                    {/* <SVG>
                                         <use xlinkHref="#dislike" />
-                                    </SVG>
+                                    </SVG> */}
                                 </div>
                                 <div className={`${classes.ctrl} ${classes['ctrl-left']} ${classes.hide}`}>
                                     <button>
@@ -68,7 +108,7 @@ const PostCardWithPics = ({post}) => {
                                 <div className={`${classes.ctrl} ${classes['ctrl-dots']}`}></div>
                             </section>
                             <section className={classes['instapost__action']}>
-                                <button className={`${classes.btn} ${classes['btn-like']}`} onClick={() => setLiked(!liked)}>
+                                <button disabled={likeBtnDisabled} className={`${classes.btn} ${classes['btn-like']}`} onClick={onToggleLike}>
                                     { 
                                         liked ? 
                                             <img src={heartIconFilled} id="like" alt="like icon"/> 
@@ -82,10 +122,10 @@ const PostCardWithPics = ({post}) => {
                                 </button>
                             </section>
                             <section className={classes['instapost__likes']}>
-                                Piace a <Link  className={classes.instalink}> 450 persone</Link>
+                                Piace a <Link to="/post/likes"  className={classes.instalink}> 450 persone</Link>
                             </section>
                             <section className={classes['instapost__description']}>
-                                <Link className={`${classes.user} ${classes.instalink}`}>
+                                <Link to={`/profiles/${post.profile.id}`} className={`${classes.user} ${classes.instalink}`}>
                                         {post.profile.nickname}
                                     </Link> {post.description}
                             </section>
@@ -93,7 +133,7 @@ const PostCardWithPics = ({post}) => {
                                 {comments.map(comment => {
                                     return (
                                         <div>
-                                            <Link className={`${classes.user} ${classes.instalink}`}>
+                                            <Link to={`/profiles/${post.profile.id}`} className={`${classes.user} ${classes.instalink}`}>
                                             {comment.nickname}
                                             </Link> {comment.comment}
                                                 </div>
