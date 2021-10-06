@@ -1,18 +1,38 @@
 import React from "react";
+import { useHistory } from "react-router";
 import globalClasses from "../../../../assets/global-styles/bootstrap.min.module.css";
 import classes from "./Register.module.scss";
 
+/**
+ * TODO:
+ * 1) aggiungere logica al bottone per tornare alla login page
+ * 2) aggiungere una form group per inviare la richiesta di registrazione
+ */
+
 const Register = () => {
+    const history = useHistory();
+
+    const goBackToLoginPage = () => {
+        console.log('btn clicked!');
+        history.replace('/login');
+    }
+
+
     return (
         <React.Fragment>
             <div className={globalClasses.container}>
                 <div className={globalClasses.row}>
                     <div className={globalClasses['col-3']}>
                         <div className={globalClasses['col-3']}>
-                            <div className={classes['bk-btn']}><div className={classes['bk-btn-triangle']}></div><div className={classes['bk-btn-bar']}></div></div>
+                            <div className={classes['bk-btn']} onClick={goBackToLoginPage}><div className={classes['bk-btn-triangle']}></div><div className={classes['bk-btn-bar']}></div></div>
                         </div>
                     </div>
-                    <div className={globalClasses['col-6']}>
+                    <div>
+                        <div className={globalClasses['col-6']}>
+                            prova
+                        </div>
+                    </div>
+                    {/* <div className={globalClasses['col-6']}>
                         <div className={globalClasses['login-form']} style={{"padding-top": "1em"}}>
                             <form>
                                 <h2 className={globalClasses['text-center']} style={{"color": "#E1306C"}}>Registrati</h2>   
@@ -96,6 +116,7 @@ const Register = () => {
                         </div>
                     </div>
                     <div className="col-3"></div>
+                </div> */}
                 </div>
             </div>
         </React.Fragment>
