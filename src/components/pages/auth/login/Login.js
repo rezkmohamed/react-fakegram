@@ -4,6 +4,7 @@ import { useState } from "react/cjs/react.development";
 import globalClasses from "../../../../assets/global-styles/bootstrap.min.module.css";
 import classes from "./Login.module.css";
 import { login } from "../../../../services/auth-service";
+import jwt_decode from "jwt-decode";
 
 const Login = () => {
     const [errorLogin, setErrorLogin] = useState(false);
@@ -22,9 +23,16 @@ const Login = () => {
 
     const submitLoginForm = (event) => {
         event.preventDefault();
+        login(inputEmail, inputPassword).then(res => {
+            console.log(res);
+            let token = res.headers.get("Authentication").replace("Bearer ", "");
+            let responseDecoded = jwt_decode(token);
+            console.log(responseDecoded);
+        }).catch(err => {
+            console.log(err);
+        })
 
-
-        setErrorLogin(true);
+        // setErrorLogin(true);
     }
 
     return (

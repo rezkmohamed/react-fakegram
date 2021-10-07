@@ -43,9 +43,11 @@ export const login = (email, password) => {
             throw new Error('Error: ' + response.status);
         }
 
-        const data = await response.json();
-        console.log(data);
-        return data;
+        console.log(response);
+
+        // const data = await response.json();
+        // console.log(data);
+        return response;
     }
 
     return loginReq();
