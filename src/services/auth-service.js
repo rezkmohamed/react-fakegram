@@ -4,12 +4,12 @@ export const registerNewProfile = (email, password, name, nickname) => {
     const registerProfileReq = async () => {
         const response = await fetch(urlBase + "register", {
             method: 'POST',
-            body: {
-                email,
-                password,
-                name,
-                nickname
-            },
+            body:JSON.stringify({
+                name: name,
+                nickname: nickname,
+                email: email,
+                password: password
+            }),
             headers: {
                 'Content-Type': 'application/json'
             },

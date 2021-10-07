@@ -6,15 +6,6 @@ import { registerNewProfile } from "../../../../services/auth-service";
 import SuccessMessage from "../../../UI/SuccessMessage";
 import ErrorMessage from "../../../UI/ErrorMessage";
 
-/**
- * TODO:
- * 1) aggiungere logica al bottone per tornare alla login page
- * 2) aggiungere una form group per inviare la richiesta di registrazione
- */
-let message;
-
-
-
 const Register = () => {
     const history = useHistory();
 
@@ -26,7 +17,7 @@ const Register = () => {
 
     const [formIsSubmitted, setFormIsSubmitted] = useState(false);
     const [registrationIsValid, setRegistrationIsValid] = useState(false);
-    // let message = "Registrazione effettuata con successo!";
+    const [message, setMessage] = useState("Profilo registrato con successo. Procedere con il login");
 
     const goBackToLoginPage = () => {
         console.log('btn clicked!');
@@ -35,13 +26,15 @@ const Register = () => {
 
     const submitRegisterForm = (event) => {
         event.preventDefault();
-        if(passwordInputRef !== confermPasswordInputRef){
-            message = 'password diverse scemo!!!';
+        console.log(passwordInputRef.current.value);
+        console.log(confermPasswordInputRef.current.value);
+        if(passwordInputRef.current.value !== confermPasswordInputRef.current.value){
+            setMessage("Hai inserito password diverse scemo!!!");
             setFormIsSubmitted(true);
             setRegistrationIsValid(false);
             return;
         }
-        registerNewProfile(emailInputRef, passwordInputRef, usernameInputRef, usernameInputRef).then(res => {
+        registerNewProfile(emailInputRef.current.value, passwordInputRef.current.value, usernameInputRef.current.value, usernameInputRef.current.value).then(res => {
             if(res){
                 console.log(res);
                 setFormIsSubmitted(true);
@@ -49,7 +42,7 @@ const Register = () => {
             }
         }).catch(err => {
             console.log(err);
-            message = err.message;
+            setMessage("Errore: prova con un'altra mail");
             setFormIsSubmitted(true);
             setRegistrationIsValid(false);
         })
@@ -152,103 +145,6 @@ const Register = () => {
                         </form>
                     </div>
                 </div>
-
-
-
-{/*                     
-                    <div className={globalClasses['col-6']}>
-                        <div className={globalClasses['login-form']} style={{"paddingTop": "1em"}}>
-                            {
-                                formIsSubmitted && registrationIsValid && <SuccessMessage message={message} />
-                            }
-                            {
-                                formIsSubmitted && !registrationIsValid && <ErrorMessage message={message} />
-                            }
-                            <form onSubmit={submitRegisterForm}>
-                                <h2 className={globalClasses['text-center']} style={{"color": "#E1306C"}}>Registrati</h2>   
-                                <div className={globalClasses['form-group']}>
-                                    <div className={globalClasses['input-group']}>
-                                        <div className={globalClasses['input-group-prepend']}>
-                                            <span className={globalClasses['input-group-text']}>
-                                                <span className={globalClasses['fa fa-user']}></span>
-                                            </span>                    
-                                        </div>
-                                        <input 
-                                                type="text" 
-                                                className={globalClasses['form-control']} 
-                                                name="username" 
-                                                placeholder="Username"
-                                                ref={usernameInputRef}
-                                                required />				
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <div className="input-group">
-                                        <div className="input-group-prepend">
-                                            <span className="input-group-text">
-                                                <i className="fa fa-lock"></i>
-                                            </span>                    
-                                        </div>
-                                        <input 
-                                                type="password" 
-                                                className="form-control" 
-                                                name="password" 
-                                                placeholder="Password" 
-                                                minLength="4"
-                                                ref={passwordInputRef}
-                                                required />				
-                                    </div>
-                                </div>
-                                
-                                <div className="form-group">
-                                    <div className="input-group">
-                                        <div className="input-group-prepend">
-                                            <span className="input-group-text">
-                                                <i className="fa fa-lock"></i>
-                                            </span>                    
-                                        </div>
-                                        <input  
-                                                type="password" 
-                                                className="form-control" 
-                                                name="confermapassword" 
-                                                placeholder="Conferma password" 
-                                                minLength="4"
-                                                ref={confermPasswordInputRef}
-                                                required />				
-                                    </div>
-                                </div>    
-
-                                <div className={globalClasses['form-group']}>
-                                    <div className={globalClasses['input-group']}>
-                                        <div className={globalClasses['input-group-prepend']}>
-                                            <span className={globalClasses['input-group-text']}>
-                                                <i className={`${globalClasses.fa} ${globalClasses['fa-lock']}`}></i>
-                                            </span>                    
-                                        </div>
-                                        <input 
-                                                type="email" 
-                                                className={globalClasses['form-control']} 
-                                                name="email" 
-                                                placeholder="email"
-                                                required
-                                                ref={emailInputRef}
-                                                email />				
-                                    </div>
-                                </div>    
-
-                                <div className={globalClasses['form-group']}>
-                                    <button 
-                                                type="submit" 
-                                                className={`${globalClasses.btn} ${globalClasses['btn-primary']} ${globalClasses['login-btn']} ${globalClasses['btn-block']}`}
-                                                style={{
-                                                    "backgroundColor": "#E1306C"
-                                                }}
-                                                >Registrati</button>
-                                </div>
-                            </form>
-                            <p className="text-center text-muted small">Registrandoti dichiari di avere almeno 17 anni</p>
-                        </div>
-                    </div> */}
                     <div className="col-3"></div>
                 </div>
             </div>
