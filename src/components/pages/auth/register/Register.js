@@ -65,6 +65,98 @@ const Register = () => {
                         </div>
                     </div>
                     <div className={globalClasses['col-6']}>
+                    <h1 style={{"paddingTop": "1em", "color": "#E1306C", "fontFamily": "cursive"}}>fakeGram</h1>
+                    <p>Registrandoti a fakeGram dichiari di avere almeno 17 anni.</p>
+                </div>
+                <div className={globalClasses['col-3']}></div>
+            </div>
+            <div className={globalClasses.row}>
+                <div className={globalClasses['col-3']}></div>
+                <div className={globalClasses['col-6']}>
+
+                </div>
+                <div className={globalClasses['col-3']}></div>
+            </div>
+            <div className={globalClasses.row}>
+                <div className={globalClasses['col-3']}></div>
+                <div className={globalClasses['col-6']}>
+                {
+                                formIsSubmitted && registrationIsValid && <SuccessMessage message={message} />
+                            }
+                            {
+                                formIsSubmitted && !registrationIsValid && <ErrorMessage message={message} />
+                            }
+
+                    <div className={classes['login-form']} style={{"paddingTop": "1em"}}>
+                        <form onSubmit={submitRegisterForm}>
+                            <h2 className={globalClasses['text-center']} style={{"color": "#E1306C"}}>Registrazione</h2>   
+                            <div className={globalClasses['form-group']}>
+                                <div className={globalClasses['input-group']}>
+                                    <div className={globalClasses['input-group-prepend']}>                  
+                                    </div>
+                                    <input 
+                                            type="text" 
+                                            className={globalClasses['form-control']}
+                                            name="email" 
+                                            placeholder="Email" 
+                                            ref={emailInputRef}
+                                            required="required" />				
+                                </div>
+                            </div>
+                            <div className={globalClasses['form-group']}>
+                                <div className={globalClasses['input-group']}>
+                                    <div className={globalClasses['input-group-prepend']}>                  
+                                    </div>
+                                    <input 
+                                            type="text" 
+                                            className={globalClasses['form-control']}
+                                            name="username" 
+                                            placeholder="Username" 
+                                            ref={usernameInputRef}
+                                            required="required" />				
+                                </div>
+                            </div>
+                            <div className={globalClasses['form-group']}>
+                                <div className={globalClasses['input-group']}>
+                                    <div className={globalClasses['input-group-prepend']}>
+                                    </div>
+                                    <input 
+                                            type="password" 
+                                            className={globalClasses['form-control']}
+                                            name="password" 
+                                            placeholder="Password" 
+                                            ref={passwordInputRef}
+                                            required="required" />				
+                                </div>
+                            </div>        
+                            <div className={globalClasses['form-group']}>
+                                <div className={globalClasses['input-group']}>
+                                    <div className={globalClasses['input-group-prepend']}>
+                                    </div>
+                                    <input 
+                                            type="password" 
+                                            className={globalClasses['form-control']}
+                                            name="password" 
+                                            placeholder="Conferma password" 
+                                            ref={confermPasswordInputRef}
+                                            required="required" />				
+                                </div>
+                            </div>        
+                            <div className="form-group">
+                                <button 
+                                        type="submit" 
+                                        className="btn btn-primary login-btn btn-block" 
+                                        style={{"backgroundColor": "#E1306C"}}
+                                        >Registrati</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+
+{/*                     
+                    <div className={globalClasses['col-6']}>
                         <div className={globalClasses['login-form']} style={{"paddingTop": "1em"}}>
                             {
                                 formIsSubmitted && registrationIsValid && <SuccessMessage message={message} />
@@ -156,7 +248,7 @@ const Register = () => {
                             </form>
                             <p className="text-center text-muted small">Registrandoti dichiari di avere almeno 17 anni</p>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="col-3"></div>
                 </div>
             </div>

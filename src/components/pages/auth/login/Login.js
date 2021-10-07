@@ -129,7 +129,7 @@ const Login = () => {
                                 <Link to="/" className="float-right" style={{"color": "#E1306C"}}>Password dimenticata?</Link>
                             </div>
                         </form>
-                        <p className="text-center text-muted small">Non hai ancora un account? <Link to="/" style={{"color":"#E1306C", "cursor": "pointer"}}>Registrati qui!</Link></p>
+                        <p className="text-center text-muted small">Non hai ancora un account? <Link to="/register" style={{"color":"#E1306C", "cursor": "pointer"}}>Registrati qui!</Link></p>
                     </div>
                 </div>
                 <div className="col-3"></div>
