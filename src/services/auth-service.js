@@ -24,3 +24,29 @@ export const registerNewProfile = (email, password, name, nickname) => {
 
     return registerProfileReq();
 }
+
+export const login = (email, password) => {
+    const loginReq = async () => {
+        const response = await fetch(urlBase + "login", {
+            method: 'POST',
+            body: JSON.stringify({
+                email: email,
+                pass: password
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if(!response.ok){
+            console.log('error: ' + response.status);
+            throw new Error('Error: ' + response.status);
+        }
+
+        const data = await response.json();
+        console.log(data);
+        return data;
+    }
+
+    return loginReq();
+}

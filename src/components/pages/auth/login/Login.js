@@ -3,28 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useState } from "react/cjs/react.development";
 import globalClasses from "../../../../assets/global-styles/bootstrap.min.module.css";
 import classes from "./Login.module.css";
-
-const users = [
-    {
-        idProfile: 'a',
-        name: 'pippo',
-        nickname: 'pippo_nickname',
-        bio: 'bio stupida',
-        profilePic: "https://techcommunity.microsoft.com/t5/image/serverpage/image-id/217078i525F6A9EF292601F/image-size/large?v=v2&px=999",
-        email: 'test1@test.com',
-        password: 'pass'
-    },
-    {
-        idProfile: 'b',
-        name: 'pluto',
-        nickname: 'pluto_nickname',
-        bio: 'bio stupida',
-        profilePic: "https://techcommunity.microsoft.com/t5/image/serverpage/image-id/217078i525F6A9EF292601F/image-size/large?v=v2&px=999",
-        email: 'test2@test.com',
-        password: 'pass'
-    }
-]
-
+import { login } from "../../../../services/auth-service";
 
 const Login = () => {
     const [errorLogin, setErrorLogin] = useState(false);
@@ -43,14 +22,8 @@ const Login = () => {
 
     const submitLoginForm = (event) => {
         event.preventDefault();
-        for(let user of users){
-            if(user.email === inputEmail && user.password === inputPassword){
-                console.log('user authenticated and found');
-                // setErrorLogin(false);
-                history.push('/');
-                return;
-            }
-        }
+
+
         setErrorLogin(true);
     }
 
