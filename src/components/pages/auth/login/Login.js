@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useState } from "react/cjs/react.development";
 import globalClasses from "../../../../assets/global-styles/bootstrap.min.module.css";
 import classes from "./Login.module.css";
 import { login } from "../../../../services/auth-service";
 import jwt_decode from "jwt-decode";
+import AuthContext from "../../../../services/auth-context";
+
+
+/**
+ * 
+ * TODO:
+ * 
+ * 
+ * IMPLEMENT LOGIN LOGIC 
+ */
+
+
 
 const Login = () => {
     const [errorLogin, setErrorLogin] = useState(false);
@@ -12,6 +24,8 @@ const Login = () => {
     const [inputPassword, setInputPassword] = useState('');
     const history = useHistory();
 
+
+    const authCtx = useContext(AuthContext);
 
     const handleInputEmail = (event) => {
         setInputEmail(event.target.value);
@@ -28,6 +42,10 @@ const Login = () => {
             let token = res.headers.get("Authentication").replace("Bearer ", "");
             let responseDecoded = jwt_decode(token);
             console.log(responseDecoded);
+            console.log(responseDecoded.exp);
+            const expirationTime = new Date(new Date().getTime() + (+responseDecoded.exp * 1000));
+            
+            authCtx.login(token, expirationTime.toString());
         }).catch(err => {
             console.log(err);
         })

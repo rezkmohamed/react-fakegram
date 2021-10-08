@@ -6,12 +6,15 @@ import { fetchPosts } from "../../../services/post-service";
 const Homepage = (props) => {
     const [isLoading, setIsLoading] = useState(false);
     const [posts, setPosts] = useState([]);
+
     
     useEffect(() => {
         setIsLoading(true);
         fetchPosts().then(posts => {
             setPosts(posts);
             setIsLoading(false);
+        }).catch(err => {
+            console.log(err);
         });
     }, []);
 

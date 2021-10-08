@@ -1,9 +1,16 @@
 const urlBase = 'http://localhost:8080/posts/';
 
+const token = localStorage.getItem('token');
+
 export const fetchPosts = () => {
         const fetchData = async () => {
             try {
-                const response = await fetch(urlBase);
+                const response = await fetch(urlBase, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token,
+                    }
+                });
                 if(!response.ok && !response.status !== '204'){
                     console.log('error: ' + response.status);
                     throw new Error('Error: ' + response.status);
@@ -23,7 +30,11 @@ export const fetchPosts = () => {
 
 export const fetchPostsByIdProfile = (idProfile) => {
     const fetchData = async () => {
-        const response = await fetch(urlBase + "profile/" + idProfile);
+        const response = await fetch(urlBase + "profile/" + idProfile, {
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            }
+        });
         if(!response.ok){
             console.log('error: ' + response.status);
             throw new Error('Error: ' + response.status);
@@ -38,7 +49,11 @@ export const fetchPostsByIdProfile = (idProfile) => {
 
 export const fetchPostById = (idPost) => {
     const fetchData = async () => {
-        const response = await fetch(urlBase + "detail/" + idPost);
+        const response = await fetch(urlBase + "detail/" + idPost, {
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            }
+        });
         if(!response.ok && !response.status !== '204'){
             console.log('error: ' + response.status);
             throw new Error('Error: ' + response.status);
@@ -62,8 +77,8 @@ export const addNewPost = (img, description) => {
                 idProfile: 'a'
             }),
             headers: {
-                'Content-Type': 'application/json'
-                // 'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
             },
         });
 

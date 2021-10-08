@@ -24,6 +24,12 @@ const Header = () => {
         }
     }
 
+    const onHandleGoToMyProfilePage = (event) => {
+        /**
+         * FIXME
+         */
+    }
+
     /**
      * LOGICA DA IMPLEMENTARE
      */
@@ -62,7 +68,7 @@ const Header = () => {
                     </div>
 
                     <div className={styles['navigation-icon']}>
-                        <Link to="/profiles/a" className={styles['navigation-link']}>
+                        <Link to={"/profiles/a"} onClick={onHandleGoToMyProfilePage} className={styles['navigation-link']}>
                             <img src={personCircle} alt="link"/>
                         </Link>
                     </div>
