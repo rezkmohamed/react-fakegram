@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import styles from "./Header.module.scss";
 //import heart from '../../icons/heart.svg';
@@ -6,11 +6,13 @@ import chatIcon from '../../icons/chat-text.svg';
 import plusSquare from '../../icons/plus-square.svg';
 import personCircle from '../../icons/person-circle.svg';
 import boxArrow from '../../icons/box-arrow-right.svg';
+import AuthContext from "../../services/auth-context";
 
 
 const Header = () => {
     const [searchedUser, setSearchedUser] = useState('');
     const history = useHistory('');
+    const authCtx = useContext(AuthContext);
 
     const onHandleSearchUser = (event) => {
         console.log(event.target.value);
@@ -29,6 +31,8 @@ const Header = () => {
      */
     const onHandleLogout = () => {
         console.log('logging out...');
+        authCtx.logout();
+        history.replace('/login');
     }
 
     return (
