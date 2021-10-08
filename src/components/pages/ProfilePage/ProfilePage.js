@@ -3,15 +3,30 @@ import { Link, useLocation } from "react-router-dom";
 import classes from "./ProfilePage.module.css";
 import globalClasses from "../../../assets/global-styles/bootstrap.min.module.css";
 import Header from "../../UI/Header";
-import { fetchProfileById } from "../../../services/profile-service";
+import { fetchProfileById, fetchProfileLogged } from "../../../services/profile-service";
 import { fetchPostsByIdProfile } from "../../../services/post-service";
 import { addFollow, checkIsFollowed, deleteFollow } from "../../../services/follow-service";
 
+const MY_PROFILE_PATH = "/profiles/me";
+
+/**
+ * TODO:
+ * FIXARE IL FETCH, RENDERLO DIVERSO IN FUNZIONE DEL FATTO SE MI TROVO SUL MIO PROFILO O SU QUELLO 
+ * DI UN'ALTRA PERSONA.
+ */
+
 const ProfilePage = () => {
     const location = useLocation();
-    const startingIndex = location.pathname.lastIndexOf('/');
-    const idProfile = location.pathname.substring(startingIndex+1, location.pathname.length);
-
+    let isMyProfile;
+    let startingIndex;
+    let idProfile;
+    if(location.pathname === MY_PROFILE_PATH){
+        isMyProfile = true;
+    } else {
+        isMyProfile = false;
+        startingIndex = location.pathname.lastIndexOf('/');
+        idProfile = location.pathname.substring(startingIndex+1, location.pathname.length);
+    }
     const [isLoadingProfile, setIsLoadingProfile] = useState(true);
     const [profile, setProfile] = useState(null);
     const [error, setError] = useState(null);
@@ -29,41 +44,56 @@ const ProfilePage = () => {
         setIsLoadingProfile(true);
         setIsLoadingPosts(true);
         setError(null);
+        console.log(isMyProfile);
 
-        fetchProfileById(idProfile)
-        .then(profile => {
-            setProfile(profile);
-            console.log(profile);
-            setIsLoadingProfile(false);
-        })
-        .catch(err => {
-            setError("Error");
-            console.log(err);
-            setIsLoadingProfile(false);
-        });
-
-        fetchPostsByIdProfile(idProfile)
-        .then(postsResponse => {
-            setPosts(postsResponse);
-            console.log(postsResponse);
-            setIsLoadingPosts(false);
-        })
-        .catch(err => {
-            setError("Error");
-            setIsLoadingPosts(false);
-        });
-
-        checkIsFollowed('b', idProfile)
-        .then(response => {
-            console.log(response);
-            if(response){
-                setIsFollowed(true);
-            }
-        })
-        .catch(err => {
-            console.log(err);
-        })
-    }, [idProfile]);
+        if(!isMyProfile){
+            fetchProfileById(idProfile)
+            .then(profile => {
+                setProfile(profile);
+                console.log(profile);
+                setIsLoadingProfile(false);
+            })
+            .catch(err => {
+                setError("Error");
+                console.log(err);
+                setIsLoadingProfile(false);
+            });
+    
+            fetchPostsByIdProfile(idProfile)
+            .then(postsResponse => {
+                setPosts(postsResponse);
+                console.log(postsResponse);
+                setIsLoadingPosts(false);
+            })
+            .catch(err => {
+                setError("Error");
+                setIsLoadingPosts(false);
+            });
+    
+            checkIsFollowed('b', idProfile)
+            .then(response => {
+                console.log(response);
+                if(response){
+                    setIsFollowed(true);
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        } else {
+            fetchProfileLogged().then(res => {
+                console.log(res);
+                setProfile(res);
+                setIsLoadingProfile(false);
+                setPosts(res.posts);
+                setIsLoadingPosts(false);
+            }).catch(err => {
+                console.log(err);
+                setIsLoadingProfile(false);
+                setIsLoadingPosts(false);
+            })
+        }
+    }, [idProfile, isMyProfile]);
 
     const followThisProfile = () => {
         addFollow('b', idProfile)
@@ -127,9 +157,14 @@ const ProfilePage = () => {
             
                     <h1 className={classes['profile-user-name']}>{profile.nickname}</h1>
             
-                    <button className={classes['profile-edit-btn']} style={{'backgroundColor': 'white'}} onClick={toggleFollow} disabled={followButtonDisabled}>{isFollowed ? 'followed' : 'follow'}</button>
-
-                    {/* <button className={classes['profile-edit-btn']} style={{'background-color': 'white'}}>modifica</button>         */}
+                    {
+                        !isMyProfile &&
+                        <button className={classes['profile-edit-btn']} style={{'backgroundColor': 'white'}} onClick={toggleFollow} disabled={followButtonDisabled}>{isFollowed ? 'followed' : 'follow'}</button>
+                    }
+                    {
+                        isMyProfile &&
+                        <button className={classes['profile-edit-btn']} style={{'background-color': 'white'}}>modifica</button>        
+                    }
                 </div>
             
                 <div className={classes['profile-stats']}>

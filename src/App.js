@@ -33,6 +33,10 @@ function App() {
         <Route path="/profiles/:idProfile" exact component={ProfilePage} />
       }
       {
+        authCtx.isLoggedIn && 
+        <Route path="/profile/me" exact component={ProfilePage}/>
+      }
+      {
         authCtx.isLoggedIn &&
         <Route path="/searchprofile" exact component={SearchPage} />
       }
