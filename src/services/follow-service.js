@@ -1,14 +1,14 @@
-
 const urlBase = 'http://localhost:8080/followers/';
 
-export const addFollow = (idProfileFollower, idProfileFollowed) => {
+export const addFollow = (idProfileFollowed) => {
+    const token = localStorage.getItem('token');
     const addFollowReq = async () => {
-        const response = await fetch(urlBase + idProfileFollower + "/follows/" + idProfileFollowed,{
+        const response = await fetch(urlBase + "follows/" + idProfileFollowed,{
             method: 'POST',
             body: {},
             headers: {
-                'Content-Type': 'application/json'
-                // 'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
             },
         });
         if(!response.ok){
@@ -20,10 +20,14 @@ export const addFollow = (idProfileFollower, idProfileFollowed) => {
     return addFollowReq();
 }
 
-export const deleteFollow = (idProfileFollower, idProfileFollowed) => {
+export const deleteFollow = (idProfileFollowed) => {
+    const token = localStorage.getItem('token');
     const deleteFollowReq = async () => {
-        const response = await fetch(urlBase + idProfileFollower + "/unfollow/" + idProfileFollowed, {
-            method: 'DELETE'
+        const response = await fetch(urlBase + "unfollow/" + idProfileFollowed, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            }
         });
         if(!response.ok){
             console.log('error: ' + response.status);
@@ -36,9 +40,14 @@ export const deleteFollow = (idProfileFollower, idProfileFollowed) => {
 }
 
 
-export const checkIsFollowed = (idProfileLogged, idProfileShowed) => {
+export const checkIsFollowed = (idProfileShowed) => {
+    const token = localStorage.getItem('token');
     const getFollow = async () => {
-        const response = await fetch(urlBase + idProfileLogged + "/checkfollow/" + idProfileShowed);
+        const response = await fetch(urlBase + "checkfollow/" + idProfileShowed, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        });
         if(!response.ok){
             console.log('error: ' + response.status);
             throw new Error('Error: ' + response.status);

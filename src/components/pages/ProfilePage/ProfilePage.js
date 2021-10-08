@@ -37,6 +37,7 @@ const ProfilePage = () => {
     const [followButtonDisabled, setFollowButtonDisabled] = useState(false);
     const [isFollowed, setIsFollowed] = useState(false);
 
+
     /**
      * INIZIALIZZAZIONE PROFILO
      */
@@ -70,7 +71,7 @@ const ProfilePage = () => {
                 setIsLoadingPosts(false);
             });
     
-            checkIsFollowed('b', idProfile)
+            checkIsFollowed(idProfile)
             .then(response => {
                 console.log(response);
                 if(response){
@@ -96,7 +97,7 @@ const ProfilePage = () => {
     }, [idProfile, isMyProfile]);
 
     const followThisProfile = () => {
-        addFollow('b', idProfile)
+        addFollow(idProfile)
         .then(isOkay => {
             if(isOkay){
                 setFollowButtonDisabled(false);
@@ -109,7 +110,7 @@ const ProfilePage = () => {
     }
 
     const unfollowThisProfile = () => {
-        deleteFollow('b', idProfile)
+        deleteFollow(idProfile)
         .then(isOkay => {
             if(isOkay){
                 setFollowButtonDisabled(false);

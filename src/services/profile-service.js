@@ -23,8 +23,13 @@ export const fetchProfileLogged = () => {
 }
 
 export const fetchProfileById = (idProfile) => {
+    const token = localStorage.getItem('token');
     const fetchProfile = async () => {
-        const response = await fetch(urlBase + idProfile);
+        const response = await fetch(urlBase + idProfile, {
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            }
+        });
         if(!response.ok){
             console.log('error: ' + response.status);
             throw new Error('Error: ' + response.status);
