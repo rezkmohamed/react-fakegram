@@ -3,10 +3,15 @@ import Header from "../../UI/Header";
 import globalClasses from "../../../assets/global-styles/bootstrap.min.module.css";
 import classes from './AddNewPost.module.scss';
 import { addNewPost } from "../../../services/post-service";
+import SuccessMessage from "../../UI/SuccessMessage";
+import ErrorMessage from "../../UI/ErrorMessage";
 
 const AddNewPost = () => {
     const [imgPost, setImgPost] = useState('');
     const [postDescription, setPostDescription] = useState('');
+    const [formIsSubmitted, setFormIsSubmitted] = useState(false);
+    const [addPostIsValid, setAddPostIsValid] = useState(false);
+    const [message, setMessage] = useState("Post aggiunto con successo!");
 
     const handleImgPost = (event) => {
         setImgPost(event.target.value.toString());
@@ -21,9 +26,12 @@ const AddNewPost = () => {
         console.log(postDescription);
         addNewPost(imgPost, postDescription)
         .then(response => {
-            console.log(response);
+            setFormIsSubmitted(true);
+            setAddPostIsValid(true);
         }).catch(err => {
-            console.log(err);
+            setFormIsSubmitted(true);
+            setAddPostIsValid(false);
+            setMessage(err.message);
         });
     }
 
@@ -34,6 +42,14 @@ const AddNewPost = () => {
                 <div className={globalClasses.row}>
                     <div className={globalClasses['col-3']}></div>
                     <div className={globalClasses['col-6']}>
+                        {
+                            formIsSubmitted && addPostIsValid &&
+                            <SuccessMessage message={message} />
+                        }
+                        {
+                            formIsSubmitted && !addPostIsValid &&
+                            <ErrorMessage message={message} />
+                        }
                             {/* <div className="alert alert-danger" role="alert">
                             Errore nel caricamento della foto!
                             </div> */}

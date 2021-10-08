@@ -26,11 +26,7 @@ const Header = () => {
         }
     }
 
-    /**
-     * LOGICA DA IMPLEMENTARE
-     */
     const onHandleLogout = () => {
-        console.log('logging out...');
         authCtx.logout();
         history.replace('/login');
     }

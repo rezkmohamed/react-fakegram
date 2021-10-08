@@ -1,8 +1,8 @@
 const urlBase = 'http://localhost:8080/posts/';
 
-const token = localStorage.getItem('token');
 
 export const fetchPosts = () => {
+    const token = localStorage.getItem('token');
         const fetchData = async () => {
             try {
                 const response = await fetch(urlBase, {
@@ -29,6 +29,7 @@ export const fetchPosts = () => {
 };
 
 export const fetchPostsByIdProfile = (idProfile) => {
+    const token = localStorage.getItem('token');
     const fetchData = async () => {
         const response = await fetch(urlBase + "profile/" + idProfile, {
             headers: {
@@ -48,6 +49,7 @@ export const fetchPostsByIdProfile = (idProfile) => {
 }
 
 export const fetchPostById = (idPost) => {
+    const token = localStorage.getItem('token');
     const fetchData = async () => {
         const response = await fetch(urlBase + "detail/" + idPost, {
             headers: {
@@ -67,14 +69,14 @@ export const fetchPostById = (idPost) => {
 }
 
 export const addNewPost = (img, description) => {
+    const token = localStorage.getItem('token');
     const addPost = async () => {
         const response = await fetch(urlBase + "save", 
         {
             method: 'POST',
             body: JSON.stringify({
                 img: img,
-                description: description,
-                idProfile: 'a'
+                description: description
             }),
             headers: {
                 'Content-Type': 'application/json',
