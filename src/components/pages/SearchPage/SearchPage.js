@@ -21,6 +21,7 @@ const SearchPage = (props) => {
         fetchProfilesToSearchByName(nameLike)
         .then(profiles => {
             setUsersSearched(profiles);
+            console.log(profiles);
             setIsLoading(false);
         })
         .catch(err => {
@@ -48,7 +49,7 @@ const SearchPage = (props) => {
                                 <img src={user.proPic} alt="propic" 
                                 className={globalClasses['mr-3']} width="64px" height="64px" />
                                 <div className={globalClasses['media-body']}>
-                                    <Link to={`/profiles/${user.idProfile}`}
+                                    <Link to={`/profiles/${user.id}`}
                                         className={`${classes['username-link']} ${globalClasses['username-link']}`}>
                                         
                                     <h5 className={globalClasses['mt-0']}>{user.name}</h5>

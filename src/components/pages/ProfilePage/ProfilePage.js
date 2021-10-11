@@ -91,6 +91,7 @@ const ProfilePage = () => {
         .then(isOkay => {
             if(isOkay){
                 setFollowButtonDisabled(false);
+                profile.followersCounter++;
                 setIsFollowed(true);
             }
         })
@@ -104,6 +105,7 @@ const ProfilePage = () => {
         .then(isOkay => {
             if(isOkay){
                 setFollowButtonDisabled(false);
+                profile.followersCounter--;
                 setIsFollowed(false);
             }
         })
