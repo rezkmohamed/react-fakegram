@@ -43,7 +43,8 @@ const Login = () => {
             let responseDecoded = jwt_decode(token);
             console.log(responseDecoded);
             console.log(responseDecoded.exp);
-            const expirationTime = new Date(new Date().getTime() + (+responseDecoded.exp));
+            // const expirationTime = new Date(new Date().getTime() + (+responseDecoded.exp));
+            const expirationTime = new Date((+responseDecoded.exp)*1000);
             localStorage.setItem('nickname', responseDecoded.nickname);
             authCtx.login(token, expirationTime.toString());
         }).catch(err => {

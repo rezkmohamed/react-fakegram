@@ -43,8 +43,13 @@ export const fetchProfileById = (idProfile) => {
 }
 
 export const fetchProfilesToSearchByName = (nameLike) => {
+    const token = localStorage.getItem('token');
     const fetchProfiles = async () => {
-        const response = await fetch(urlBase + 'search/' + nameLike);
+        const response = await fetch(urlBase + 'search/' + nameLike, {
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            }
+        });
         if(!response.ok){
             console.log('error: ' + response.status);
             throw new Error('Error: ' + response.status);
