@@ -72,6 +72,7 @@ const PostCardWithPics = ({post}) => {
         if(!liked){
             addLikePost(post.idPost).then(response => {
                 setLiked(true);
+                post.likesCounter++;
                 setLikeBtnDisabled(false);
             }).catch(err => {
                 console.log(err);
@@ -81,6 +82,7 @@ const PostCardWithPics = ({post}) => {
         else {
             deleteLikePost(post.idPost).then(response => {
                 setLiked(false);
+                post.likesCounter--;
                 setLikeBtnDisabled(false);
             }).catch(err => {
                 console.log(err);
@@ -143,7 +145,7 @@ const PostCardWithPics = ({post}) => {
                                 </button>
                             </section>
                             <section className={classes['instapost__likes']}>
-                                Piace a <Link to="/post/likes"  className={classes.instalink}> 450 persone</Link>
+                                Piace a <Link to="/post/likes"  className={classes.instalink}> {post.likesCounter} persone</Link>
                             </section>
                             <section className={classes['instapost__description']}>
                                 <Link to={`/profiles/${post.profile.id}`} className={`${classes.user} ${classes.instalink}`}>
