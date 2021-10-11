@@ -9,12 +9,6 @@ import { addFollow, checkIsFollowed, deleteFollow } from "../../../services/foll
 
 const MY_PROFILE_PATH = "/profiles/me";
 
-/**
- * TODO:
- * FIXARE IL FETCH, RENDERLO DIVERSO IN FUNZIONE DEL FATTO SE MI TROVO SUL MIO PROFILO O SU QUELLO 
- * DI UN'ALTRA PERSONA.
- */
-
 const ProfilePage = () => {
     const location = useLocation();
     let isMyProfile;
@@ -37,10 +31,6 @@ const ProfilePage = () => {
     const [followButtonDisabled, setFollowButtonDisabled] = useState(false);
     const [isFollowed, setIsFollowed] = useState(false);
 
-
-    /**
-     * INIZIALIZZAZIONE PROFILO
-     */
     useEffect(() => {
         setIsLoadingProfile(true);
         setIsLoadingPosts(true);

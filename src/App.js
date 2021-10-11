@@ -17,45 +17,45 @@ function App() {
   return (
     <React.Fragment>
       {
-        authCtx.isLoggedIn &&
+        authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
         <Route path="/" exact component={Homepage}/>
       }
       {
-        !authCtx.isLoggedIn &&
+        !authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
         <Route path="/login" exact component={Login} />
       }
       {
-        !authCtx.isLoggedIn &&
+        !authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
         <Route path="/register" exact component={Register} />
       }
       {
-        authCtx.isLoggedIn &&
+        authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
         <Route path="/profiles/:idProfile" exact component={ProfilePage} />
       }
       {
-        authCtx.isLoggedIn && 
+        authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
         <Route path="/profile/me" exact component={ProfilePage}/>
       }
       {
-        authCtx.isLoggedIn &&
+        authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
         <Route path="/searchprofile" exact component={SearchPage} />
       }
       {
-        authCtx.isLoggedIn &&
+        authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
         <Route path="/posts/detail/:idPost" exact component={DetailPostPage} />
       }
       {
-        authCtx.isLoggedIn &&
+        authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
         <Route path="/newpost" exact component={AddNewPost} />
       }
       {     
-        authCtx.isLoggedIn &&
+        authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
         <Route path='*'>
           <Redirect to='/' />
         </Route>
       }
       {
-        !authCtx.isLoggedIn &&
+        !authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
         <Route path='*'>
           <Redirect to='/login' />
         </Route>

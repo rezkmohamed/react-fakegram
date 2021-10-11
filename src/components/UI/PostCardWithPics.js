@@ -33,7 +33,7 @@ const PostCardWithPics = ({post}) => {
 
     useEffect(() => {
         setIsCheckingLike(true);
-        checkIsLiked('a', post.idPost).then(response => {
+        checkIsLiked(post.idPost).then(response => {
             if(response){
                 setLiked(true);
             } else {
@@ -49,7 +49,7 @@ const PostCardWithPics = ({post}) => {
     const onToggleLike = () => {
         setLikeBtnDisabled(true);
         if(!liked){
-            addLikePost('a', post.idPost).then(response => {
+            addLikePost(post.idPost).then(response => {
                 setLiked(true);
                 setLikeBtnDisabled(false);
             }).catch(err => {
@@ -58,7 +58,7 @@ const PostCardWithPics = ({post}) => {
             });
         }
         else {
-            deleteLikePost('a', post.idPost).then(response => {
+            deleteLikePost(post.idPost).then(response => {
                 setLiked(false);
                 setLikeBtnDisabled(false);
             }).catch(err => {

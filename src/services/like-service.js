@@ -1,8 +1,13 @@
 const urlBase = 'http://localhost:8080/likes/';
 
-export const checkIsLiked = (idProfileLogged, idPostShowed) => {
+export const checkIsLiked = (idPostShowed) => {
+    const token = localStorage.getItem('token');
     const getLike = async () => {
-        const response = await fetch(urlBase + "check/" + idProfileLogged + "/" + idPostShowed);
+        const response = await fetch(urlBase + "check/" + idPostShowed, {
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            }
+        });
         if(!response.ok){
             console.log('error: ' + response.status);
             throw new Error('Error: ' + response.status);
@@ -15,11 +20,15 @@ export const checkIsLiked = (idProfileLogged, idPostShowed) => {
     return getLike();
 }
 
-export const addLikePost = (idProfile, idPost) => {
+export const addLikePost = (idPost) => {
+    const token = localStorage.getItem('token');
     const addLike = async () => {
-        const response = await fetch(urlBase + "add/" + idProfile + "/" + idPost, {
+        const response = await fetch(urlBase + "add/" + idPost, {
             method: 'POST',
-            body: {}
+            body: {},
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            }
         });
         if(!response.ok){
             console.log('error: ' + response.status);
@@ -32,10 +41,14 @@ export const addLikePost = (idProfile, idPost) => {
     return addLike();
 }
 
-export const deleteLikePost = (idProfile, idPost) => {
+export const deleteLikePost = (idPost) => {
+    const token = localStorage.getItem('token');
     const deleteLike = async () => {
-        const response = await fetch(urlBase + "delete/" + idProfile + "/" + idPost, {
-            method: 'DELETE'
+        const response = await fetch(urlBase + "delete/" + idPost, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            }
         });
         if(!response.ok){
             console.log('error: ' + response.status);
