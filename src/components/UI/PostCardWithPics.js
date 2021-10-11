@@ -150,19 +150,21 @@ const PostCardWithPics = ({post}) => {
                                         {post.profile.nickname}
                                     </Link> {post.description}
                             </section>
-                            <section className={classes['instapost__description']}>
+                            {
+                                !isLoadingComments && 
+                                <section className={classes['instapost__description']}>
                                 {comments.map(comment => {
                                     return (
-                                        <div>
+                                        <div key={comment.idComment}>
                                             <Link to={`/profiles/${comment.idProfile}`} 
-                                            key={comment.idComment}
                                             className={`${classes.user} ${classes.instalink}`}>
                                             {comment.nicknameProfile}
                                             </Link> {comment.comment}
-                                                </div>
+                                        </div>
                                     )
                                 })}
                             </section>
+                            }
                             <section className={classes['instapost__timestamp']}>
                                 {post.date}
                             </section>
