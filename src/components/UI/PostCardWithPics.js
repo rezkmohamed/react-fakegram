@@ -10,6 +10,7 @@ import commentIcon from "../../icons/chat.svg";
 import { useEffect, useState } from "react/cjs/react.development";
 import * as moment from "moment";
 import { checkIsLiked, addLikePost, deleteLikePost } from "../../services/like-service";
+import { addComment, fetchCommentsForPost } from "../../services/comment-service";
 
 
 const PostCardWithPics = ({post}) => {
@@ -18,6 +19,7 @@ const PostCardWithPics = ({post}) => {
     const [liked, setLiked] = useState(false);
     const [comments, setComments] = useState([]);
     const [commentInput, setCommentInput] = useState('');
+    const [isLoadingComments, setIsLoadingComments] = useState(true);
     post.date = moment(new Date(post.date)).format("MM-DD-YYYY, h:mm:ss a");
 
     const commentInputHandler = (event) => {
@@ -25,14 +27,33 @@ const PostCardWithPics = ({post}) => {
     }
 
     const onAddComment = (comment) =>{
+        const nicknameProfileLogged = localStorage.getItem('nickname');
         setComments([
-            ...comments, {nickname: 'nickname', comment: comment}
-        ])
+            ...comments, {nickname: nicknameProfileLogged, comment: comment}
+        ]);
+
+        addComment(comment, post.idPost).then(response => {
+            console.log(response);
+        }).catch(err => {
+            console.log(err);
+        });
+
         setCommentInput('');
     }
 
     useEffect(() => {
         // setIsCheckingLike(true);
+        setIsLoadingComments(true);
+        fetchCommentsForPost(post.idPost)
+        .then(response => {
+            console.log(response);
+            setComments(response);
+            setIsLoadingComments(false);
+        }).catch(err => {
+            console.log(err);
+            setIsLoadingComments(false);
+        });
+
         checkIsLiked(post.idPost).then(response => {
             if(response){
                 setLiked(true);
@@ -133,8 +154,10 @@ const PostCardWithPics = ({post}) => {
                                 {comments.map(comment => {
                                     return (
                                         <div>
-                                            <Link to={`/profiles/${post.profile.id}`} className={`${classes.user} ${classes.instalink}`}>
-                                            {comment.nickname}
+                                            <Link to={`/profiles/${comment.idProfile}`} 
+                                            key={comment.idComment}
+                                            className={`${classes.user} ${classes.instalink}`}>
+                                            {comment.nicknameProfile}
                                             </Link> {comment.comment}
                                                 </div>
                                     )

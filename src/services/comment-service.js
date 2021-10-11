@@ -28,10 +28,10 @@ export const addComment = (commentText, idPost) => {
     const addCommentReq = async () => {
         const response = await fetch(urlBase + "add", {
             method: 'POST',
-            body: {
+            body: JSON.stringify({
                 comment: commentText,
                 idPost: idPost
-            },
+            }),
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + token,

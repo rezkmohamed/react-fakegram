@@ -44,7 +44,7 @@ const Login = () => {
             console.log(responseDecoded);
             console.log(responseDecoded.exp);
             const expirationTime = new Date(new Date().getTime() + (+responseDecoded.exp));
-            
+            localStorage.setItem('nickname', responseDecoded.nickname);
             authCtx.login(token, expirationTime.toString());
         }).catch(err => {
             console.log(err);
