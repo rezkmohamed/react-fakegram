@@ -14,7 +14,7 @@ import { checkIsLiked, addLikePost, deleteLikePost } from "../../services/like-s
 
 const PostCardWithPics = ({post}) => {
     const [likeBtnDisabled, setLikeBtnDisabled] = useState(false);
-    const [isCheckingLike, setIsCheckingLike] = useState(true);
+    // const [isCheckingLike, setIsCheckingLike] = useState(true);
     const [liked, setLiked] = useState(false);
     const [comments, setComments] = useState([]);
     const [commentInput, setCommentInput] = useState('');
@@ -32,17 +32,17 @@ const PostCardWithPics = ({post}) => {
     }
 
     useEffect(() => {
-        setIsCheckingLike(true);
+        // setIsCheckingLike(true);
         checkIsLiked(post.idPost).then(response => {
             if(response){
                 setLiked(true);
             } else {
                 setLiked(false);
             }
-            setIsCheckingLike(false);
+            // setIsCheckingLike(false);
         }).catch(err => {
             console.log(err);
-            setIsCheckingLike(false);
+            // setIsCheckingLike(false);
         });
     }, [post]);
 
