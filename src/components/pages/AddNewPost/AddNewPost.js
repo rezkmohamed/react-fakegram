@@ -38,7 +38,7 @@ const AddNewPost = () => {
     return(
         <React.Fragment>
             <Header />
-            <div className={globalClasses.container} style={{"padding-top": "6em"}}>
+            <div className={globalClasses.container} style={{"paddingTop": "6em"}}>
                 <div className={globalClasses.row}>
                     <div className={globalClasses['col-3']}></div>
                     <div className={globalClasses['col-6']}>

@@ -37,15 +37,14 @@ const retriveStoredToken = () => {
 };
 
 export const AuthContextProvider = (props) => {
-
     const tokenData = retriveStoredToken();
     let initialToken;
     if(tokenData){
         initialToken = tokenData.token;
-
     }
 
     const [token, setToken] = useState(initialToken);
+    const [pendingStorageCheck, setPendingStorageCheck] = useState(true);
 
     const userIsLoggedIn = !!token;
 
@@ -53,7 +52,7 @@ export const AuthContextProvider = (props) => {
         setToken(token);
         localStorage.setItem('token', token);
         localStorage.setItem('expirationTime', expirationTime);
-
+        setPendingStorageCheck(false);
         //logica per autologout.
         const remainingTime = calculateRemainingTime(expirationTime);
         // quando faccio il login, definisco logoutTimer.

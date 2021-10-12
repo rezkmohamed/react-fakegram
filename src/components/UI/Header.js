@@ -63,7 +63,7 @@ const Header = () => {
                     </div>
 
                     <div className={styles['navigation-icon']}>
-                        <Link to="profiles/me" className={styles['navigation-link']}>
+                        <Link to="/profiles/me" className={styles['navigation-link']}>
                             <img src={personCircle} alt="link"/>
                         </Link>
                     </div>

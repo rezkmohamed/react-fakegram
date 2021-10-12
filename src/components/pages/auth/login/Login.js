@@ -33,11 +33,8 @@ const Login = () => {
         setLoginRequestIsSent(false);
 
         login(inputEmail, inputPassword).then(res => {
-            console.log(res);
             let token = res.headers.get("Authentication").replace("Bearer ", "");
             let responseDecoded = jwt_decode(token);
-            console.log(responseDecoded);
-            console.log(responseDecoded.exp);
             // const expirationTime = new Date(new Date().getTime() + (+responseDecoded.exp));
             const expirationTime = new Date((+responseDecoded.exp)*1000);
             localStorage.setItem('nickname', responseDecoded.nickname);

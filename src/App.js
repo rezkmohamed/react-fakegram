@@ -63,7 +63,7 @@ function App() {
         authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
         <Route path="/newpost" exact component={AddNewPost} />
       }
-      {     
+      {/* {     
         authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
         <Route path='*'>
           <Redirect to='/' />
@@ -74,7 +74,7 @@ function App() {
         <Route path='*'>
           <Redirect to='/login' />
         </Route>
-      }
+      } */}
     </React.Fragment>
   );
 }

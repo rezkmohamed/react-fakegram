@@ -91,7 +91,7 @@ const UpdateProfilePage = () => {
             setRequestUpdatePasswordIsSent(true);
             setMessage(err.message);
         });
-    }
+    };
 
 
     return(
@@ -110,7 +110,7 @@ const UpdateProfilePage = () => {
                             <ErrorMessage message={message} />
                         }
 
-                        <form onSubmit={submitUpdateGeneralData} enctype="multipart/form-data">
+                        <form onSubmit={submitUpdateGeneralData} encType="multipart/form-data">
                             <h3>Nickname:</h3>
                             <input 
                                     type="text"
@@ -164,14 +164,14 @@ const UpdateProfilePage = () => {
                             <input 
                                     type="text"
                                     id="email"
-                                    formControlName="email"
+                                    formcontrolname="email"
                                     ref={emailInputRef}
                                     className="form-control" />
                             <h3>Password:</h3>
                             <input
                                     type="password"
                                     id="password1"
-                                    formControlName="password"
+                                    formcontrolname="password"
                                     className="form-control" />
                             <button
                                     type="submit"
@@ -201,21 +201,21 @@ const UpdateProfilePage = () => {
                             <input 
                                     type="password"
                                     id="old"
-                                    formControlName="old"
+                                    formcontrolname="old"
                                     ref={oldPasswordInputRef}
                                     className="form-control" />
                             <h3>Nuova password:</h3>
                             <input 
                                     type="password"
                                     id="new"
-                                    formControlName="new"
+                                    formcontrolname="new"
                                     ref={newPasswordInputRef}
                                     className="form-control" />
                             <h3>Conferma password:</h3>
                             <input 
                                     type="password"
                                     id="confirm"
-                                    formControlName="confirm"
+                                    formcontrolname="confirm"
                                     ref={confirmNewPasswordInputRef}
                                     className="form-control" />
                             <button 

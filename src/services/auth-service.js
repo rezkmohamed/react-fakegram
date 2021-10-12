@@ -1,4 +1,4 @@
-const urlBase = "http://localhost:8080/"
+const urlBase = "http://localhost:8080/";
 
 export const registerNewProfile = (email, password, name, nickname) => {
     const registerProfileReq = async () => {

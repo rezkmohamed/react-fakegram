@@ -161,7 +161,7 @@ const ProfilePage = () => {
                     }
                     {
                         isMyProfile &&
-                        <button className={classes['profile-edit-btn']} style={{'background-color': 'white'}}><Link to="/update" style={{ color: 'inherit', textDecoration: 'inherit' }}> modifica</Link></button>        
+                        <button className={classes['profile-edit-btn']} style={{'backgroundColor': 'white'}}><Link to="/update" style={{ color: 'inherit', textDecoration: 'inherit' }}> modifica</Link></button>        
                     }
                 </div>
             
