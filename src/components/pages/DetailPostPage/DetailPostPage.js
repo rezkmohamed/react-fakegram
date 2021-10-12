@@ -8,26 +8,40 @@ import { fetchPostById } from "../../../services/post-service";
 const DetailPostPage = () => {
     const location = useLocation();
     const startingIndex = location.pathname.lastIndexOf('/');
-    const idPost = location.pathname.substring(startingIndex+1, location.pathname.length);
+    let idPost;
+    idPost = location.pathname.substring(startingIndex+1, location.pathname.length);
+
     const [isLoading, setIsloading] = useState(true);
     const [post, setPost] = useState(null);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         setIsloading(true);
+        setError(null);
+        console.log(idPost);
+
+        
         fetchPostById(idPost).then(post => {
             console.log(post);
             setPost(post);
             setIsloading(false);
-        }).catch(err => console.log(err));
+        }).catch(err => {
+            console.log(err);
+            setIsloading(false);
+            setError(err.message);
+        });
     }, [idPost]);
 
     return(
         <React.Fragment>
             <Header />
             <div className={classes.content}>
-                { isLoading && <p>Loading...</p>}
                 {
-                    !isLoading &&
+                    error && <p>{error}</p>
+                }
+                { isLoading && !error && <p>Loading...</p>}
+                {
+                    !isLoading && !error && 
                     <PostCardWithPics key={post.idPost} post={post}/>
                 }
             </div>

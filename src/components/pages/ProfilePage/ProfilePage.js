@@ -14,12 +14,17 @@ const ProfilePage = () => {
     let isMyProfile;
     let startingIndex;
     let idProfile;
+    let idLogged = localStorage.getItem('id');
     if(location.pathname === MY_PROFILE_PATH){
         isMyProfile = true;
     } else {
-        isMyProfile = false;
         startingIndex = location.pathname.lastIndexOf('/');
         idProfile = location.pathname.substring(startingIndex+1, location.pathname.length);
+        if(idProfile === idLogged){
+            isMyProfile = true;
+        } else {
+            isMyProfile = false;
+        }
     }
     const [isLoadingProfile, setIsLoadingProfile] = useState(true);
     const [profile, setProfile] = useState(null);
