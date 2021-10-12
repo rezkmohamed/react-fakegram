@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import Header from "../../UI/Header";
 import classes from "./UpdateProfilePage.module.css";
 import globalClasses from "../../../assets/global-styles/bootstrap.min.module.css";
+import { updateGeneralDataForProfile } from "../../../services/profile-service";
+import SuccessMessage from "../../UI/SuccessMessage";
+import ErrorMessage from "../../UI/ErrorMessage";
 
 /**
  * FIXME:
@@ -9,10 +12,34 @@ import globalClasses from "../../../assets/global-styles/bootstrap.min.module.cs
  * @returns 
  */
 const UpdateProfilePage = () => {
+    const nicknameInputRef = useRef();
+    const nameInputRef = useRef();
+    const bioInputRef = useRef();
+    const emailInputRef = useRef();
 
+    const [updateGeneralDataIsValid, setUpdateGeneralDataIsValid] = useState(false);
+    const [requestIsSent, setRequestIsSent] = useState(false);
+    const [message, setMessage] = useState("");
 
+    const submitUpdateGeneralData = (event) => {
+        event.preventDefault();
+        setRequestIsSent(false);
+        setUpdateGeneralDataIsValid(false);
 
-
+        updateGeneralDataForProfile(nameInputRef.current.value, nicknameInputRef.current.value, null, bioInputRef.current.value)
+        .then(res => {
+            if(res){
+                setUpdateGeneralDataIsValid(true);
+            }
+            setRequestIsSent(true);
+            setMessage('Data updated!!!');
+            localStorage.removeItem('nickname');
+            localStorage.setItem('nickname', nicknameInputRef.current.value);
+        }).catch(err => {
+            setMessage(err.message);
+            setRequestIsSent(true);
+        })
+    }
 
 
     return(
@@ -31,13 +58,22 @@ const UpdateProfilePage = () => {
                         <div className="alert alert-success" role="alert">
                             Dati cambiati con successo
                         </div> */}
+                        {
+                            requestIsSent && updateGeneralDataIsValid &&
+                            <SuccessMessage message={message} />
+                        }
+                        {
+                            requestIsSent && !updateGeneralDataIsValid &&
+                            <ErrorMessage message={message} />
+                        }
 
-                        <form enctype="multipart/form-data">
+                        <form onSubmit={submitUpdateGeneralData} enctype="multipart/form-data">
                             <h3>Nickname:</h3>
                             <input 
                                     type="text"
                                     className="form-control"
                                     name="nickname"
+                                    ref={nicknameInputRef}
                                     required
                                     minlength="4" />
                             <h3>Nome:</h3>
@@ -45,6 +81,7 @@ const UpdateProfilePage = () => {
                                     type="text"
                                     className="form-control"
                                     name="nome"
+                                    ref={nameInputRef}
                                     required
                                     minlength="4" />
                             <h3>Biografia:</h3>
@@ -52,6 +89,7 @@ const UpdateProfilePage = () => {
                                     type="text" 
                                     className="form-control"
                                     name="biografia"
+                                    ref={bioInputRef}
                                     required
                                     minlength="4" />
                             <button 

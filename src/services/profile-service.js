@@ -149,10 +149,11 @@ export const fetchFollowingForProfile = (idProfile) => {
 export const updateGeneralDataForProfile = (name, nickname, email, bio) => {
     const token = localStorage.getItem('token');
     const updateProfile = async () => {
-        const response = await(urlBase + "updatebasics", {
+        const response = await fetch(urlBase + "updatebasics" , {
             method: 'PUT',
             headers: {
                 'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 name,
