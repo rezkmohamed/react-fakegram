@@ -145,3 +145,28 @@ export const fetchFollowingForProfile = (idProfile) => {
 
     return fetchProfiles();
 }
+
+export const updateGeneralDataForProfile = (name, nickname, email, bio) => {
+    const token = localStorage.getItem('token');
+    const updateProfile = async () => {
+        const response = await(urlBase + "updatebasics", {
+            method: 'PUT',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            },
+            body: JSON.stringify({
+                name,
+                nickname,
+                email,
+                bio
+            })
+        });
+        if(!response.ok){
+            console.log('error: ' + response.status);
+            throw new Error('Error: ' + response.status);
+        }
+
+        return true;
+    }
+    return updateProfile();
+}

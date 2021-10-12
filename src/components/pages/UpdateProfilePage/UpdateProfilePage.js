@@ -3,8 +3,18 @@ import Header from "../../UI/Header";
 import classes from "./UpdateProfilePage.module.css";
 import globalClasses from "../../../assets/global-styles/bootstrap.min.module.css";
 
-
+/**
+ * FIXME:
+ * LOGIC TO BE IMPLEMENTED
+ * @returns 
+ */
 const UpdateProfilePage = () => {
+
+
+
+
+
+
     return(
         <React.Fragment>
             <Header />
@@ -106,23 +116,17 @@ const UpdateProfilePage = () => {
                         </div> */}
 
                         <form>
-                            <h3>email:</h3>
+                            <h3>Nuova email:</h3>
                             <input 
                                     type="text"
                                     id="email"
                                     formControlName="email"
                                     className="form-control" />
-                            <h3>password:</h3>
+                            <h3>Password:</h3>
                             <input
                                     type="password"
                                     id="password1"
                                     formControlName="password"
-                                    className="form-control" />
-                            <h3>confirm password:</h3>
-                            <input
-                                    type="password"
-                                    id="password-confirm1"
-                                    formControlName="confirm"
                                     className="form-control" />
                             <button
                                     type="submit"
@@ -149,19 +153,19 @@ const UpdateProfilePage = () => {
 
                         
                         <form>
-                            <h3>vecchia password:</h3>
+                            <h3>Vecchia password:</h3>
                             <input 
                                     type="password"
                                     id="old"
                                     formControlName="old"
                                     className="form-control" />
-                            <h3>nuova password:</h3>
+                            <h3>Nuova password:</h3>
                             <input 
                                     type="password"
                                     id="new"
                                     formControlName="new"
                                     className="form-control" />
-                            <h3>conferma password:</h3>
+                            <h3>Conferma password:</h3>
                             <input 
                                     type="password"
                                     id="confirm"
