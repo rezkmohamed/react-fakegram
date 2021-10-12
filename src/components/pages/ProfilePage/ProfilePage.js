@@ -170,7 +170,7 @@ const ProfilePage = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to={`followlist?id-profile=${profile.id}&follow-type=following`} style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                        <Link to={`/followlist?id-profile=${profile.id}&follow-type=following`} style={{ color: 'inherit', textDecoration: 'inherit' }}>
                             <span className={classes['profile-stat-count']}>{profile.followingCounter}</span> following
                         </Link>
                     </li>
