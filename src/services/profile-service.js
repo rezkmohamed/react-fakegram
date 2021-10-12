@@ -69,3 +69,29 @@ export const fetchProfilesToSearchByName = (nameLike) => {
     const profiles = fetchProfiles();
     return profiles;
 }
+
+
+export const fetchProfilesLikeToPost = (idPost) => {
+    const token = localStorage.getItem('token');
+    const fetchProfiles = async () => {
+        const response = await fetch(urlBase + "liked/" + idPost, {
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            }
+        });
+        if(!response.ok){
+            console.log('error: ' + response.status);
+            throw new Error('Error: ' + response.status);
+        }
+        const data = await response.json();
+        for(let profile of data){
+            if(!profile.proPic){
+                profile.proPic = DEFAULT_IMG;
+            }
+        }
+
+        return data;
+    }
+    
+    return fetchProfiles();
+}

@@ -6,6 +6,7 @@ import Login from './components/pages/auth/login/Login';
 import Register from './components/pages/auth/register/Register';
 import DetailPostPage from './components/pages/DetailPostPage/DetailPostPage';
 import Homepage from './components/pages/Homepage/Homepage';
+import LikesListPage from './components/pages/LikesListPage/LikesListPage';
 import ProfilePage from './components/pages/ProfilePage/ProfilePage';
 import SearchPage from './components/pages/SearchPage/SearchPage';
 import AuthContext from './services/auth-context';
@@ -39,6 +40,10 @@ function App() {
       {
         authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
         <Route path="/searchprofile" exact component={SearchPage} />
+      }
+      {
+        authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
+        <Route path="/likes" exact component={LikesListPage} />
       }
       {
         authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&

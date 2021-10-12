@@ -1,34 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import classes from "./SearchPage.module.css";
-import globalClasses from "../../../assets/global-styles/bootstrap.min.module.css";
 import Header from "../../UI/Header";
-import { fetchProfilesToSearchByName } from "../../../services/profile-service";
+import classes from './LikesListPage.module.css';
+import globalClasses from "../../../assets/global-styles/bootstrap.min.module.css";
+import { Link, useLocation } from "react-router-dom";
+import { fetchProfilesLikeToPost } from "../../../services/profile-service";
 
-const SearchPage = (props) => {
+const LikesListPage = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
-    const nameLike = queryParams.get('like');
+    const idPost = queryParams.get('id-post');
 
-    const [usersSearched, setUsersSearched] = useState([]);
+    const [profilesLikeToPost, setProfilesLikeToPost] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => {   
+
+    useEffect(() => {
         setIsLoading(true);
         setError(null);
 
-        fetchProfilesToSearchByName(nameLike)
+        fetchProfilesLikeToPost(idPost)
         .then(profiles => {
-            setUsersSearched(profiles);
-            console.log(profiles);
+            setProfilesLikeToPost(profiles);
             setIsLoading(false);
-        })
-        .catch(err => {
+        }).catch(err => {
             setError(err.message);
             setIsLoading(false);
         });
-    }, [nameLike]);
+    }, [idPost]);
+
 
     return(
         <React.Fragment>
@@ -43,7 +43,7 @@ const SearchPage = (props) => {
                     }
                     {
                         !isLoading &&
-                        usersSearched.map(user => {
+                        profilesLikeToPost.map(user => {
                             return (
                                 <div key={user.id} className={`${globalClasses.media} ${classes.media}`}>
                                 <img src={user.proPic} alt="propic" 
@@ -66,4 +66,4 @@ const SearchPage = (props) => {
     );
 }
 
-export default SearchPage;
+export default LikesListPage;

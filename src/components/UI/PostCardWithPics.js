@@ -145,7 +145,7 @@ const PostCardWithPics = ({post}) => {
                                 </button>
                             </section>
                             <section className={classes['instapost__likes']}>
-                                Piace a <Link to="/post/likes"  className={classes.instalink}> {post.likesCounter} persone</Link>
+                                Piace a <Link to={`likes/?id-post=${post.idPost}`}  className={classes.instalink}> {post.likesCounter} persone</Link>
                             </section>
                             <section className={classes['instapost__description']}>
                                 <Link to={`/profiles/${post.profile.id}`} className={`${classes.user} ${classes.instalink}`}>
