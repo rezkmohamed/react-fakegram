@@ -18,12 +18,18 @@ const UpdateProfilePage = () => {
     const emailInputRef = useRef();
 
     const [updateGeneralDataIsValid, setUpdateGeneralDataIsValid] = useState(false);
-    const [requestIsSent, setRequestIsSent] = useState(false);
+    const [requestGeneralDataIsSent, setRequestGeneralDataIsSent] = useState(false);
+
+    const [updateEmailIsValid, setUpdateEmailIsValid] = useState(false);
+    const [requestEmailIsSent, setRequestEmailIsSent] = useState(false);
     const [message, setMessage] = useState("");
+
+
+
 
     const submitUpdateGeneralData = (event) => {
         event.preventDefault();
-        setRequestIsSent(false);
+        setRequestGeneralDataIsSent(false);
         setUpdateGeneralDataIsValid(false);
 
         updateGeneralDataForProfile(nameInputRef.current.value, nicknameInputRef.current.value, null, bioInputRef.current.value)
@@ -31,15 +37,33 @@ const UpdateProfilePage = () => {
             if(res){
                 setUpdateGeneralDataIsValid(true);
             }
-            setRequestIsSent(true);
-            setMessage('Data updated!!!');
+            setRequestGeneralDataIsSent(true);
+            setMessage('Dati modificati!!!');
             localStorage.removeItem('nickname');
             localStorage.setItem('nickname', nicknameInputRef.current.value);
         }).catch(err => {
             setMessage(err.message);
-            setRequestIsSent(true);
-        })
-    }
+            setRequestGeneralDataIsSent(true);
+        });
+    };
+
+    const submitUpdateEmail = (event) => {
+        event.preventDefault();
+        setRequestEmailIsSent(false);
+        setUpdateEmailIsValid(false);
+
+        updateGeneralDataForProfile(null, null, emailInputRef.current.value, null)
+        .then(res => {
+            if(res){
+                setUpdateEmailIsValid(true);
+            }
+            setRequestEmailIsSent(true);
+            setMessage('Email modificata!!!');
+        }).catch(err => {
+            setMessage(err.message);
+            setRequestEmailIsSent(true);
+        });
+    };
 
 
     return(
@@ -49,21 +73,12 @@ const UpdateProfilePage = () => {
                 <div className={`${classes.row} ${globalClasses.row}`}>
                     <div className="col-3"></div>
                     <div className="col-6">
-                        {/* <div className="loading">loading...</div>
-
-                        <div className="alert alert-danger" role="alert">
-                        Errore nella modifica dei dati!
-                        </div>
-
-                        <div className="alert alert-success" role="alert">
-                            Dati cambiati con successo
-                        </div> */}
                         {
-                            requestIsSent && updateGeneralDataIsValid &&
+                            requestGeneralDataIsSent && updateGeneralDataIsValid &&
                             <SuccessMessage message={message} />
                         }
                         {
-                            requestIsSent && !updateGeneralDataIsValid &&
+                            requestGeneralDataIsSent && !updateGeneralDataIsValid &&
                             <ErrorMessage message={message} />
                         }
 
@@ -152,13 +167,22 @@ const UpdateProfilePage = () => {
                         <div className="alert alert-success" role="alert">
                             Email cambiata con successo
                         </div> */}
+                        {
+                            requestEmailIsSent && updateEmailIsValid && 
+                            <SuccessMessage message={message} />
+                        }
+                        {
+                            requestEmailIsSent && !updateEmailIsValid &&
+                            <ErrorMessage message={message} />
+                        }
 
-                        <form>
+                        <form onSubmit={submitUpdateEmail}>
                             <h3>Nuova email:</h3>
                             <input 
                                     type="text"
                                     id="email"
                                     formControlName="email"
+                                    ref={emailInputRef}
                                     className="form-control" />
                             <h3>Password:</h3>
                             <input
