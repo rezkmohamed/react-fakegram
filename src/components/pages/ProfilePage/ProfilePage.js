@@ -164,8 +164,16 @@ const ProfilePage = () => {
             
                     <ul>
                     <li><span className={classes['profile-stat-count']}>{profile.postsCounter}</span> posts</li>
-                    <li><span className={classes['profile-stat-count']}>{profile.followersCounter}</span> followers</li>
-                    <li><span className={classes['profile-stat-count']}>{profile.followingCounter}</span> following</li>
+                    <li>
+                        <Link to={`/followlist?id-profile=${profile.id}&follow-type=followers`} style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                            <span className={classes['profile-stat-count']}>{profile.followersCounter}</span> followers
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to={`followlist?id-profile=${profile.id}&follow-type=following`} style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                            <span className={classes['profile-stat-count']}>{profile.followingCounter}</span> following
+                        </Link>
+                    </li>
                     </ul>
                 </div>
                 <div className={classes['profile-bio']}>

@@ -5,6 +5,7 @@ import AddNewPost from './components/pages/AddNewPost/AddNewPost';
 import Login from './components/pages/auth/login/Login';
 import Register from './components/pages/auth/register/Register';
 import DetailPostPage from './components/pages/DetailPostPage/DetailPostPage';
+import FollowListPage from './components/pages/FollowListPage/FollowListPage';
 import Homepage from './components/pages/Homepage/Homepage';
 import LikesListPage from './components/pages/LikesListPage/LikesListPage';
 import ProfilePage from './components/pages/ProfilePage/ProfilePage';
@@ -44,6 +45,10 @@ function App() {
       {
         authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
         <Route path="/likes" exact component={LikesListPage} />
+      }
+      {
+        authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
+        <Route path="/followlist" exact component={FollowListPage} />
       }
       {
         authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
