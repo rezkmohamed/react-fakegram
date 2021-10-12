@@ -6,11 +6,6 @@ import { updateGeneralDataForProfile, updatePasswordForProfile } from "../../../
 import SuccessMessage from "../../UI/SuccessMessage";
 import ErrorMessage from "../../UI/ErrorMessage";
 
-/**
- * FIXME:
- * LOGIC TO BE IMPLEMENTED
- * @returns 
- */
 const UpdateProfilePage = () => {
     const nicknameInputRef = useRef();
     const nameInputRef = useRef();
@@ -123,7 +118,7 @@ const UpdateProfilePage = () => {
                                     name="nickname"
                                     ref={nicknameInputRef}
                                     required
-                                    minlength="4" />
+                                    minLength="4" />
                             <h3>Nome:</h3>
                             <input 
                                     type="text"
@@ -131,7 +126,7 @@ const UpdateProfilePage = () => {
                                     name="nome"
                                     ref={nameInputRef}
                                     required
-                                    minlength="4" />
+                                    minLength="4" />
                             <h3>Biografia:</h3>
                             <input 
                                     type="text" 
@@ -139,7 +134,7 @@ const UpdateProfilePage = () => {
                                     name="biografia"
                                     ref={bioInputRef}
                                     required
-                                    minlength="4" />
+                                    minLength="4" />
                             <button 
                                     type="submit"
                                     className={`btn btn-primary ${classes['btn-primary']}`}>

@@ -6,20 +6,15 @@ import classes from "./Login.module.css";
 import { login } from "../../../../services/auth-service";
 import jwt_decode from "jwt-decode";
 import AuthContext from "../../../../services/auth-context";
+import ErrorMessage from "../../../UI/ErrorMessage";
 
-
-/**
- * 
- * TODO:
- * 
- * 
- * IMPLEMENT LOGIN LOGIC 
- */
 const Login = () => {
-    const [errorLogin, setErrorLogin] = useState(false);
+    const [errorLogin, setErrorLogin] = useState(true);
+    const [loginRequestIsSent, setLoginRequestIsSent] = useState(false);
+    const [message, setMessage] = useState('');
     const [inputEmail, setInputEmail] = useState('');
     const [inputPassword, setInputPassword] = useState('');
-    const history = useHistory();
+    // const history = useHistory();
 
 
     const authCtx = useContext(AuthContext);
@@ -34,6 +29,9 @@ const Login = () => {
 
     const submitLoginForm = (event) => {
         event.preventDefault();
+        setErrorLogin(true);
+        setLoginRequestIsSent(false);
+
         login(inputEmail, inputPassword).then(res => {
             console.log(res);
             let token = res.headers.get("Authentication").replace("Bearer ", "");
@@ -44,9 +42,14 @@ const Login = () => {
             const expirationTime = new Date((+responseDecoded.exp)*1000);
             localStorage.setItem('nickname', responseDecoded.nickname);
             localStorage.setItem('id', responseDecoded.idUser);
+            setErrorLogin(false);
+            setLoginRequestIsSent(true);
             authCtx.login(token, expirationTime.toString());
         }).catch(err => {
             console.log(err);
+            setMessage(err.message);
+            setErrorLogin(true);
+            setLoginRequestIsSent(true);
         })
 
         // setErrorLogin(true);
@@ -66,10 +69,8 @@ const Login = () => {
                 <div className={globalClasses['col-3']}></div>
                 <div className={globalClasses['col-6']}>
                     {
-                        errorLogin &&                     
-                        <div className={`${globalClasses.alert} ${globalClasses['alert-danger']}`} role="alert">
-                            Errore. Ricontrolla email e password
-                        </div>
+                        errorLogin && loginRequestIsSent &&
+                        <ErrorMessage message={message} />      
                     }
 
                 </div>
