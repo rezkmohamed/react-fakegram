@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import Header from "../../UI/Header";
 import classes from "./UpdateProfilePage.module.css";
 import globalClasses from "../../../assets/global-styles/bootstrap.min.module.css";
-import { updateGeneralDataForProfile } from "../../../services/profile-service";
+import { updateGeneralDataForProfile, updatePasswordForProfile } from "../../../services/profile-service";
 import SuccessMessage from "../../UI/SuccessMessage";
 import ErrorMessage from "../../UI/ErrorMessage";
 
@@ -16,12 +16,19 @@ const UpdateProfilePage = () => {
     const nameInputRef = useRef();
     const bioInputRef = useRef();
     const emailInputRef = useRef();
+    const oldPasswordInputRef = useRef();
+    const newPasswordInputRef = useRef();
+    const confirmNewPasswordInputRef = useRef();
 
     const [updateGeneralDataIsValid, setUpdateGeneralDataIsValid] = useState(false);
     const [requestGeneralDataIsSent, setRequestGeneralDataIsSent] = useState(false);
 
     const [updateEmailIsValid, setUpdateEmailIsValid] = useState(false);
     const [requestEmailIsSent, setRequestEmailIsSent] = useState(false);
+
+    const [updatePasswordIsValid, setUpdatePasswordIsValid] = useState(false);
+    const [requestUpdatePasswordIsSent, setRequestUpdatePasswordIsSent] = useState(false);
+
     const [message, setMessage] = useState("");
 
 
@@ -64,6 +71,32 @@ const UpdateProfilePage = () => {
             setRequestEmailIsSent(true);
         });
     };
+
+    const submitUpdatePassword = (event) => {
+        event.preventDefault();
+        setUpdatePasswordIsValid(false);
+        setRequestUpdatePasswordIsSent(false);
+
+        if(newPasswordInputRef.current.value !== confirmNewPasswordInputRef.current.value){
+            setMessage('scemo hai messo password diverse');
+            setUpdatePasswordIsValid(false);
+            setRequestUpdatePasswordIsSent(true);
+            return;
+        }
+
+        updatePasswordForProfile(oldPasswordInputRef.current.value, newPasswordInputRef.current.value)
+        .then(res => {
+            if(res) {
+                setUpdatePasswordIsValid(true);
+                setMessage('Password modificataaaaaaa!');
+            }
+            setRequestUpdatePasswordIsSent(true);
+        }).catch(err => {
+            setUpdatePasswordIsValid(false);
+            setRequestUpdatePasswordIsSent(true);
+            setMessage(err.message);
+        });
+    }
 
 
     return(
@@ -118,55 +151,10 @@ const UpdateProfilePage = () => {
                 </div>
 
                 <hr />
-                {/* <div className="row">
-                        <div className="col-3"></div>
-                        <div className="col-6">
-                            <div className="alert alert-danger" role="alert"
-                            *ngIf="!fileIsOkay && fileIsSended ">
-                            Errore nel caricamento della foto!
-                            </div>
-                
-                            <div className="alert alert-success" role="alert" 
-                            *ngIf="fileIsOkay && fileIsSended">
-                                Foto caricata con successo!
-                            </div>
-                            <h3>Seleziona un'immagine del profilo: (formato png)</h3>
-                            <div className="custom-file mb-2">
-                                <input 
-                                    type="file"
-                                    className="custom-file-input"
-                                    name="proPic"
-                                    id="customFile"
-                                    #fileInput
-                                    (change)="onFileChanged($event)"
-                                    required
-                                    >
-                                <label 
-                                    className="custom-file-label"
-                                    for="customFile"
-                                    (click)="fileInput.click()">
-                                    <span *ngIf="!fileIsSelected">Scegli file</span>
-                                    <span *ngIf="fileIsSelected">{{fileName}}</span>
-                            </label>
-                                <button className="btn btn-primary">Carica la foto</button>
-
-                            </div>
-
-                        </div>
-                        <div className="col-3"></div>
-                </div> */}
-
 
                 <div className="row">
                     <div className="col-3"></div>
                     <div className="col-6">
-                        {/* <div className="alert alert-danger" role="alert">
-                                Errore nel cambio email, ricontrolla la password!
-                        </div>
-
-                        <div className="alert alert-success" role="alert">
-                            Email cambiata con successo
-                        </div> */}
                         {
                             requestEmailIsSent && updateEmailIsValid && 
                             <SuccessMessage message={message} />
@@ -204,34 +192,36 @@ const UpdateProfilePage = () => {
                 <div className="row">
                     <div className="col-3"></div>
                     <div className="col-6">
-
-                        {/* <div className="alert alert-danger" role="alert">
-                        password sbagliata!
-                        </div>
-
-                        <div className="alert alert-success" role="alert">
-                            Password modificata con successo.
-                        </div> */}
-
+                        {
+                            updatePasswordIsValid && requestUpdatePasswordIsSent &&
+                            <SuccessMessage message={message} />
+                        }
+                        {
+                            !updatePasswordIsValid && requestUpdatePasswordIsSent &&
+                            <ErrorMessage message={message} />
+                        }
                         
-                        <form>
+                        <form onSubmit={submitUpdatePassword}>
                             <h3>Vecchia password:</h3>
                             <input 
                                     type="password"
                                     id="old"
                                     formControlName="old"
+                                    ref={oldPasswordInputRef}
                                     className="form-control" />
                             <h3>Nuova password:</h3>
                             <input 
                                     type="password"
                                     id="new"
                                     formControlName="new"
+                                    ref={newPasswordInputRef}
                                     className="form-control" />
                             <h3>Conferma password:</h3>
                             <input 
                                     type="password"
                                     id="confirm"
                                     formControlName="confirm"
+                                    ref={confirmNewPasswordInputRef}
                                     className="form-control" />
                             <button 
                                     

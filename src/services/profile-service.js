@@ -171,3 +171,23 @@ export const updateGeneralDataForProfile = (name, nickname, email, bio) => {
     }
     return updateProfile();
 }
+
+export const updatePasswordForProfile = (oldPassword, newPassword) => {
+    const token = localStorage.getItem('token');
+    const updatePassword = async () => {
+        const response = await fetch(urlBase + oldPassword + "/newpass/" + newPassword, {
+            method: 'PUT',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            }
+        });
+        if(!response.ok){
+            console.log('error: ' + response.status);
+            throw new Error('Error: ' + response.status);
+        }
+
+        return true;
+    }
+
+    return updatePassword();
+}
