@@ -10,6 +10,7 @@ import Homepage from './components/pages/Homepage/Homepage';
 import LikesListPage from './components/pages/LikesListPage/LikesListPage';
 import ProfilePage from './components/pages/ProfilePage/ProfilePage';
 import SearchPage from './components/pages/SearchPage/SearchPage';
+import UpdateProfilePage from './components/pages/UpdateProfilePage/UpdateProfilePage';
 import AuthContext from './services/auth-context';
 
 
@@ -37,6 +38,10 @@ function App() {
       {
         authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
         <Route path="/profile/me" exact component={ProfilePage}/>
+      }
+      {
+        authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
+        <Route path="/update" exact component={UpdateProfilePage}/>
       }
       {
         authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&

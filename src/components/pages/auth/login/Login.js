@@ -15,9 +15,6 @@ import AuthContext from "../../../../services/auth-context";
  * 
  * IMPLEMENT LOGIN LOGIC 
  */
-
-
-
 const Login = () => {
     const [errorLogin, setErrorLogin] = useState(false);
     const [inputEmail, setInputEmail] = useState('');
