@@ -6,7 +6,7 @@ import Header from "../../../UI/Header";
 const ChatComponent = () => {
     return (
         <React.Fragment>
-            {/* <Header /> */}
+            <Header />
             <div className={classes['chat-container']}>
                 {
                     /**
