@@ -14,7 +14,7 @@ const Login = () => {
     const [message, setMessage] = useState('');
     const [inputEmail, setInputEmail] = useState('');
     const [inputPassword, setInputPassword] = useState('');
-    // const history = useHistory();
+    const history = useHistory();
 
 
     const authCtx = useContext(AuthContext);
@@ -41,6 +41,7 @@ const Login = () => {
             localStorage.setItem('id', responseDecoded.idUser);
             setErrorLogin(false);
             setLoginRequestIsSent(true);
+            history.replace('/');
             authCtx.login(token, expirationTime.toString());
         }).catch(err => {
             console.log(err);

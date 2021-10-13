@@ -4,6 +4,7 @@ import './App.css';
 import AddNewPost from './components/pages/AddNewPost/AddNewPost';
 import Login from './components/pages/auth/login/Login';
 import Register from './components/pages/auth/register/Register';
+import ChatComponent from './components/pages/chat/ChatComponent/ChatComponent';
 import DetailPostPage from './components/pages/DetailPostPage/DetailPostPage';
 import FollowListPage from './components/pages/FollowListPage/FollowListPage';
 import Homepage from './components/pages/Homepage/Homepage';
@@ -62,6 +63,9 @@ function App() {
       {
         authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
         <Route path="/newpost" exact component={AddNewPost} />
+      }
+      {
+        <Route path="/chat" exact component={ChatComponent} />
       }
       {/* {     
         authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&

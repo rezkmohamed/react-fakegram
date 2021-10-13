@@ -1,0 +1,48 @@
+*{
+    margin: 0px;
+    font-family: sans-serif;
+    color: #a2a3a4;
+}
+
+.chat-container{
+    position: fixed;
+    position: absolute;
+
+    margin: auto;
+    height: 90%;
+    right: 0px;
+    left: 0px;
+    display: flex;
+    flex-direction: row;
+
+
+    app-sidebar{ // --> quando faccio il refactor sposto il flex-basis qui
+        flex-basis: 30%;
+        display: block;
+        height: 100%;
+        border-right: 1px solid #e8e8e8;
+
+    }
+
+    .chat{
+        background-color: #f7f9fa;
+        flex-grow: 1;
+
+        .chat-placeholder{
+            height: 100%; //per centrare il placeholder verticalmente
+            display: flex; // flex, align e justify servono a centrare orizzontalmente
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            h2{
+                font-size: 25px;
+                font-weight: normal;
+                color: #555555;
+            }
+
+            p{
+                text-align: center;
+            }
+        }
+    }
+}
