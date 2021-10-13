@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import styles from "./Header.module.scss";
 //import heart from '../../icons/heart.svg';
-// import chatIcon from '../../icons/chat-text.svg';
+import chatIcon from '../../icons/chat-text.svg';
 import plusSquare from '../../icons/plus-square.svg';
 import personCircle from '../../icons/person-circle.svg';
 import boxArrow from '../../icons/box-arrow-right.svg';
@@ -53,6 +53,12 @@ const Header = () => {
                     <div className={styles['navigation-icon']}>
                         <Link to="/" className={styles['navigation-link']}>
                             <img src={houseDoor} alt="link"/>
+                        </Link>
+                    </div>
+
+                    <div className={styles['navigation-icon']}>
+                        <Link to="/chat" className={styles['navigation-link']}>
+                            <img src={chatIcon} alt="link"/>
                         </Link>
                     </div>
 
