@@ -6,26 +6,26 @@ import chatIcon from "../../../../assets/chatIcon.svg";
 const ChatContent = () => {
     return (
         <React.Fragment>
-            <div class={classes['container-chat-area']}>
-                <div class={classes['header-chat']}>
-                    <div class={classes['avatar-section']}>
-                        <div class={classes['avatar-picture']}>
+            <div className={classes['container-chat-area']}>
+                <div className={classes['header-chat']}>
+                    <div className={classes['avatar-section']}>
+                        <div className={classes['avatar-picture']}>
                             <img src={defaultImg} alt="asdadsads" />
                         </div>
-                        <div class={classes['avatar-name']}>
+                        <div className={classes['avatar-name']}>
                             nickname
                         </div>
                     </div>
                 </div>
-                <div class={classes['body-chat']}>
+                <div className={classes['body-chat']}>
                     
 
 
-                    <div class={classes['message']}>
+                    <div className={classes['message']}>
 
-                        <div class={classes['message-content']}>
+                        <div className={classes['message-content']}>
                             CONTENUTO RANDOM DEL MESSAGGIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-                            <div class={classes['time']}>
+                            <div className={classes['time']}>
                                 31/03/1999 
                             </div>
                         </div>
@@ -39,7 +39,7 @@ const ChatContent = () => {
                         <textarea >
                         </textarea>
                     </div>
-                    <div class={classes['send-icon']}>
+                    <div className={classes['send-icon']}>
                         <img src={chatIcon} alt="sandasinasdniadsniasni" />
                     </div>
                 </div>
