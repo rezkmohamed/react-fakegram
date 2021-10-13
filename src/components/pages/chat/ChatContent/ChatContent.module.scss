@@ -1,0 +1,121 @@
+.container-chat-area{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    //background-color: #e7dfdc;
+    background-color: #e2e2e2;
+    .header-chat{
+        min-height: 67px;
+        background-color: #eeeeee;
+        box-shadow: 0.5px 0.5px 0.5px #CCC;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .avatar-section{
+            display: flex;
+            align-items: center;
+
+            .avatar-picture{
+                min-width: 40px;
+                max-width: 40px;
+                margin: 0 10px;
+
+                img{
+                    max-width: 100%;
+                }
+            }
+
+            .avatar-name{
+                flex-grow: 1;
+                color: #333;
+            }
+        }
+    }
+
+    .body-chat{
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column-reverse;//mi serve per mettere i messaggi in basso
+        padding: 20px 50px;
+        overflow: auto; // per permettere lo scroll
+
+        .message{
+            margin-top: 10px;
+            color: #767676;
+            display: flex;
+            flex-direction: column; //mi permette di far andare a dx e sx i messaggi
+            align-items: flex-start;//i messaggi dell'altro utente a sx
+
+            .message-content{
+                background-color: #FFF;
+                border-radius: 5px;
+                padding: 10px; //padding interno al messaggio.
+                word-break: break-all;//per fare andare a capo il testo 
+                max-width: 250px;
+
+                .time{
+                    text-align: right; //orario allineato a dx
+                    color: rgb(136, 135, 135);
+                    font-size: 13px;
+                    margin-top: 5px;
+                }
+            }
+
+            &.me{
+                align-items: flex-end;
+                color: #555454;
+
+                .message-content{
+                    //background-color: #dcf7c5;
+                    background-color: #BEE3DB;
+
+                }
+            }
+            &.notSeen{
+                font: bold;
+                color: black;
+            }
+
+        }
+
+    }
+
+    .footer-chat-area{
+        flex-basis: 67px;
+        background-color: #f0eeed;
+        display: flex;
+
+        .input-area{
+            flex-grow: 1;
+            padding-left: 50px;
+            display: flex;
+            align-items: center;            
+            font-family: sans-serif;         
+
+            textarea{
+                width: 100%;
+                height: 45px;
+                border: 0px;
+                border-radius: 4px;
+                resize: none;
+                outline: none;
+                padding: 14px;
+                box-sizing: border-box;
+            }
+        }
+
+        .send-icon{
+            flex-basis: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img{
+                max-width: 100%;
+                cursor: pointer;
+            }
+        }
+    }
+}
