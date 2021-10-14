@@ -24,9 +24,9 @@ const ChatContent = () => {
                     <div className={classes['message']}>
 
                         <div className={classes['message-content']}>
-                            CONTENUTO RANDOM DEL MESSAGGIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+                            CONTENUTO RANDOM MESSAGGIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
                             <div className={classes['time']}>
-                                31/03/1999 
+                                21/09/2021 11:04 
                             </div>
                         </div>
 

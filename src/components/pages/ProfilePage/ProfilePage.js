@@ -126,6 +126,10 @@ const ProfilePage = () => {
         } else {
             followThisProfile();
         }
+    };
+
+    const goToPosts = () => {
+        document.getElementById("post-list").scrollIntoView({behavior: 'smooth'});
     }
 
     return (
@@ -168,7 +172,7 @@ const ProfilePage = () => {
                 <div className={classes['profile-stats']}>
             
                     <ul>
-                    <li><span className={classes['profile-stat-count']}>{profile.postsCounter}</span> posts</li>
+                    <li onClick={goToPosts}><span className={classes['profile-stat-count']}>{profile.postsCounter}</span> posts</li>
                     <li>
                         <Link to={`/followlist?id-profile=${profile.id}&follow-type=followers`} style={{ color: 'inherit', textDecoration: 'inherit' }}>
                             <span className={classes['profile-stat-count']}>{profile.followersCounter}</span> followers
@@ -190,7 +194,7 @@ const ProfilePage = () => {
         
         <hr />
 
-        <section className={classes['post-list']}>
+        <section id="post-list" className={classes['post-list']}>
             {
                 isLoadingPosts && <p>Loading posts...</p>
             }

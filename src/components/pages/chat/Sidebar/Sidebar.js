@@ -3,6 +3,55 @@ import classes from "./Sidebar.module.scss";
 import defaultImg from "../../../../assets/no-pro-pic.png";
 import searchIcon from "../../../../assets/search-icon.png";
 
+
+const DUMMY_CONVERSATIONS = [
+    {
+        img: defaultImg,
+        nickname: 'nickname',
+        lastMsg: 'ultimo messaggio',
+    },
+    {
+        img: defaultImg,
+        nickname: 'nickname',
+        lastMsg: 'ultimo messaggio'
+    },
+    {
+        img: defaultImg,
+        nickname: 'nickname',
+        lastMsg: 'ultimo messaggio'
+    },
+    {
+        img: defaultImg,
+        nickname: 'nickname',
+        lastMsg: 'ultimo messaggio'
+    },
+    {
+        img: defaultImg,
+        nickname: 'nickname',
+        lastMsg: 'ultimo messaggio'
+    },
+    {
+        img: defaultImg,
+        nickname: 'nickname',
+        lastMsg: 'ultimo messaggio'
+    },
+    {
+        img: defaultImg,
+        nickname: 'nickname',
+        lastMsg: 'ultimo messaggio'
+    },
+    {
+        img: defaultImg,
+        nickname: 'nickname',
+        lastMsg: 'ultimo messaggio'
+    },
+    {
+        img: defaultImg,
+        nickname: 'nickname',
+        lastMsg: 'ultimo messaggio'
+    }
+]
+
 const Sidebar = () => {
     return(
         <React.Fragment>
@@ -25,27 +74,30 @@ const Sidebar = () => {
                 </div>
 
                 <div className={classes['sidebar-content']}>
-                    <div className={classes.conversation}>
+                    {
+                        DUMMY_CONVERSATIONS.map(conversation => {
+                            return (
+                                <div className={classes.conversation}>
 
-                        <div className={classes.picture}>
-                            <img src={defaultImg} alt='asdadsad'/>
-                        </div>
-
-                        <div className={classes.content}>
-                            <div className={classes['conversation-header']}>
-                                <div className={classes.name}>
-                                    nickname
+                                <div className={classes.picture}>
+                                    <img src={conversation.img} alt='asdadsad'/>
                                 </div>
-                            </div>
-
-                            <div className={classes.message}>
-                                ultimo messaggio
-                            </div>
-                        </div>
-
-                    </div>
+        
+                                <div className={classes.content}>
+                                    <div className={classes['conversation-header']}>
+                                        <div className={classes.name}>
+                                            {conversation.nickname}
+                                        </div>
+                                    </div>
+        
+                                    <div className={classes.message}>
+                                        {conversation.lastMsg}
+                                    </div>
+                                </div>
+                            </div>)
+                        })
+                    }
                 </div>
-
             </div>
         </React.Fragment>
     );
