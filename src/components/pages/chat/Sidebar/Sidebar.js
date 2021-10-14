@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./Sidebar.module.scss";
-import defaultImg from "../../../../assets/no-pro-pic.png";
+// import defaultImg from "../../../../assets/no-pro-pic.png";
 import searchIcon from "../../../../assets/search-icon.png";
 
 const Sidebar = ({conversations, isLoading, errorLoading, idProfile, setSelectedConversation, profile}) => {
@@ -9,15 +9,18 @@ const Sidebar = ({conversations, isLoading, errorLoading, idProfile, setSelected
         <React.Fragment>
             <div className={classes.sidebar}>
                 <div className={classes.row1}>
-                    <div className={classes['sidebar-header']}>
-                        <div className={classes['avatar-container']}>
-                            <img src={profile.proPic} alt='ASDDA'/>
+                    {
+                        !isLoading && 
+                        <div className={classes['sidebar-header']}>
+                            <div className={classes['avatar-container']}>
+                                <img src={profile.proPic} alt='ASDDA'/>
+                            </div>
+                            <div className={classes['avatar-info']}>
+                                {profile.nickname} 
+                            </div>
+                            <div className={classes['actions-container']}></div>
                         </div>
-                        <div className={classes['avatar-info']}>
-                            {profile.nickname} 
-                        </div>
-                        <div className={classes['actions-container']}></div>
-                    </div>
+                    }
 
                     <div className={classes['search-box']}>
                         <img width="20" src={searchIcon} alt='adasdasd'/>

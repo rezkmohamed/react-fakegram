@@ -10,15 +10,15 @@ const ChatComponent = () => {
     const [conversations, setConversations] = useState([]);
     const [isLoadingConversations, setIsLoadingConversations] = useState(true);
     const [error, setError] = useState(false);
-    const [idProfile, setIdProfile] = useState('');
+    const [idProfile, setIdProfile] = useState('initialId');
     const [profile, setProfile] = useState(null);
     const [selectedConversation, setSelectedConversation] = useState(null);
     
     useEffect(() => {
         setIsLoadingConversations(true);
         setError(false);
-        setIdProfile(localStorage.getItem('id'));
-
+        let id = localStorage.getItem('id');
+        setIdProfile(id);
         openWebSocket();
 
         fetchConversationsForProfile()
@@ -47,7 +47,7 @@ const ChatComponent = () => {
                 <Sidebar
                         setSelectedConversation={setSelectedConversation}
                         profile={profile}
-                        idprofile={idProfile} 
+                        idProfile={idProfile} 
                         isLoading={isLoadingConversations} 
                         errorLoading={error} 
                         conversations={conversations}/>
