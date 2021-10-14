@@ -3,7 +3,10 @@ import classes from "./ChatContent.module.scss";
 import defaultImg from "../../../../assets/no-pro-pic.png";
 import chatIcon from "../../../../assets/chatIcon.svg";
 
-const ChatContent = () => {
+const ChatContent = ({conversation}) => {
+
+    console.log(conversation);
+
     return (
         <React.Fragment>
             <div className={classes['container-chat-area']}>

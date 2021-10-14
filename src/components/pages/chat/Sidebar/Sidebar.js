@@ -3,58 +3,7 @@ import classes from "./Sidebar.module.scss";
 import defaultImg from "../../../../assets/no-pro-pic.png";
 import searchIcon from "../../../../assets/search-icon.png";
 
-
-// const DUMMY_CONVERSATIONS = [
-//     {
-//         img: defaultImg,
-//         nickname: 'nickname',
-//         lastMsg: 'ultimo messaggio',
-//     },
-//     {
-//         img: defaultImg,
-//         nickname: 'nickname',
-//         lastMsg: 'ultimo messaggio'
-//     },
-//     {
-//         img: defaultImg,
-//         nickname: 'nickname',
-//         lastMsg: 'ultimo messaggio'
-//     },
-//     {
-//         img: defaultImg,
-//         nickname: 'nickname',
-//         lastMsg: 'ultimo messaggio'
-//     },
-//     {
-//         img: defaultImg,
-//         nickname: 'nickname',
-//         lastMsg: 'ultimo messaggio'
-//     },
-//     {
-//         img: defaultImg,
-//         nickname: 'nickname',
-//         lastMsg: 'ultimo messaggio'
-//     },
-//     {
-//         img: defaultImg,
-//         nickname: 'nickname',
-//         lastMsg: 'ultimo messaggio'
-//     },
-//     {
-//         img: defaultImg,
-//         nickname: 'nickname',
-//         lastMsg: 'ultimo messaggio'
-//     },
-//     {
-//         img: defaultImg,
-//         nickname: 'nickname',
-//         lastMsg: 'ultimo messaggio'
-//     }
-// ];
-
-let idProfile = localStorage.getItem('id');
-
-const Sidebar = ({conversations, isLoading, errorLoading}) => {
+const Sidebar = ({conversations, isLoading, errorLoading, idProfile, setSelectedConversation}) => {
 
     return(
         <React.Fragment>
@@ -94,7 +43,7 @@ const Sidebar = ({conversations, isLoading, errorLoading}) => {
                             }
 
                             return (
-                                <div className={classes.conversation} key={conversation.idConversation}>
+                                <div onClick={() => setSelectedConversation(conversation)}  className={classes.conversation} key={conversation.idConversation}>
 
                                 <div className={classes.picture}>
                                     <img src={otherProfile.proPic} alt='asdadsad'/>
