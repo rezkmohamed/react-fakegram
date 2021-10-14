@@ -16,6 +16,9 @@ export const fetchProfileLogged = () => {
             throw new Error('Error: ' + response.status);
         }
         const data = await response.json();
+        if(!data.proPic){
+            data.proPic = DEFAULT_IMG;
+        }
         return data;
     }
 
