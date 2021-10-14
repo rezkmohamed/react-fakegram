@@ -52,7 +52,7 @@ const DUMMY_CONVERSATIONS = [
     }
 ]
 
-const Sidebar = () => {
+const Sidebar = ({conversations, isLoading, errorLoading}) => {
     return(
         <React.Fragment>
             <div className={classes.sidebar}>
