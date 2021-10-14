@@ -50,9 +50,12 @@ const DUMMY_CONVERSATIONS = [
         nickname: 'nickname',
         lastMsg: 'ultimo messaggio'
     }
-]
+];
+
+let idProfile = localStorage.getItem('id');
 
 const Sidebar = ({conversations, isLoading, errorLoading}) => {
+
     return(
         <React.Fragment>
             <div className={classes.sidebar}>
@@ -75,24 +78,33 @@ const Sidebar = ({conversations, isLoading, errorLoading}) => {
 
                 <div className={classes['sidebar-content']}>
                     {
-                        DUMMY_CONVERSATIONS.map(conversation => {
+                        conversations.map(conversation => {
+                            let otherProfile;
+                            if(conversation.firstProfile.id === idProfile){
+                                otherProfile = conversation.secondProfile;
+                            } else {
+                                otherProfile = conversation.firstProfile;
+                            }
+
                             return (
                                 <div className={classes.conversation}>
 
                                 <div className={classes.picture}>
-                                    <img src={conversation.img} alt='asdadsad'/>
+                                    <img src={otherProfile.proPic} alt='asdadsad'/>
                                 </div>
         
                                 <div className={classes.content}>
                                     <div className={classes['conversation-header']}>
                                         <div className={classes.name}>
-                                            {conversation.nickname}
+                                            {otherProfile.nickname}
                                         </div>
                                     </div>
-        
-                                    <div className={classes.message}>
-                                        {conversation.lastMsg}
-                                    </div>
+                                    {
+                                        conversation.lastMsg && 
+                                        <div className={classes.message}>
+                                            {conversation.lastMsg}
+                                        </div>
+                                    }
                                 </div>
                             </div>)
                         })
