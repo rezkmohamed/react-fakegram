@@ -4,53 +4,53 @@ import defaultImg from "../../../../assets/no-pro-pic.png";
 import searchIcon from "../../../../assets/search-icon.png";
 
 
-const DUMMY_CONVERSATIONS = [
-    {
-        img: defaultImg,
-        nickname: 'nickname',
-        lastMsg: 'ultimo messaggio',
-    },
-    {
-        img: defaultImg,
-        nickname: 'nickname',
-        lastMsg: 'ultimo messaggio'
-    },
-    {
-        img: defaultImg,
-        nickname: 'nickname',
-        lastMsg: 'ultimo messaggio'
-    },
-    {
-        img: defaultImg,
-        nickname: 'nickname',
-        lastMsg: 'ultimo messaggio'
-    },
-    {
-        img: defaultImg,
-        nickname: 'nickname',
-        lastMsg: 'ultimo messaggio'
-    },
-    {
-        img: defaultImg,
-        nickname: 'nickname',
-        lastMsg: 'ultimo messaggio'
-    },
-    {
-        img: defaultImg,
-        nickname: 'nickname',
-        lastMsg: 'ultimo messaggio'
-    },
-    {
-        img: defaultImg,
-        nickname: 'nickname',
-        lastMsg: 'ultimo messaggio'
-    },
-    {
-        img: defaultImg,
-        nickname: 'nickname',
-        lastMsg: 'ultimo messaggio'
-    }
-];
+// const DUMMY_CONVERSATIONS = [
+//     {
+//         img: defaultImg,
+//         nickname: 'nickname',
+//         lastMsg: 'ultimo messaggio',
+//     },
+//     {
+//         img: defaultImg,
+//         nickname: 'nickname',
+//         lastMsg: 'ultimo messaggio'
+//     },
+//     {
+//         img: defaultImg,
+//         nickname: 'nickname',
+//         lastMsg: 'ultimo messaggio'
+//     },
+//     {
+//         img: defaultImg,
+//         nickname: 'nickname',
+//         lastMsg: 'ultimo messaggio'
+//     },
+//     {
+//         img: defaultImg,
+//         nickname: 'nickname',
+//         lastMsg: 'ultimo messaggio'
+//     },
+//     {
+//         img: defaultImg,
+//         nickname: 'nickname',
+//         lastMsg: 'ultimo messaggio'
+//     },
+//     {
+//         img: defaultImg,
+//         nickname: 'nickname',
+//         lastMsg: 'ultimo messaggio'
+//     },
+//     {
+//         img: defaultImg,
+//         nickname: 'nickname',
+//         lastMsg: 'ultimo messaggio'
+//     },
+//     {
+//         img: defaultImg,
+//         nickname: 'nickname',
+//         lastMsg: 'ultimo messaggio'
+//     }
+// ];
 
 let idProfile = localStorage.getItem('id');
 
@@ -78,6 +78,13 @@ const Sidebar = ({conversations, isLoading, errorLoading}) => {
 
                 <div className={classes['sidebar-content']}>
                     {
+                        errorLoading && <p>ERRORE CARICAMENTO DELLE CONVERSAZIONI.</p>
+                    }
+                    {
+                        isLoading && <p>Loading...</p>
+                    }
+                    {   
+                        !isLoading && !errorLoading &&
                         conversations.map(conversation => {
                             let otherProfile;
                             if(conversation.firstProfile.id === idProfile){
@@ -87,7 +94,7 @@ const Sidebar = ({conversations, isLoading, errorLoading}) => {
                             }
 
                             return (
-                                <div className={classes.conversation}>
+                                <div className={classes.conversation} key={conversation.idConversation}>
 
                                 <div className={classes.picture}>
                                     <img src={otherProfile.proPic} alt='asdadsad'/>
