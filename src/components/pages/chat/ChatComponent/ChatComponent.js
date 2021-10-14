@@ -11,10 +11,9 @@ const ChatComponent = () => {
     const [isLoadingConversations, setIsLoadingConversations] = useState(true);
     const [error, setError] = useState(false);
     const [idProfile, setIdProfile] = useState('');
+    const [profile, setProfile] = useState(null);
     const [selectedConversation, setSelectedConversation] = useState(null);
-
     
-
     useEffect(() => {
         setIsLoadingConversations(true);
         setError(false);
@@ -26,6 +25,11 @@ const ChatComponent = () => {
         .then(response => {
             console.log(response);
             setConversations(response);
+            if(response[0].firstProfile.id === idProfile){
+                setProfile(response[0].firstProfile);
+            } else {
+                setProfile(response[0].secondProfile);
+            }
             setIsLoadingConversations(false);
             setError(false);
         }).catch(err => {
@@ -42,6 +46,7 @@ const ChatComponent = () => {
             <div className={classes['chat-container']}>
                 <Sidebar
                         setSelectedConversation={setSelectedConversation}
+                        profile={profile}
                         idprofile={idProfile} 
                         isLoading={isLoadingConversations} 
                         errorLoading={error} 
@@ -56,7 +61,7 @@ const ChatComponent = () => {
                     }
                     {
                         selectedConversation &&
-                        <ChatContent conversation={selectedConversation} />
+                        <ChatContent profile={profile} conversation={selectedConversation} />
                     }
                 </div>
             </div>

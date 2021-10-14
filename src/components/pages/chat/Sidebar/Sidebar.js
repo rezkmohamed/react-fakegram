@@ -3,7 +3,7 @@ import classes from "./Sidebar.module.scss";
 import defaultImg from "../../../../assets/no-pro-pic.png";
 import searchIcon from "../../../../assets/search-icon.png";
 
-const Sidebar = ({conversations, isLoading, errorLoading, idProfile, setSelectedConversation}) => {
+const Sidebar = ({conversations, isLoading, errorLoading, idProfile, setSelectedConversation, profile}) => {
 
     return(
         <React.Fragment>
@@ -11,10 +11,10 @@ const Sidebar = ({conversations, isLoading, errorLoading, idProfile, setSelected
                 <div className={classes.row1}>
                     <div className={classes['sidebar-header']}>
                         <div className={classes['avatar-container']}>
-                            <img src={defaultImg} alt='ASDDA'/>
+                            <img src={profile.proPic} alt='ASDDA'/>
                         </div>
                         <div className={classes['avatar-info']}>
-                            nickname 
+                            {profile.nickname} 
                         </div>
                         <div className={classes['actions-container']}></div>
                     </div>
