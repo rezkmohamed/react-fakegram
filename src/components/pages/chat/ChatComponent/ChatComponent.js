@@ -3,7 +3,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import classes from './ChatComponent.module.scss';
 import Header from "../../../UI/Header";
 import ChatContent from '../ChatContent/ChatContent';
-import { fetchConversationsForProfile } from '../../../../services/message-conversation-service';
+import { fetchConversationsForProfile, openWebSocket } from '../../../../services/message-conversation-service';
 
 
 const ChatComponent = () => {
@@ -13,10 +13,15 @@ const ChatComponent = () => {
     const [idProfile, setIdProfile] = useState('');
     const [selectedConversation, setSelectedConversation] = useState(null);
 
+    
+
     useEffect(() => {
         setIsLoadingConversations(true);
         setError(false);
         setIdProfile(localStorage.getItem('id'));
+
+        openWebSocket();
+
         fetchConversationsForProfile()
         .then(response => {
             console.log(response);
