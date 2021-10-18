@@ -1,12 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./ChatContent.module.scss";
 // import defaultImg from "../../../../assets/no-pro-pic.png";
 import chatIcon from "../../../../assets/chatIcon.svg";
 import { fetchMessagesForConversation } from "../../../../services/message-conversation-service";
+import { v4 as UUID } from 'uuid';
 
 let otherProfile;
 
 const ChatContent = ({conversation, profile}) => {
+    const [messages, setMessages] = useState([]);
+    const [messageToSend, setMessageToSend] = useState('');
+
     if(conversation.firstProfile.id === profile.id){
         otherProfile = conversation.secondProfile;
     } else {
@@ -17,12 +21,30 @@ const ChatContent = ({conversation, profile}) => {
         fetchMessagesForConversation(conversation.idConversation) 
         .then(res => {
             console.log(res);
+            setMessages(res);
         }).catch(err => {
             window.alert('Error: ' + err.message);
         })
     }, [conversation]);
 
-    console.log(conversation);
+    const handleMessageInput = (event) => {
+        setMessageToSend(event.target.value);
+    }
+
+    const onSubmitMessage = () => {
+        setMessages([
+            {
+                message: messageToSend,
+                date: new Date(),
+                idProfileSender: profile.id,
+                idProfileReciver: otherProfile.id,
+                idMessage: UUID()
+            }, ...messages
+        ]);    
+
+        setMessageToSend('');
+        console.log(messages);
+    };
 
     return (
         <React.Fragment>
@@ -39,27 +61,31 @@ const ChatContent = ({conversation, profile}) => {
                 </div>
                 <div className={classes['body-chat']}>
                     {
-                        conversation.messages.length === 0 &&
+                        messages.length === 0 &&
                         <p>Non ci sono messaggi in questa conversazione.</p>
                     }
                     {
-                        conversation.messages.length > 0 && 
-                        <div className={classes['message']}>
-                            <div className={classes['message-content']}>
-                                CONTENUTO RANDOM MESSAGGIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-                                <div className={classes['time']}>
-                                    21/09/2021 11:04 
-                                </div>
-                            </div>
-                        </div>
+                        messages.length > 0 && 
+                        messages.map((message) => {
+                            return (
+                                <div key={message.idMessage} className={`${classes['message']} ${message.idProfileSender === profile.id ? 'me' : ''} me `}>
+                                    <div className={classes['message-content']}>
+                                        {message.message}
+                                        <div className={classes['time']}>
+                                            {/* {message.date}  */}
+                                            11/09/2021
+                                        </div>
+                                    </div>
+                                </div>)
+                        })
                     }
                 </div>
                 <div className={classes['footer-chat-area']}>
                     <div className={classes['input-area']}>
-                        <textarea >
+                        <textarea value={messageToSend} onChange={handleMessageInput}>
                         </textarea>
                     </div>
-                    <div className={classes['send-icon']}>
+                    <div className={classes['send-icon']} onClick={onSubmitMessage}>
                         <img src={chatIcon} alt="sandasinasdniadsniasni" />
                     </div>
                 </div>
