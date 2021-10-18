@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import classes from "./ChatContent.module.scss";
 // import defaultImg from "../../../../assets/no-pro-pic.png";
 import chatIcon from "../../../../assets/chatIcon.svg";
-import { fetchMessagesForConversation } from "../../../../services/message-conversation-service";
+import { fetchMessagesForConversation, sendMessage } from "../../../../services/message-conversation-service";
 import { v4 as UUID } from 'uuid';
 
 let otherProfile;
@@ -32,17 +32,20 @@ const ChatContent = ({conversation, profile, setLastMessageSelectedConversation}
     }
 
     const onSubmitMessage = () => {
+        let newMessage = {
+            message: messageToSend,
+            date: new Date().getMilliseconds(),
+            idProfileSender: profile.id,
+            idProfileReciver: otherProfile.id,
+            idMessage: UUID(),
+            idConversation: conversation.idConversation
+        }
         setMessages([
-            {
-                message: messageToSend,
-                date: new Date(),
-                idProfileSender: profile.id,
-                idProfileReciver: otherProfile.id,
-                idMessage: UUID()
-            }, ...messages
+            newMessage, ...messages
         ]);    
         setLastMessageSelectedConversation(messageToSend);
         conversation.latestMessage = messageToSend;
+        sendMessage({...newMessage});
 
         setMessageToSend('');
         console.log(messages);

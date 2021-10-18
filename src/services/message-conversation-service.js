@@ -3,9 +3,11 @@ const urlBaseSOCKET = "ws://localhost:8080/chat";
 
 const DEFAULT_IMG = "https://techcommunity.microsoft.com/t5/image/serverpage/image-id/217078i525F6A9EF292601F/image-size/large?v=v2&px=999";
 
+let webSocket = new WebSocket(urlBaseSOCKET);
+;
 
 export const openWebSocket = () => {   
-    let webSocket = new WebSocket(urlBaseSOCKET);
+    // webSocket = new WebSocket(urlBaseSOCKET);
     let inChat = false;
 
     webSocket.onopen = (event) => {
@@ -25,6 +27,10 @@ export const openWebSocket = () => {
         }
         console.log('Close: ' + event);
     }
+};
+
+export const sendMessage = (message) => {
+    webSocket.send(JSON.stringify(message));
 };
 
 
