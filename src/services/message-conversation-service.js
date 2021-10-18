@@ -55,4 +55,25 @@ export const fetchConversationsForProfile = () => {
     }
 
     return fetchConversation();
+};
+
+export const addNewConversation = (idSecondProfile) => {
+    const token = localStorage.getItem('token');
+    const startConversation = async () => {
+        const response = await fetch(urlBaseAPI + "new/" + idSecondProfile, {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        });
+        if(!response.ok){
+            console.log('error: ' + response.status);
+            throw new Error('Error: ' + response.status);
+        }
+        const data = await response.json();
+
+        return data;
+    }
+
+    return startConversation();
 }

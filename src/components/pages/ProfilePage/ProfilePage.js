@@ -132,6 +132,13 @@ const ProfilePage = () => {
         document.getElementById("post-list").scrollIntoView({behavior: 'smooth'});
     }
 
+    const onStartConversation = () => {
+        /**
+         * FIXME: 
+         * logic to add
+         */
+    };
+
     return (
     <React.Fragment>
         <Header />
@@ -162,6 +169,11 @@ const ProfilePage = () => {
                     {
                         !isMyProfile &&
                         <button className={classes['profile-edit-btn']} style={{'backgroundColor': 'white'}} onClick={toggleFollow} disabled={followButtonDisabled}>{isFollowed ? 'followed' : 'follow'}</button>
+                    }
+                    {
+                        !isMyProfile && 
+                        <button className={classes['profile-edit-btn']} style={{'backgroundColor': 'white'}} onClick={onStartConversation}>messaggio</button>
+
                     }
                     {
                         isMyProfile &&
