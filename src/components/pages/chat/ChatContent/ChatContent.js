@@ -68,7 +68,7 @@ const ChatContent = ({conversation, profile}) => {
                         messages.length > 0 && 
                         messages.map((message) => {
                             return (
-                                <div key={message.idMessage} className={`${classes['message']} ${message.idProfileSender === profile.id ? 'me' : ''} me `}>
+                                <div key={message.idMessage} className={`${classes['message']} ${message.idProfileSender === profile.id ? classes.me : ''}`}>
                                     <div className={classes['message-content']}>
                                         {message.message}
                                         <div className={classes['time']}>
