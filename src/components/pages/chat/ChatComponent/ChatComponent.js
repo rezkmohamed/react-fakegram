@@ -13,6 +13,7 @@ const ChatComponent = () => {
     const [idProfile, setIdProfile] = useState('');
     const [profile, setProfile] = useState(null);
     const [selectedConversation, setSelectedConversation] = useState(null);
+    const [lastMessageSelectedConversation, setLastMessageSelectedConversation] = useState('');
     
     useEffect(() => {
         setIsLoadingConversations(true);
@@ -63,7 +64,8 @@ const ChatComponent = () => {
                         idProfile={idProfile} 
                         isLoading={isLoadingConversations} 
                         errorLoading={error} 
-                        conversations={conversations}/>
+                        conversations={conversations}
+                        lastMessageSelectedConversation={lastMessageSelectedConversation}/>
                 <div className={classes.chat}>
                     {
                         !selectedConversation &&
@@ -74,7 +76,7 @@ const ChatComponent = () => {
                     }
                     {
                         selectedConversation &&
-                        <ChatContent profile={profile} conversation={selectedConversation} />
+                        <ChatContent profile={profile} conversation={selectedConversation} setLastMessageSelectedConversation={setLastMessageSelectedConversation} />
                     }
                 </div>
             </div>

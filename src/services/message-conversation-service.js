@@ -25,7 +25,7 @@ export const openWebSocket = () => {
         }
         console.log('Close: ' + event);
     }
-}
+};
 
 
 export const fetchConversationsForProfile = () => {
@@ -97,4 +97,4 @@ export const fetchMessagesForConversation = (idConversation) => {
     }
 
     return fetchMessages();
-}
+};

@@ -3,7 +3,9 @@ import classes from "./Sidebar.module.scss";
 // import defaultImg from "../../../../assets/no-pro-pic.png";
 import searchIcon from "../../../../assets/search-icon.png";
 
-const Sidebar = ({conversations, isLoading, errorLoading, idProfile, setSelectedConversation, profile}) => {
+const Sidebar = ({conversations, isLoading, errorLoading, idProfile, setSelectedConversation, profile, lastMessageSelectedConversation}) => {
+
+    console.log(conversations);
 
     return(
         <React.Fragment>
@@ -59,9 +61,9 @@ const Sidebar = ({conversations, isLoading, errorLoading, idProfile, setSelected
                                         </div>
                                     </div>
                                     {
-                                        conversation.lastMsg && 
+                                        conversation.latestMessage && 
                                         <div className={classes.message}>
-                                            {conversation.lastMsg}
+                                            {conversation.latestMessage} 
                                         </div>
                                     }
                                 </div>

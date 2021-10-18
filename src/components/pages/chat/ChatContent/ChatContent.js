@@ -7,7 +7,7 @@ import { v4 as UUID } from 'uuid';
 
 let otherProfile;
 
-const ChatContent = ({conversation, profile}) => {
+const ChatContent = ({conversation, profile, setLastMessageSelectedConversation}) => {
     const [messages, setMessages] = useState([]);
     const [messageToSend, setMessageToSend] = useState('');
 
@@ -41,6 +41,8 @@ const ChatContent = ({conversation, profile}) => {
                 idMessage: UUID()
             }, ...messages
         ]);    
+        setLastMessageSelectedConversation(messageToSend);
+        conversation.latestMessage = messageToSend;
 
         setMessageToSend('');
         console.log(messages);
