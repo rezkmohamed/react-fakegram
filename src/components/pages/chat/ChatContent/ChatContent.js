@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./ChatContent.module.scss";
 // import defaultImg from "../../../../assets/no-pro-pic.png";
 import chatIcon from "../../../../assets/chatIcon.svg";
+import { fetchMessagesForConversation } from "../../../../services/message-conversation-service";
 
 let otherProfile;
 
@@ -11,6 +12,15 @@ const ChatContent = ({conversation, profile}) => {
     } else {
         otherProfile = conversation.firstProfile;
     }
+
+    useEffect(() => {
+        fetchMessagesForConversation(conversation.idConversation) 
+        .then(res => {
+            console.log(res);
+        }).catch(err => {
+            window.alert('Error: ' + err.message);
+        })
+    }, [conversation]);
 
     console.log(conversation);
 
