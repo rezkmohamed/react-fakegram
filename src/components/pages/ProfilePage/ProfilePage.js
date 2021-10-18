@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import classes from "./ProfilePage.module.css";
 import globalClasses from "../../../assets/global-styles/bootstrap.min.module.css";
 import Header from "../../UI/Header";
 import { fetchProfileById, fetchProfileLogged } from "../../../services/profile-service";
 import { fetchPostsByIdProfile } from "../../../services/post-service";
 import { addFollow, checkIsFollowed, deleteFollow } from "../../../services/follow-service";
+import { addNewConversation } from "../../../services/message-conversation-service";
 
 const MY_PROFILE_PATH = "/profiles/me";
 
 const ProfilePage = () => {
+    const history = useHistory();
     const location = useLocation();
     let isMyProfile;
     let startingIndex;
@@ -133,10 +135,15 @@ const ProfilePage = () => {
     }
 
     const onStartConversation = () => {
-        /**
-         * FIXME: 
-         * logic to add
-         */
+        addNewConversation(idProfile)
+        .then(res => {
+            console.log(res);
+            if(res){
+                history.push("/chat");
+            }
+        }).catch(err => {
+            window.alert('Errore: ' + err.message + " riprova più tardi");
+        });
     };
 
     return (
