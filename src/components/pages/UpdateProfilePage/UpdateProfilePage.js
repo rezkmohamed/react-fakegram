@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import Header from "../../UI/Header";
 import classes from "./UpdateProfilePage.module.css";
 import globalClasses from "../../../assets/global-styles/bootstrap.min.module.css";
-import { updateGeneralDataForProfile, updatePasswordForProfile } from "../../../services/profile-service";
+import { updateGeneralDataForProfile, updatePasswordForProfile, updateProfilePic } from "../../../services/profile-service";
 import SuccessMessage from "../../UI/SuccessMessage";
 import ErrorMessage from "../../UI/ErrorMessage";
 
@@ -14,6 +14,7 @@ const UpdateProfilePage = () => {
     const oldPasswordInputRef = useRef();
     const newPasswordInputRef = useRef();
     const confirmNewPasswordInputRef = useRef();
+    const newProfilePicture = useRef();
 
     const [updateGeneralDataIsValid, setUpdateGeneralDataIsValid] = useState(false);
     const [requestGeneralDataIsSent, setRequestGeneralDataIsSent] = useState(false);
@@ -23,6 +24,9 @@ const UpdateProfilePage = () => {
 
     const [updatePasswordIsValid, setUpdatePasswordIsValid] = useState(false);
     const [requestUpdatePasswordIsSent, setRequestUpdatePasswordIsSent] = useState(false);
+
+    const [updateProfilePictureIsValid, setUpdateProfilePictureIsValid] = useState(false);
+    const [requestUpdateProfilePictureIsSent, setRequestUpdateProfilePictureisSent] = useState(false);
 
     const [message, setMessage] = useState("");
 
@@ -91,6 +95,28 @@ const UpdateProfilePage = () => {
             setRequestUpdatePasswordIsSent(true);
             setMessage(err.message);
         });
+    };
+
+    const submitUpdateProfilePicture = (event) => {
+        event.preventDefault(); 
+        console.log(newProfilePicture.current.value);
+
+        setRequestUpdateProfilePictureisSent(false);
+        setUpdateProfilePictureIsValid(false);
+        updateProfilePic(newProfilePicture.current.value)
+        .then(res => {
+            if(res){
+                setUpdateProfilePictureIsValid(true);
+                setMessage('YEAH BRO')
+            }
+            setRequestUpdateProfilePictureisSent(true);
+
+        }).catch(err => {
+            console.log(err);
+            setUpdateProfilePictureIsValid(false);
+            setRequestUpdateProfilePictureisSent(true);
+            setMessage('NOOOOO ERRORE BRO, ' + err.message);
+        })
     };
 
 
@@ -182,6 +208,38 @@ const UpdateProfilePage = () => {
                     </div>
                     <div className="col-3"></div>
                 </div>
+
+
+                <hr />
+                <div className="row">
+                    <div className="col-3"></div>
+                    <div className="col-6">
+                        {
+                            requestUpdateProfilePictureIsSent && updateProfilePictureIsValid &&
+                            <SuccessMessage message={message} />
+                        }
+                        {
+                            requestUpdateProfilePictureIsSent && !updateProfilePictureIsValid &&
+                            <ErrorMessage message={message} />
+                        }
+                        <form onSubmit={submitUpdateProfilePicture}>
+                            <h3>Nuova immagine del profilo:</h3>
+                            <input 
+                                    type="text"
+                                    id="email"
+                                    formcontrolname="email"
+                                    ref={newProfilePicture}
+                                    className="form-control" />
+                            <button
+                                    type="submit"
+                                    className={`btn btn-primary ${classes['btn-primary']}`}>
+                                    cambia immagine
+                            </button>
+                        </form>
+                    </div>
+                    <div className="col-3"></div>
+                </div>
+
 
                 <hr />
                 <div className="row">
