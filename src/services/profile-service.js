@@ -194,3 +194,23 @@ export const updatePasswordForProfile = (oldPassword, newPassword) => {
 
     return updatePassword();
 }
+
+export const updateProfilePic = (proPic) => {
+    const token = localStorage.getItem('token');
+    const updateProPic = async () => {
+        const response = await fetch(urlBase + "newpropic/" + proPic, {
+            method: 'PUT',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            }
+        });
+        if(!response.ok){
+            console.log('error: ' + response.status);
+            throw new Error('Error: ' + response.status);
+        }
+
+        return true;
+    }
+
+    return updateProPic();
+}
