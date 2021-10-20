@@ -5,7 +5,7 @@ import searchIcon from "../../../../assets/search-icon.png";
 
 const Sidebar = ({conversations, isLoading, errorLoading, idProfile, setSelectedConversation, profile, lastMessageSelectedConversation}) => {
 
-    console.log(conversations);
+    // console.log(conversations);
 
     return(
         <React.Fragment>

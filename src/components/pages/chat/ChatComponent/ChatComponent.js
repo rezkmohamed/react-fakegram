@@ -3,7 +3,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import classes from './ChatComponent.module.scss';
 import Header from "../../../UI/Header";
 import ChatContent from '../ChatContent/ChatContent';
-import { fetchConversationsForProfile, openWebSocket } from '../../../../services/message-conversation-service';
+import { fetchConversationsForProfile, openWebSocket} from '../../../../services/message-conversation-service';
 import { fetchProfileLogged } from '../../../../services/profile-service';
 
 const ChatComponent = () => {
@@ -22,10 +22,12 @@ const ChatComponent = () => {
         setIdProfile(id);
         openWebSocket();
 
+
         fetchConversationsForProfile()
         .then(response => {
-            console.log(response);
+            // console.log(response);
             setConversations(response);
+
             if(response.length > 0) {
                 if(response[0].firstProfile.id === idProfile){
                     setProfile(response[0].firstProfile);

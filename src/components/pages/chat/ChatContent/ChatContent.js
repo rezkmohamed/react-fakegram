@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import classes from "./ChatContent.module.scss";
 // import defaultImg from "../../../../assets/no-pro-pic.png";
 import chatIcon from "../../../../assets/chatIcon.svg";
-import { fetchMessagesForConversation, sendMessage } from "../../../../services/message-conversation-service";
+import { fetchMessagesForConversation, sendMessage, setConversationSelected, setRenderForChat } from "../../../../services/message-conversation-service";
 import { v4 as UUID } from 'uuid';
 
 let otherProfile;
@@ -10,6 +10,7 @@ let otherProfile;
 const ChatContent = ({conversation, profile, setLastMessageSelectedConversation}) => {
     const [messages, setMessages] = useState([]);
     const [messageToSend, setMessageToSend] = useState('');
+    const [rerender, setRerender] = useState(false);
 
     if(conversation.firstProfile.id === profile.id){
         otherProfile = conversation.secondProfile;
@@ -17,15 +18,19 @@ const ChatContent = ({conversation, profile, setLastMessageSelectedConversation}
         otherProfile = conversation.firstProfile;
     }
 
+    // console.log(conversation);
     useEffect(() => {
+        setConversationSelected(conversation);
+        setRenderForChat(setRerender);
         fetchMessagesForConversation(conversation.idConversation) 
         .then(res => {
-            console.log(res);
+            // console.log(res);
             setMessages(res);
+            conversation.messages = messages;
         }).catch(err => {
-            window.alert('Error: ' + err.message);
+            window.alert('Error: ' + err.message + " line 31");
         })
-    }, [conversation]);
+    }, [conversation, messages]);
 
     const handleMessageInput = (event) => {
         setMessageToSend(event.target.value);

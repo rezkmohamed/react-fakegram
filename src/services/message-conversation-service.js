@@ -4,7 +4,17 @@ const urlBaseSOCKET = "ws://localhost:8080/chat";
 const DEFAULT_IMG = "https://techcommunity.microsoft.com/t5/image/serverpage/image-id/217078i525F6A9EF292601F/image-size/large?v=v2&px=999";
 
 let webSocket = new WebSocket(urlBaseSOCKET);
-;
+
+let conversationSelected; 
+let setter;
+
+export const setConversationSelected = (conversation) => {
+    conversationSelected = conversation;
+}
+
+export const setRenderForChat = (setRender) => {
+    setter = setRender;
+}
 
 export const openWebSocket = () => {   
     // webSocket = new WebSocket(urlBaseSOCKET);
@@ -19,6 +29,21 @@ export const openWebSocket = () => {
     webSocket.onmessage = (event) => {
         console.log("ON MESSAGE::: ");
         console.log(event.data);
+        const message = JSON.parse(event.data);
+        /**
+         * FIXME:
+         * ADD SEND MESSAGE TO CONVERSATION
+         */
+        console.log(conversationSelected);
+        conversationSelected.messages.unshift(message);
+        setter(true);
+        // console.log(conversations);
+        // if(conversations){
+        //     const conversation = conversations.find((conversation) => {
+        //         return conversation.idConversation === message.idConversation;
+        //     });
+        //     conversation.messages.unshift(message);
+        // }
     }
 
     webSocket.onclose = (event) => {
