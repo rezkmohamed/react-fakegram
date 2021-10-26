@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import classes from "./ChatContent.module.scss";
 // import defaultImg from "../../../../assets/no-pro-pic.png";
 import chatIcon from "../../../../assets/chatIcon.svg";
@@ -11,30 +11,14 @@ let otherProfile;
 
 const ChatContent = ({profile, setLastMessageSelectedConversation}) => {
     const [messageToSend, setMessageToSend] = useState('');
-    // const [rerender, setRerender] = useState(false);
     const conversation = useSelector((state) => state.conversations.value.conversationSelected);
     const dispatch = useDispatch();
-    // const [messages, setMessages] = useState(conversation.messages);
 
     if(conversation.firstProfile.id === profile.id){
         otherProfile = conversation.secondProfile;
     } else {
         otherProfile = conversation.firstProfile;
     }
-
-    // console.log(conversation);
-    // useEffect(() => {
-        // setConversationSelected(conversation);
-        // setRenderForChat(setRerender);
-        // fetchMessagesForConversation(conversation.idConversation) 
-        // .then(res => {
-        //     // console.log(res);
-        //     setMessages(res);
-        //     conversation.messages = messages;
-        // }).catch(err => {
-        //     window.alert('Error: ' + err.message + " line 31");
-        // })
-    // }, [conversation, messages]);
 
     const handleMessageInput = (event) => {
         setMessageToSend(event.target.value);
@@ -49,16 +33,12 @@ const ChatContent = ({profile, setLastMessageSelectedConversation}) => {
             idMessage: UUID(),
             idConversation: conversation.idConversation
         }
-        // setMessages([
-        //     newMessage, ...messages
-        // ]);    
         setLastMessageSelectedConversation(messageToSend);
         dispatch(conversationsActions.addMessageToConversation(newMessage));
         // conversation.latestMessage = messageToSend;
         sendMessage({...newMessage});
 
         setMessageToSend('');
-        // console.log(messages);
     };
 
     return (

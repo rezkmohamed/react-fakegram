@@ -5,21 +5,18 @@ import Header from "../../../UI/Header";
 import ChatContent from '../ChatContent/ChatContent';
 import { fetchConversationsForProfile, openWebSocket} from '../../../../services/message-conversation-service';
 import { fetchProfileLogged } from '../../../../services/profile-service';
-import { Provider, useDispatch } from 'react-redux';
-import store from '../../../../chat-store/index';
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { conversationsActions } from '../../../../chat-store/conversations-slice';
 
 const ChatComponent = () => {
     const dispatch = useDispatch();
 
-    // const [conversations, setConversations] = useState([]);
     const conversations = useSelector((state) => state.conversations.value.conversations);
     const [isLoadingConversations, setIsLoadingConversations] = useState(true);
     const [error, setError] = useState(false);
     const [idProfile, setIdProfile] = useState('');
     const [profile, setProfile] = useState(null);
-    // const [selectedConversation, setSelectedConversation] = useState(null);
     const selectedConversation = useSelector((state) => state.conversations.value.conversationSelected);
     const [lastMessageSelectedConversation, setLastMessageSelectedConversation] = useState('');
     
@@ -33,8 +30,6 @@ const ChatComponent = () => {
 
         fetchConversationsForProfile()
         .then(response => {
-            // console.log(response);
-            // setConversations(response);
             dispatch(conversationsActions.setConversations(response));
             if(response.length > 0) {
                 if(response[0].firstProfile.id === idProfile){

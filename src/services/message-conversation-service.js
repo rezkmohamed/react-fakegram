@@ -1,5 +1,4 @@
-import { useDispatch } from "react-redux";
-import conversationsSlice, { conversationsActions } from "../chat-store/conversations-slice";
+import { conversationsActions } from "../chat-store/conversations-slice";
 import store from "../chat-store";
 const urlBaseAPI = "http://localhost:8080/conversations/";
 const urlBaseSOCKET = "ws://localhost:8080/chat";
@@ -8,21 +7,8 @@ const DEFAULT_IMG = "https://techcommunity.microsoft.com/t5/image/serverpage/ima
 
 let webSocket = new WebSocket(urlBaseSOCKET);
 
-// let conversationSelected; 
-// let setter;
-
-// export const setConversationSelected = (conversation) => {
-//     conversationSelected = conversation;
-// }
-
-// export const setRenderForChat = (setRender) => {
-//     setter = setRender;
-// }
-
 export const openWebSocket = () => {   
-    // webSocket = new WebSocket(urlBaseSOCKET);
     let inChat = false;
-    // eslint-disable-next-line react-hooks/rules-of-hooks
 
     webSocket.onopen = (event) => {
         console.log('Open: ' + event);
@@ -36,20 +22,7 @@ export const openWebSocket = () => {
         const message = JSON.parse(event.data);
 
         store.dispatch(conversationsActions.addMessageToConversation(message));
-        /**
-         * FIXME:
-         * ADD SEND MESSAGE TO CONVERSATION
-         */
-        // console.log(conversationSelected);
-        // conversationSelected.messages.unshift(message);
-        // setter(true);
-        // console.log(conversations);
-        // if(conversations){
-        //     const conversation = conversations.find((conversation) => {
-        //         return conversation.idConversation === message.idConversation;
-        //     });
-        //     conversation.messages.unshift(message);
-        // }
+
     }
 
     webSocket.onclose = (event) => {
