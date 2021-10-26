@@ -164,7 +164,7 @@ const ProfilePage = () => {
         
                 <div className={classes['profile-image']}>
             
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="" style={{'width': '180px', 'height': '180px'}} />
+                    <img src={profile.proPic} alt="" style={{'width': '180px', 'height': '180px'}} />
         
             
                 </div>

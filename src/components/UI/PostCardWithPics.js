@@ -106,7 +106,7 @@ const PostCardWithPics = ({post}) => {
                         <article className={classes.instapost}>
                             <header className={classes['instapost__header']}>
                                 <Link to={`/profiles/${post.profile.id}`} className={classes['profile-img']} >
-                                    <img src={NoProPic} alt="profile pic"/>
+                                    <img src={post.profile.proPic} alt="profile pic"/>
                                 </Link>
                                 <div className={classes['profile-name']}>
                                     <Link to={`/profiles/${post.profile.id}`} className={`${classes.user} ${classes.instalink}`}>
