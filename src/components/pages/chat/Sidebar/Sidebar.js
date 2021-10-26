@@ -3,11 +3,13 @@ import classes from "./Sidebar.module.scss";
 // import defaultImg from "../../../../assets/no-pro-pic.png";
 import searchIcon from "../../../../assets/search-icon.png";
 import { conversationsActions } from "../../../../chat-store/conversations-slice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-const Sidebar = ({conversations, isLoading, errorLoading, idProfile, profile, lastMessageSelectedConversation}) => {
+const Sidebar = ({isLoading, errorLoading, idProfile, profile}) => {
     const dispatch = useDispatch();
     // console.log(conversations);
+
+    const conversations = useSelector((state) => state.conversations.value.conversations);
 
     return(
         <React.Fragment>

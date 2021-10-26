@@ -26,6 +26,11 @@ const conversationsSlice = createSlice({
 
         addMessageToConversation: (state, action) => {
             state.value.conversationSelected.messages.unshift(action.payload);
+            state.value.conversations.forEach((cnv) => {
+                if(cnv.idConversation === action.payload.idConversation){
+                    cnv.latestMessage = action.payload.message;
+                }
+            });
         }
     }
 });

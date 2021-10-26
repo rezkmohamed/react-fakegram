@@ -37,7 +37,7 @@ const ChatContent = ({profile, setLastMessageSelectedConversation}) => {
         dispatch(conversationsActions.addMessageToConversation(newMessage));
         // conversation.latestMessage = messageToSend;
         sendMessage({...newMessage});
-
+        
         setMessageToSend('');
     };
 
