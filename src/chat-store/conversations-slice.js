@@ -22,6 +22,10 @@ const conversationsSlice = createSlice({
              */
             state.value.conversationSelected = JSON.parse(JSON.stringify(action.payload));
             ;
+        },
+
+        addMessageToConversation: (state, action) => {
+            state.value.conversationSelected.messages.unshift(action.payload);
         }
     }
 });

@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
+import { Provider } from 'react-redux';
 import { Redirect, Route } from 'react-router';
 import './App.css';
+import store from './chat-store';
 import AddNewPost from './components/pages/AddNewPost/AddNewPost';
 import Login from './components/pages/auth/login/Login';
 import Register from './components/pages/auth/register/Register';
@@ -65,7 +67,9 @@ function App() {
         <Route path="/newpost" exact component={AddNewPost} />
       }
       {
-        <Route path="/chat" exact component={ChatComponent} />
+        <Provider store={store}>
+          <Route path="/chat" exact component={ChatComponent} />
+        </Provider>
       }
       {/* {     
         authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&

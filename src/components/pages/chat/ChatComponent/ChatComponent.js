@@ -5,14 +5,22 @@ import Header from "../../../UI/Header";
 import ChatContent from '../ChatContent/ChatContent';
 import { fetchConversationsForProfile, openWebSocket} from '../../../../services/message-conversation-service';
 import { fetchProfileLogged } from '../../../../services/profile-service';
+import { Provider, useDispatch } from 'react-redux';
+import store from '../../../../chat-store/index';
+import { useSelector } from 'react-redux';
+import { conversationsActions } from '../../../../chat-store/conversations-slice';
 
 const ChatComponent = () => {
-    const [conversations, setConversations] = useState([]);
+    const dispatch = useDispatch();
+
+    // const [conversations, setConversations] = useState([]);
+    const conversations = useSelector((state) => state.conversations.value.conversations);
     const [isLoadingConversations, setIsLoadingConversations] = useState(true);
     const [error, setError] = useState(false);
     const [idProfile, setIdProfile] = useState('');
     const [profile, setProfile] = useState(null);
-    const [selectedConversation, setSelectedConversation] = useState(null);
+    // const [selectedConversation, setSelectedConversation] = useState(null);
+    const selectedConversation = useSelector((state) => state.conversations.value.conversationSelected);
     const [lastMessageSelectedConversation, setLastMessageSelectedConversation] = useState('');
     
     useEffect(() => {
@@ -26,8 +34,8 @@ const ChatComponent = () => {
         fetchConversationsForProfile()
         .then(response => {
             // console.log(response);
-            setConversations(response);
-
+            // setConversations(response);
+            dispatch(conversationsActions.setConversations(response));
             if(response.length > 0) {
                 if(response[0].firstProfile.id === idProfile){
                     setProfile(response[0].firstProfile);
@@ -58,30 +66,30 @@ const ChatComponent = () => {
 
     return (
         <React.Fragment>
-            <Header />
-            <div className={classes['chat-container']}>
-                <Sidebar
-                        setSelectedConversation={setSelectedConversation}
-                        profile={profile}
-                        idProfile={idProfile} 
-                        isLoading={isLoadingConversations} 
-                        errorLoading={error} 
-                        conversations={conversations}
-                        lastMessageSelectedConversation={lastMessageSelectedConversation}/>
-                <div className={classes.chat}>
-                    {
-                        !selectedConversation &&
-                        <div className={classes['chat-placeholder']}>
-                            <h2>Nessuna conversazione selezionata</h2>
-                            <p>fakeGram ti permette di messaggiare con altre persone. Ricordati di <br /> mantenere un comportamento corretto e rispettoso.</p>
-                        </div> 
-                    }
-                    {
-                        selectedConversation &&
-                        <ChatContent profile={profile} conversation={selectedConversation} setLastMessageSelectedConversation={setLastMessageSelectedConversation} />
-                    }
+                <Header />
+                <div className={classes['chat-container']}>
+                    <Sidebar
+                            // setSelectedConversation={setSelectedConversation}
+                            profile={profile}
+                            idProfile={idProfile} 
+                            isLoading={isLoadingConversations} 
+                            errorLoading={error} 
+                            conversations={conversations}
+                            lastMessageSelectedConversation={lastMessageSelectedConversation}/>
+                    <div className={classes.chat}>
+                        {
+                            !selectedConversation &&
+                            <div className={classes['chat-placeholder']}>
+                                <h2>Nessuna conversazione selezionata</h2>
+                                <p>fakeGram ti permette di messaggiare con altre persone. Ricordati di <br /> mantenere un comportamento corretto e rispettoso.</p>
+                            </div> 
+                        }
+                        {
+                            selectedConversation &&
+                            <ChatContent profile={profile} setLastMessageSelectedConversation={setLastMessageSelectedConversation} />
+                        }
+                    </div>
                 </div>
-            </div>
         </React.Fragment>
     );
 }

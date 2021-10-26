@@ -4,13 +4,16 @@ import classes from "./ChatContent.module.scss";
 import chatIcon from "../../../../assets/chatIcon.svg";
 import { fetchMessagesForConversation, sendMessage, setConversationSelected, setRenderForChat } from "../../../../services/message-conversation-service";
 import { v4 as UUID } from 'uuid';
+import { conversationsActions } from "../../../../chat-store/conversations-slice";
+import { useSelector } from "react-redux";
 
 let otherProfile;
 
-const ChatContent = ({conversation, profile, setLastMessageSelectedConversation}) => {
+const ChatContent = ({profile, setLastMessageSelectedConversation}) => {
     const [messages, setMessages] = useState([]);
     const [messageToSend, setMessageToSend] = useState('');
-    const [rerender, setRerender] = useState(false);
+    // const [rerender, setRerender] = useState(false);
+    const conversation = useSelector((state) => state.conversations.value.conversationSelected);
 
     if(conversation.firstProfile.id === profile.id){
         otherProfile = conversation.secondProfile;
@@ -21,15 +24,15 @@ const ChatContent = ({conversation, profile, setLastMessageSelectedConversation}
     // console.log(conversation);
     useEffect(() => {
         setConversationSelected(conversation);
-        setRenderForChat(setRerender);
-        fetchMessagesForConversation(conversation.idConversation) 
-        .then(res => {
-            // console.log(res);
-            setMessages(res);
-            conversation.messages = messages;
-        }).catch(err => {
-            window.alert('Error: ' + err.message + " line 31");
-        })
+        // setRenderForChat(setRerender);
+        // fetchMessagesForConversation(conversation.idConversation) 
+        // .then(res => {
+        //     // console.log(res);
+        //     setMessages(res);
+        //     conversation.messages = messages;
+        // }).catch(err => {
+        //     window.alert('Error: ' + err.message + " line 31");
+        // })
     }, [conversation, messages]);
 
     const handleMessageInput = (event) => {
@@ -71,12 +74,12 @@ const ChatContent = ({conversation, profile, setLastMessageSelectedConversation}
                 </div>
                 <div className={classes['body-chat']}>
                     {
-                        messages.length === 0 &&
+                        conversation.messages.length === 0 &&
                         <p>Non ci sono messaggi in questa conversazione.</p>
                     }
                     {
-                        messages.length > 0 && 
-                        messages.map((message) => {
+                        conversation.messages.length > 0 && 
+                        conversation.messages.map((message) => {
                             return (
                                 <div key={message.idMessage} className={`${classes['message']} ${message.idProfileSender === profile.id ? classes.me : ''}`}>
                                     <div className={classes['message-content']}>

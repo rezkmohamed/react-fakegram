@@ -2,9 +2,11 @@ import React from "react";
 import classes from "./Sidebar.module.scss";
 // import defaultImg from "../../../../assets/no-pro-pic.png";
 import searchIcon from "../../../../assets/search-icon.png";
+import { conversationsActions } from "../../../../chat-store/conversations-slice";
+import { useDispatch } from "react-redux";
 
-const Sidebar = ({conversations, isLoading, errorLoading, idProfile, setSelectedConversation, profile, lastMessageSelectedConversation}) => {
-
+const Sidebar = ({conversations, isLoading, errorLoading, idProfile, profile, lastMessageSelectedConversation}) => {
+    const dispatch = useDispatch();
     // console.log(conversations);
 
     return(
@@ -48,7 +50,7 @@ const Sidebar = ({conversations, isLoading, errorLoading, idProfile, setSelected
                             }
 
                             return (
-                                <div onClick={() => setSelectedConversation(conversation)}  className={classes.conversation} key={conversation.idConversation}>
+                                <div onClick={() => dispatch(conversationsActions.setSelectedConversation(conversation))}  className={classes.conversation} key={conversation.idConversation}>
 
                                 <div className={classes.picture}>
                                     <img src={otherProfile.proPic} alt='asdadsad'/>
