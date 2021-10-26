@@ -16,12 +16,12 @@ import SearchPage from './components/pages/SearchPage/SearchPage';
 import UpdateProfilePage from './components/pages/UpdateProfilePage/UpdateProfilePage';
 import AuthContext from './services/auth-context';
 
-
 function App() {
   const authCtx = useContext(AuthContext);
 
   return (
     <React.Fragment>
+      <Provider store={store}>
       {
         authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
         <Route path="/" exact component={Homepage}/>
@@ -67,9 +67,7 @@ function App() {
         <Route path="/newpost" exact component={AddNewPost} />
       }
       {
-        <Provider store={store}>
-          <Route path="/chat" exact component={ChatComponent} />
-        </Provider>
+        <Route path="/chat" exact component={ChatComponent} />
       }
       {/* {     
         authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
@@ -83,6 +81,7 @@ function App() {
           <Redirect to='/login' />
         </Route>
       } */}
+      </Provider>
     </React.Fragment>
   );
 }

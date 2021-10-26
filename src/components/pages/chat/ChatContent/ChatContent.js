@@ -2,18 +2,19 @@ import React, { useEffect, useState } from "react";
 import classes from "./ChatContent.module.scss";
 // import defaultImg from "../../../../assets/no-pro-pic.png";
 import chatIcon from "../../../../assets/chatIcon.svg";
-import { fetchMessagesForConversation, sendMessage, setConversationSelected, setRenderForChat } from "../../../../services/message-conversation-service";
+import { sendMessage } from "../../../../services/message-conversation-service";
 import { v4 as UUID } from 'uuid';
+import { useDispatch, useSelector } from "react-redux";
 import { conversationsActions } from "../../../../chat-store/conversations-slice";
-import { useSelector } from "react-redux";
 
 let otherProfile;
 
 const ChatContent = ({profile, setLastMessageSelectedConversation}) => {
-    const [messages, setMessages] = useState([]);
     const [messageToSend, setMessageToSend] = useState('');
     // const [rerender, setRerender] = useState(false);
     const conversation = useSelector((state) => state.conversations.value.conversationSelected);
+    const dispatch = useDispatch();
+    // const [messages, setMessages] = useState(conversation.messages);
 
     if(conversation.firstProfile.id === profile.id){
         otherProfile = conversation.secondProfile;
@@ -22,8 +23,8 @@ const ChatContent = ({profile, setLastMessageSelectedConversation}) => {
     }
 
     // console.log(conversation);
-    useEffect(() => {
-        setConversationSelected(conversation);
+    // useEffect(() => {
+        // setConversationSelected(conversation);
         // setRenderForChat(setRerender);
         // fetchMessagesForConversation(conversation.idConversation) 
         // .then(res => {
@@ -33,7 +34,7 @@ const ChatContent = ({profile, setLastMessageSelectedConversation}) => {
         // }).catch(err => {
         //     window.alert('Error: ' + err.message + " line 31");
         // })
-    }, [conversation, messages]);
+    // }, [conversation, messages]);
 
     const handleMessageInput = (event) => {
         setMessageToSend(event.target.value);
@@ -48,15 +49,16 @@ const ChatContent = ({profile, setLastMessageSelectedConversation}) => {
             idMessage: UUID(),
             idConversation: conversation.idConversation
         }
-        setMessages([
-            newMessage, ...messages
-        ]);    
+        // setMessages([
+        //     newMessage, ...messages
+        // ]);    
         setLastMessageSelectedConversation(messageToSend);
-        conversation.latestMessage = messageToSend;
+        dispatch(conversationsActions.addMessageToConversation(newMessage));
+        // conversation.latestMessage = messageToSend;
         sendMessage({...newMessage});
 
         setMessageToSend('');
-        console.log(messages);
+        // console.log(messages);
     };
 
     return (
