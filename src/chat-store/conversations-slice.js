@@ -1,13 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialStateValue = {
+    conversations: [],
+    conversationSelected: null,
+};
+
 const conversationsSlice = createSlice({
     name: 'conversations',
-    initialState: {
-        conversations: [],
-        conversationSelected: null,
-    },
+    initialState: { value: initialStateValue},
     reducers: {
-        
+        setConversations: (state, action) => {
+            /**
+             * copia del payload
+             */
+            state.value.conversations = [...action.payload];
+        },
+
+        setSelectedConversation: (state, action) => {
+            /**
+             * copia del payload
+             */
+            state.value.conversationSelected = JSON.parse(JSON.stringify(action.payload));
+            ;
+        }
     }
 });
 
