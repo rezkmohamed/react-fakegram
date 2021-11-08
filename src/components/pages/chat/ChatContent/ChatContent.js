@@ -6,6 +6,8 @@ import { sendMessage } from "../../../../services/message-conversation-service";
 import { v4 as UUID } from 'uuid';
 import { useDispatch, useSelector } from "react-redux";
 import { conversationsActions } from "../../../../chat-store/conversations-slice";
+import moment from 'moment';
+
 
 let otherProfile;
 
@@ -13,6 +15,8 @@ const ChatContent = ({profile, setLastMessageSelectedConversation}) => {
     const [messageToSend, setMessageToSend] = useState('');
     const conversation = useSelector((state) => state.conversations.value.conversationSelected);
     const dispatch = useDispatch();
+
+    console.log(conversation);
 
     if(conversation.firstProfile.id === profile.id){
         otherProfile = conversation.secondProfile;
@@ -68,7 +72,8 @@ const ChatContent = ({profile, setLastMessageSelectedConversation}) => {
                                         {message.message}
                                         <div className={classes['time']}>
                                             {/* {message.date}  */}
-                                            11/09/2021
+                                            {/* 11/09/2021 */}
+                                            { moment(message.dateMillis).format('MMMM Do YYYY, h:mm:ss a') }
                                         </div>
                                     </div>
                                 </div>)

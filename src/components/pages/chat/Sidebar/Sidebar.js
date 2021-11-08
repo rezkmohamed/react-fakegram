@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Sidebar = ({isLoading, errorLoading, idProfile, profile}) => {
     const dispatch = useDispatch();
-    // console.log(conversations);
 
     const conversations = useSelector((state) => state.conversations.value.conversations);
 

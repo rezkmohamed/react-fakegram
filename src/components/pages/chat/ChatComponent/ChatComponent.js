@@ -12,7 +12,7 @@ import { conversationsActions } from '../../../../chat-store/conversations-slice
 const ChatComponent = () => {
     const dispatch = useDispatch();
 
-    const conversations = useSelector((state) => state.conversations.value.conversations);
+    // const conversations = useSelector((state) => state.conversations.value.conversations);
     const [isLoadingConversations, setIsLoadingConversations] = useState(true);
     const [error, setError] = useState(false);
     const [idProfile, setIdProfile] = useState('');
@@ -64,12 +64,10 @@ const ChatComponent = () => {
                 <Header />
                 <div className={classes['chat-container']}>
                     <Sidebar
-                            // setSelectedConversation={setSelectedConversation}
                             profile={profile}
                             idProfile={idProfile} 
                             isLoading={isLoadingConversations} 
                             errorLoading={error} 
-                            conversations={conversations}
                             lastMessageSelectedConversation={lastMessageSelectedConversation}/>
                     <div className={classes.chat}>
                         {

@@ -22,7 +22,6 @@ export const openWebSocket = () => {
         const message = JSON.parse(event.data);
 
         store.dispatch(conversationsActions.addMessageToConversation(message));
-
     }
 
     webSocket.onclose = (event) => {
