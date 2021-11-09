@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import NoProPic from "../../assets/no-pro-pic.png";
+// import NoProPic from "../../assets/no-pro-pic.png";
 // import SVG from 'react-inlinesvg';
 import classes from './PostCardWithPics.module.scss';
 import globalClasses from '../../assets/global-styles/bootstrap.min.module.css';

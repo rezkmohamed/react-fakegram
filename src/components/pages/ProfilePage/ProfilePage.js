@@ -12,6 +12,9 @@ import questionsIcon from "../../../icons/patch-question.svg";
 
 const MY_PROFILE_PATH = "/profiles/me";
 
+const GALLERY_TYPE = "gallery";
+const QUESTIONS_TYPE = "questions";
+
 const ProfilePage = () => {
     const history = useHistory();
     const location = useLocation();
@@ -39,6 +42,8 @@ const ProfilePage = () => {
 
     const [followButtonDisabled, setFollowButtonDisabled] = useState(false);
     const [isFollowed, setIsFollowed] = useState(false);
+
+    const [displayGallery, setDisplayGallery] = useState(true);
 
     useEffect(() => {
         setIsLoadingProfile(true);
@@ -148,6 +153,16 @@ const ProfilePage = () => {
         });
     };
 
+    const changeViewType = (type) => {
+        if(type === GALLERY_TYPE){
+            setDisplayGallery(true);
+        } else if(type === QUESTIONS_TYPE) {
+            setDisplayGallery(false);
+        } else {
+            window.alert('ERRRORE!!! NON SIAMO RIUSCITI!!!');
+        }
+    };
+
     return (
     <React.Fragment>
         <Header />
@@ -213,8 +228,8 @@ const ProfilePage = () => {
         }
         </div>
         <div className={classes['selector-type']}>
-            <img className={classes.icons} src={galleryIcon} alt="gallery-icon"/>
-            <img className={classes.icons} src={questionsIcon} alt="questions-icon" />
+            <img className={classes.icons} onClick={() => changeViewType(GALLERY_TYPE)} src={galleryIcon} alt="gallery-icon"/>
+            <img className={classes.icons} onClick={() => changeViewType(QUESTIONS_TYPE)} src={questionsIcon} alt="questions-icon" />
         </div>
         <hr />
 
@@ -224,6 +239,7 @@ const ProfilePage = () => {
             }
             {
                 !isLoadingPosts && 
+                displayGallery &&
                 posts.map(post => {
                     return(
                         <Link key={post.idPost} to={`/posts/detail/${post.idPost}`} className={classes.post}>
