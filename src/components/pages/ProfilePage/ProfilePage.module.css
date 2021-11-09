@@ -265,3 +265,16 @@ body{
     text-align: center;
     display: inline-block;
   }
+
+.selector-type {
+  display: flex;
+  justify-content: center;
+}
+
+.icons { 
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  margin-left: 15px;
+  cursor: pointer;
+}

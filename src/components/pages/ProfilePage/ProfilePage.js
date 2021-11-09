@@ -7,6 +7,8 @@ import { fetchProfileById, fetchProfileLogged } from "../../../services/profile-
 import { fetchPostsByIdProfile } from "../../../services/post-service";
 import { addFollow, checkIsFollowed, deleteFollow } from "../../../services/follow-service";
 import { addNewConversation } from "../../../services/message-conversation-service";
+import galleryIcon from "../../../icons/images.svg";
+import questionsIcon from "../../../icons/patch-question.svg";
 
 const MY_PROFILE_PATH = "/profiles/me";
 
@@ -210,7 +212,10 @@ const ProfilePage = () => {
             </div>
         }
         </div>
-        
+        <div className={classes['selector-type']}>
+            <img className={classes.icons} src={galleryIcon} alt="gallery-icon"/>
+            <img className={classes.icons} src={questionsIcon} alt="questions-icon" />
+        </div>
         <hr />
 
         <section id="post-list" className={classes['post-list']}>
