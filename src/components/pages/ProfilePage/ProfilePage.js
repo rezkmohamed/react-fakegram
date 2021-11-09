@@ -9,6 +9,7 @@ import { addFollow, checkIsFollowed, deleteFollow } from "../../../services/foll
 import { addNewConversation } from "../../../services/message-conversation-service";
 import galleryIcon from "../../../icons/images.svg";
 import questionsIcon from "../../../icons/patch-question.svg";
+import QuestionCard from "../../UI/QuestionCard";
 
 const MY_PROFILE_PATH = "/profiles/me";
 
@@ -251,7 +252,11 @@ const ProfilePage = () => {
                     </Link>    
                     );
                 })
-            }        
+            }       
+            {
+                !displayGallery &&
+                <QuestionCard />
+            } 
         </section>
     </React.Fragment>
     );
