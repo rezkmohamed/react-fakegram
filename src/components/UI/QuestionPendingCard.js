@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import classes from "./QuestionPendingCard.module.scss";
+import { useHistory } from 'react-router';
 
 const QuestionPendingCard = ({question}) => {
     console.log(question);
-    const goToAnswerPage = () => {
-        console.log('going to answer page...');
+    const history = useHistory();
+    const goToAnswerPage = (event) => {
+        event.preventDefault();
+        history.push(`/answerquestion/?idQuestion=${question.idQuestion}`);
     };
 
     return (

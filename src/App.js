@@ -4,6 +4,7 @@ import { Redirect, Route } from 'react-router';
 import './App.css';
 import store from './chat-store';
 import AddNewPost from './components/pages/AddNewPost/AddNewPost';
+import AnswerToPendingQuestionPage from './components/pages/AnswerToPendingQuestionPage/AnswerToPendingQuestionPage';
 import Login from './components/pages/auth/login/Login';
 import Register from './components/pages/auth/register/Register';
 import ChatComponent from './components/pages/chat/ChatComponent/ChatComponent';
@@ -73,7 +74,7 @@ function App() {
       }
       {
         authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
-        <Route path="/answerquestion" exact component={PendingQuestionsPage} />
+        <Route path="/answerquestion" exact component={AnswerToPendingQuestionPage} />
       }
 
       {
