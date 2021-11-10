@@ -27,6 +27,7 @@ const ProfilePage = () => {
     let idLogged = localStorage.getItem('id');
     if(location.pathname === MY_PROFILE_PATH){
         isMyProfile = true;
+        idProfile = idLogged;
     } else {
         startingIndex = location.pathname.lastIndexOf('/');
         idProfile = location.pathname.substring(startingIndex+1, location.pathname.length);
