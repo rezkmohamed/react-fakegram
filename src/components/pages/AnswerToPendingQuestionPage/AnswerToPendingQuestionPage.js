@@ -4,6 +4,7 @@ import { useState } from 'react/cjs/react.development';
 import Header from '../../UI/Header';
 import { fetchPendingQuestion } from '../../../services/question-service';
 import classes from "./AnswerToPendingQuestionPage.module.scss";
+import QuestionCardAnswer from '../../UI/QuestionCardAnswer';
 
 const AnswerToPendingQuestionPage = () => {
     const location = useLocation();
@@ -17,17 +18,27 @@ const AnswerToPendingQuestionPage = () => {
         setIsLoading(true);
         fetchPendingQuestion(idQuestion)
         .then(res => {
-            console.log(res);
+            setQuestion(res);
             setIsLoading(false);
         }).catch(err => {
-            console.log(err);
+            window.alert('ERRROREEEEE:::: ' + err.message);
             setIsLoading(false);
-        })
+        });
     }, [idQuestion]);
 
     return (
         <React.Fragment>
             <Header />
+            <div className={classes.content}>
+                {
+                    isLoading && 
+                    <p>LOADINGGGGG......</p>
+                }
+                {
+                    !isLoading && 
+                    <QuestionCardAnswer question={question}/>
+                }
+            </div>
         </React.Fragment>
     );
 }
