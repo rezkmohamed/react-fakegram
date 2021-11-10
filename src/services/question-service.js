@@ -42,3 +42,26 @@ export const fetchPendingQuestions = () => {
     return fetchPendingQuestionsReq();
 };
 
+export const addNewQuestion = (question) => {
+    const token = localStorage.getItem('token');
+    const addNewQuestionReq = async () => {
+        const response =  await fetch(urlBase + "new", {
+            method: 'POST',
+            body: JSON.stringify(question),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
+            },
+        });
+
+        if(!response.ok){
+            console.log('error: ' + response.status);
+            throw new Error('Error: ' + response.status);
+        }
+
+        return true;
+    }
+
+    return addNewQuestionReq();
+};
+
