@@ -248,7 +248,7 @@ const ProfilePage = () => {
         {
             !displayGallery && 
             !isMyProfile &&
-            <QuestionInput />
+            <QuestionInput idProfileReciver={idProfile} idProfileSender={idLogged} />
         }
         <section id="post-list" className={classes['post-list']}>
             {
