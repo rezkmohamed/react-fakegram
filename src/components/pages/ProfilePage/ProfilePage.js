@@ -255,7 +255,7 @@ const ProfilePage = () => {
             }       
             {
                 !displayGallery &&
-                <QuestionCard />
+                <QuestionCard /> 
             } 
         </section>
     </React.Fragment>
