@@ -270,15 +270,16 @@ const ProfilePage = () => {
                     );
                 })
             }       
-            {
-                !displayGallery &&
-                questions.map(q => {
-                    return (
-                        <QuestionCard key={q.idQuestion} question={q}/>
-                    )
-                })
-            } 
         </section>
+        {
+            !displayGallery &&
+            questions.map(q => {
+                return (
+                    <QuestionCard key={q.idQuestion} question={q}/>
+                )
+            })
+        } 
+
     </React.Fragment>
     );
 }
