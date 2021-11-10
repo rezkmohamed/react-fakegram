@@ -22,9 +22,7 @@ const QuestionInput = ({idProfileReciver, idProfileSender}) => {
             console.log(res);
         }).catch(err =>{
             console.log(err);
-        })
-
-        window.alert(isAnonym);
+        });
     };
 
     return (

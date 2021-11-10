@@ -8,6 +8,7 @@ import personCircle from '../../icons/person-circle.svg';
 import boxArrow from '../../icons/box-arrow-right.svg';
 import houseDoor from '../../icons/house-door.svg';
 import AuthContext from "../../services/auth-context";
+import questionIcon from "../../icons/patch-question.svg";
 
 
 const Header = () => {
@@ -61,6 +62,13 @@ const Header = () => {
                             <img src={chatIcon} alt="link"/>
                         </Link>
                     </div>
+
+                    <div className={styles['navigation-icon']}>
+                        <Link to="/" className={styles['navigation-link']}>
+                            <img src={questionIcon} alt="link"/>
+                        </Link>
+                    </div>
+
 
                     <div className={styles['navigation-icon']}>
                         <Link to="/newpost" className={styles['navigation-link notifica']}>
