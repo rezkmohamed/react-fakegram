@@ -11,6 +11,7 @@ import galleryIcon from "../../../icons/images.svg";
 import questionsIcon from "../../../icons/patch-question.svg";
 import QuestionCard from "../../UI/QuestionCard";
 import { fetchQuestionsForProfile } from "../../../services/question-service";
+import QuestionInput from "../../UI/QuestionInput";
 
 const MY_PROFILE_PATH = "/profiles/me";
 
@@ -244,7 +245,11 @@ const ProfilePage = () => {
             <img className={classes.icons} onClick={() => changeViewType(QUESTIONS_TYPE)} src={questionsIcon} alt="questions-icon" />
         </div>
         <hr />
-
+        {
+            !displayGallery && 
+            !isMyProfile &&
+            <QuestionInput />
+        }
         <section id="post-list" className={classes['post-list']}>
             {
                 isLoadingPosts && <p>Loading posts...</p>
