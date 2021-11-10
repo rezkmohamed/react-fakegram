@@ -65,3 +65,23 @@ export const addNewQuestion = (question) => {
     return addNewQuestionReq();
 };
 
+export const updateQuestion = (idQuestion, answer) => {
+    const token = localStorage.getItem('token');
+    const updateQuestionReq = async () => {
+        const response = await fetch(urlBase + idQuestion + "/update/" + answer, {
+            method: 'PUT',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            },
+        });
+
+        if(!response.ok){
+            console.log('error: ' + response.status);
+            throw new Error('Error: ' + response.status);
+        }
+
+        return true;
+    }
+
+    return updateQuestionReq();
+};
