@@ -1,18 +1,23 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import classes from "./QuestionCard.module.scss";
 
-const QuestionCard = (props) => {
+const QuestionCard = ({question}) => {
     return (
         <React.Fragment>
             <div className={`jumbotron ${classes['main-div']}`}>
-                <h1 className="display-4">Esempio di domanda, come ti chiami scemo?</h1>
+                {
+                    !question.isAnonym && 
+                    <h1 className="display-4" style={{fontSize: '35px'}}><Link to={"/profiles/" + question.profileSender.id} style={{ textDecoration: 'none', color: '#ff2c74'}}>{question.profileSender.nickname}</Link> ha chiesto</h1>
+                }
+                {
+                    question.isAnonym &&
+                    <h1 className="display-4" style={{fontSize: '35px'}}>un anonimo ha chiesto</h1>
+                }
+                <p>{question.question}</p>
+                {/* <h1 className="display-4">{question.question}</h1> */}
                 <hr className="my-4" />
-                <p>It uses utility classNamees for typography and spacing to space content out within the larger container.
-                This is an example of an answer.
-                </p>
-                <p className="lead">
-                    {/* <Link className={`btn btn-primary btn-lg ${classes.color}`} role="button">Like</Link> */}
+                <p>{question.answer}
                 </p>
             </div>
         </React.Fragment>

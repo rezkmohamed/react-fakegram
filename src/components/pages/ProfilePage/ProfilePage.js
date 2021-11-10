@@ -157,6 +157,7 @@ const ProfilePage = () => {
         fetchQuestionsForProfile(idProfile)
         .then(res => {
             console.log(res);
+            setQuestions(res);
         }).catch(err => {
             console.log(err);
         });
@@ -271,7 +272,11 @@ const ProfilePage = () => {
             }       
             {
                 !displayGallery &&
-                <QuestionCard /> 
+                questions.map(q => {
+                    return (
+                        <QuestionCard key={q.idQuestion} question={q}/>
+                    )
+                })
             } 
         </section>
     </React.Fragment>
