@@ -42,6 +42,27 @@ export const fetchPendingQuestions = () => {
     return fetchPendingQuestionsReq();
 };
 
+export const fetchPendingQuestion = (idQuestion) => {
+    const token = localStorage.getItem('token');
+    const fetchPendingQuestionReq = async () => {
+        const response = await fetch(urlBase + "pending/" + idQuestion, {
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            }
+        });
+
+        if(!response.ok){
+            console.log('error: ' + response.status);
+            throw new Error('Error: ' + response.status);
+        }
+        const data = await response.json();
+
+        return data;
+    }
+
+    return fetchPendingQuestionReq();
+};
+
 export const addNewQuestion = (question) => {
     const token = localStorage.getItem('token');
     const addNewQuestionReq = async () => {

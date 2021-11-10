@@ -8,17 +8,14 @@ import { fetchPendingQuestions } from '../../../services/question-service';
 const PendingQuestionsPage = () => {
     const [questionsPending, setQuestionsPending] = useState([]);
 
-
     useEffect(() => {
         fetchPendingQuestions()
         .then(res => {
             setQuestionsPending(res);
         }).catch(err => {
-            console.log(err);
             window.alert("ERRRORRR::: " + err.message);
         });
     }, []);
-
 
     return (
         <React.Fragment>

@@ -72,6 +72,11 @@ function App() {
         <Route path="/pending" exact component={PendingQuestionsPage} />
       }
       {
+        authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
+        <Route path="/answerquestion" exact component={PendingQuestionsPage} />
+      }
+
+      {
         <Route path="/chat" exact component={ChatComponent} />
       }
       {/* {     
