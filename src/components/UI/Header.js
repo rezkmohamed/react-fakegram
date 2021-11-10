@@ -64,7 +64,7 @@ const Header = () => {
                     </div>
 
                     <div className={styles['navigation-icon']}>
-                        <Link to="/" className={styles['navigation-link']}>
+                        <Link to="/pending" className={styles['navigation-link']}>
                             <img src={questionIcon} alt="link"/>
                         </Link>
                     </div>

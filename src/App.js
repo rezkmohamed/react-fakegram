@@ -11,6 +11,7 @@ import DetailPostPage from './components/pages/DetailPostPage/DetailPostPage';
 import FollowListPage from './components/pages/FollowListPage/FollowListPage';
 import Homepage from './components/pages/Homepage/Homepage';
 import LikesListPage from './components/pages/LikesListPage/LikesListPage';
+import PendingQuestionsPage from './components/pages/PendingQuestionsPage/PendingQuestionsPage';
 import ProfilePage from './components/pages/ProfilePage/ProfilePage';
 import SearchPage from './components/pages/SearchPage/SearchPage';
 import UpdateProfilePage from './components/pages/UpdateProfilePage/UpdateProfilePage';
@@ -65,6 +66,10 @@ function App() {
       {
         authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
         <Route path="/newpost" exact component={AddNewPost} />
+      }
+      {
+        authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
+        <Route path="/pending" exact component={PendingQuestionsPage} />
       }
       {
         <Route path="/chat" exact component={ChatComponent} />
