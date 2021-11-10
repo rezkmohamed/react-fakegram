@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import classes from "./QuestionCard.module.scss";
 
 const QuestionCard = (props) => {
@@ -12,7 +12,7 @@ const QuestionCard = (props) => {
                 This is an example of an answer.
                 </p>
                 <p className="lead">
-                    <Link className="btn btn-primary btn-lg" role="button">Like</Link> <span className={classes.likes}>30 like</span>
+                    {/* <Link className={`btn btn-primary btn-lg ${classes.color}`} role="button">Like</Link> */}
                 </p>
             </div>
         </React.Fragment>
