@@ -10,6 +10,7 @@ import { addNewConversation } from "../../../services/message-conversation-servi
 import galleryIcon from "../../../icons/images.svg";
 import questionsIcon from "../../../icons/patch-question.svg";
 import QuestionCard from "../../UI/QuestionCard";
+import { fetchQuestionsForProfile } from "../../../services/question-service";
 
 const MY_PROFILE_PATH = "/profiles/me";
 
@@ -45,6 +46,8 @@ const ProfilePage = () => {
     const [isFollowed, setIsFollowed] = useState(false);
 
     const [displayGallery, setDisplayGallery] = useState(true);
+    const [questions, setQuestions] = useState([]);
+    const [firstClickOnQuestionsBtn, setFirstClickOnQuestionsBtn] = useState(true);
 
     useEffect(() => {
         setIsLoadingProfile(true);
@@ -56,12 +59,10 @@ const ProfilePage = () => {
             fetchProfileById(idProfile)
             .then(profile => {
                 setProfile(profile);
-                console.log(profile);
                 setIsLoadingProfile(false);
             })
             .catch(err => {
                 setError("Error");
-                console.log(err);
                 setIsLoadingProfile(false);
             });
     
@@ -78,7 +79,6 @@ const ProfilePage = () => {
     
             checkIsFollowed(idProfile)
             .then(response => {
-                console.log(response);
                 if(response){
                     setIsFollowed(true);
                 }
@@ -88,13 +88,11 @@ const ProfilePage = () => {
             })
         } else {
             fetchProfileLogged().then(res => {
-                console.log(res);
                 setProfile(res);
                 setIsLoadingProfile(false);
                 setPosts(res.posts);
                 setIsLoadingPosts(false);
             }).catch(err => {
-                console.log(err);
                 setIsLoadingProfile(false);
                 setIsLoadingPosts(false);
             })
@@ -154,10 +152,23 @@ const ProfilePage = () => {
         });
     };
 
+    const getAnsweredQuestions = () => {
+        fetchQuestionsForProfile(idProfile)
+        .then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+        });
+    }   
+
     const changeViewType = (type) => {
         if(type === GALLERY_TYPE){
             setDisplayGallery(true);
         } else if(type === QUESTIONS_TYPE) {
+            if(firstClickOnQuestionsBtn){
+                setFirstClickOnQuestionsBtn(false);
+                getAnsweredQuestions();
+            }
             setDisplayGallery(false);
         } else {
             window.alert('ERRRORE!!! NON SIAMO RIUSCITI!!!');
