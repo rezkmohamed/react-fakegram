@@ -18,6 +18,16 @@ const Header = () => {
     const authCtx = useContext(AuthContext);
 
 
+    setInterval(() => {
+        console.log('fetching notifications...');
+        fetchNotifications()
+        .then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+        })
+    }, 3000);
+
     const onHandleSearchUser = (event) => {
         console.log(event.target.value);
         setSearchedUser(event.target.value);
