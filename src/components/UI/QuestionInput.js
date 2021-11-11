@@ -17,11 +17,16 @@ const QuestionInput = ({idProfileReciver, idProfileSender}) => {
             isAnswered: false,
             question: questionCurr
         };
+
         addNewQuestion(questionToSend)
         .then(res => {
-            console.log(res);
+            if(res){
+                window.alert('DOMANDA INVIATA!');
+                question.current.value = "";
+            }
         }).catch(err =>{
             console.log(err);
+            window.alert('ERRORRRRRR:::::::::' + err.message);
         });
     };
 
