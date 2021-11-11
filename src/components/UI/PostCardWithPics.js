@@ -12,6 +12,7 @@ import * as moment from "moment";
 import { checkIsLiked, addLikePost, deleteLikePost } from "../../services/like-service";
 import { addComment, fetchCommentsForPost } from "../../services/comment-service";
 
+const nicknameProfileLogged = localStorage.getItem('nickname');
 
 const PostCardWithPics = ({post}) => {
     const [likeBtnDisabled, setLikeBtnDisabled] = useState(false);
@@ -24,12 +25,12 @@ const PostCardWithPics = ({post}) => {
 
     const commentInputHandler = (event) => {
         setCommentInput(event.target.value);
-    }
+    };
 
     const onAddComment = (comment) =>{
-        const nicknameProfileLogged = localStorage.getItem('nickname');
+        console.log(nicknameProfileLogged);
         setComments([
-            ...comments, {nickname: nicknameProfileLogged, comment: comment}
+            ...comments, {nicknameProfile: nicknameProfileLogged, comment: comment}
         ]);
 
         addComment(comment, post.idPost).then(response => {
@@ -39,7 +40,7 @@ const PostCardWithPics = ({post}) => {
         });
 
         setCommentInput('');
-    }
+    };
 
     useEffect(() => {
         // setIsCheckingLike(true);
@@ -89,7 +90,7 @@ const PostCardWithPics = ({post}) => {
                 setLikeBtnDisabled(false);
             });
         }
-    }
+    };
 
     return (
         <React.Fragment>
@@ -171,7 +172,6 @@ const PostCardWithPics = ({post}) => {
                                 {post.date}
                             </section>
                             <section className={classes['instapost__add-comment']}>
-
                                 <textarea 
                                             id="id"
                                             className={classes['comment-input']}
