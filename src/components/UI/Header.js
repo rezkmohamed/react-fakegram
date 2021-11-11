@@ -9,7 +9,7 @@ import boxArrow from '../../icons/box-arrow-right.svg';
 import houseDoor from '../../icons/house-door.svg';
 import AuthContext from "../../services/auth-context";
 import questionIcon from "../../icons/patch-question.svg";
-
+import bellIcon from "../../icons/bell.svg";
 
 const Header = () => {
     const [searchedUser, setSearchedUser] = useState('');
@@ -62,6 +62,13 @@ const Header = () => {
                             <img src={chatIcon} alt="link"/>
                         </Link>
                     </div>
+
+                    <div className={styles['navigation-icon']}>
+                        <Link to="/notifications" className={styles['navigation-link']}>
+                            <img src={bellIcon} alt="link"/>
+                        </Link>
+                    </div>
+
 
                     <div className={styles['navigation-icon']}>
                         <Link to="/pending" className={styles['navigation-link']}>

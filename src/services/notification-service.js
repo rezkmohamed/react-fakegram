@@ -1,32 +1,21 @@
+const urlBase = 'http://localhost:8080/notifications/';
 
-const urlBaseSOCKET = "ws://localhost:8080/notifications";
+export const fetchNotifications = () => {
+    const token = localStorage.getItem('token');
+    const fetchNotificationsReq = async () => {
+        const response = await fetch(urlBase, {
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            }
+        });
 
-let webSocket = new WebSocket(urlBaseSOCKET);
-
-export const openNotificationSocket = () => {
-    let inApp = true;
-
-    webSocket.onopen = (event) => {
-        console.log('Open: ' + event);
-        let token = localStorage.getItem('token');
-        webSocket.send(JSON.stringify("Bearer " + token));
-    };
-
-    webSocket.onmessage = (event) => {
-        console.log("ON MESSAGE::: ");
-        console.log(event.data);
-        const notification = JSON.parse(event.data);
-        /**
-         * FIXME
-         */
-    };
-
-    webSocket.onclose = (event) => {
-        if(inApp) {
-            this.openWebSocket();
-            return;
+        if(!response.ok){
+            console.log('error: ' + response.status);
+            throw new Error('Error: ' + response.status);
         }
-        console.log('Close: ' + event);
+        const data = await response.json();
+        return data;
     }
-};
 
+    return fetchNotificationsReq();
+};
