@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Provider } from 'react-redux';
 import { Redirect, Route } from 'react-router';
 import './App.css';
-import store from './chat-store';
+import store from './store';
 import AddNewPost from './components/pages/AddNewPost/AddNewPost';
 import AnswerToPendingQuestionPage from './components/pages/AnswerToPendingQuestionPage/AnswerToPendingQuestionPage';
 import Login from './components/pages/auth/login/Login';

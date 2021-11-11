@@ -10,11 +10,13 @@ import houseDoor from '../../icons/house-door.svg';
 import AuthContext from "../../services/auth-context";
 import questionIcon from "../../icons/patch-question.svg";
 import bellIcon from "../../icons/bell.svg";
+import { fetchNotifications } from "../../services/notification-service";
 
 const Header = () => {
     const [searchedUser, setSearchedUser] = useState('');
     const history = useHistory('');
     const authCtx = useContext(AuthContext);
+
 
     const onHandleSearchUser = (event) => {
         console.log(event.target.value);

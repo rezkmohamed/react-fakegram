@@ -5,7 +5,7 @@ import chatIcon from "../../../../assets/chatIcon.svg";
 import { sendMessage } from "../../../../services/message-conversation-service";
 import { v4 as UUID } from 'uuid';
 import { useDispatch, useSelector } from "react-redux";
-import { conversationsActions } from "../../../../chat-store/conversations-slice";
+import { conversationsActions } from "../../../../store/conversations-slice";
 import moment from 'moment';
 
 

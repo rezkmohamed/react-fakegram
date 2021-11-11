@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./Sidebar.module.scss";
 // import defaultImg from "../../../../assets/no-pro-pic.png";
 import searchIcon from "../../../../assets/search-icon.png";
-import { conversationsActions } from "../../../../chat-store/conversations-slice";
+import { conversationsActions } from "../../../../store/conversations-slice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Sidebar = ({isLoading, errorLoading, idProfile, profile}) => {

@@ -7,11 +7,10 @@ import { fetchConversationsForProfile, openWebSocket} from '../../../../services
 import { fetchProfileLogged } from '../../../../services/profile-service';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { conversationsActions } from '../../../../chat-store/conversations-slice';
+import { conversationsActions } from '../../../../store/conversations-slice';
 
 const ChatComponent = () => {
     const dispatch = useDispatch();
-
     // const conversations = useSelector((state) => state.conversations.value.conversations);
     const [isLoadingConversations, setIsLoadingConversations] = useState(true);
     const [error, setError] = useState(false);

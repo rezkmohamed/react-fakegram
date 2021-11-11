@@ -1,5 +1,5 @@
-import { conversationsActions } from "../chat-store/conversations-slice";
-import store from "../chat-store";
+import { conversationsActions } from "../store/conversations-slice";
+import store from "../store";
 const urlBaseAPI = "http://localhost:8080/conversations/";
 const urlBaseSOCKET = "ws://localhost:8080/chat";
 
