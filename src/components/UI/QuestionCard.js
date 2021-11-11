@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 import classes from "./QuestionCard.module.scss";
 
 const QuestionCard = ({question}) => {
-
     const onRemoveQuestion = () => {
-        console.log('removing...');
-    };
+        const isSure = window.confirm('SICURO?');
+        console.log(isSure);
+        if(isSure){
+            
+        }
+    };  
 
     return (
         <React.Fragment>
@@ -23,8 +26,7 @@ const QuestionCard = ({question}) => {
                 <p>{question.question}</p>
                 {/* <h1 className="display-4">{question.question}</h1> */}
                 <hr className="my-4" />
-                <p>{question.answer}
-                </p>
+                <p>{question.answer}</p>
             </div>
         </React.Fragment>
     );

@@ -106,3 +106,24 @@ export const updateQuestion = (idQuestion, answer) => {
 
     return updateQuestionReq();
 };
+
+export const setQuestionToPending = (idQuestion) => {
+    const token = localStorage.getItem('token');
+    const setQuestionToPendingReq = async () => {
+        const response = await fetch(urlBase + idQuestion + "/settopending", {
+            method: 'PUT',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            }
+        });
+
+        if(!response.ok){
+            console.log('error: ' + response.status);
+            throw new Error('Error: ' + response.status);
+        }
+
+        return true;
+    }
+
+    return setQuestionToPendingReq();
+};
