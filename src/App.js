@@ -17,6 +17,7 @@ import ProfilePage from './components/pages/ProfilePage/ProfilePage';
 import SearchPage from './components/pages/SearchPage/SearchPage';
 import UpdateProfilePage from './components/pages/UpdateProfilePage/UpdateProfilePage';
 import AuthContext from './services/auth-context';
+import NotificationsPage from './components/pages/NotificationsPage/NotificationsPage';
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -55,6 +56,10 @@ function App() {
       {
         authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
         <Route path="/likes" exact component={LikesListPage} />
+      }
+      {
+        authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
+        <Route path="/notifications" exact component={NotificationsPage} />
       }
       {
         authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
