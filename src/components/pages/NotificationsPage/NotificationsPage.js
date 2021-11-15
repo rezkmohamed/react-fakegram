@@ -15,7 +15,6 @@ const NotificationsPage = (props) => {
                 <Notification />
                 <Notification />
                 <Notification />
-
             </div>
         </React.Fragment>
     );

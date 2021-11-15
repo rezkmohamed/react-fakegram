@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Provider } from 'react-redux';
-import { Redirect, Route } from 'react-router';
+import { Route } from 'react-router';
 import './App.css';
 import store from './store';
 import AddNewPost from './components/pages/AddNewPost/AddNewPost';

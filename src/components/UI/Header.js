@@ -11,11 +11,14 @@ import AuthContext from "../../services/auth-context";
 import questionIcon from "../../icons/patch-question.svg";
 import bellIcon from "../../icons/bell.svg";
 import { fetchNotifications } from "../../services/notification-service";
+import { useDispatch } from "react-redux";
+import { notificationsActions } from "../../store/notifications-slice";
 
 const Header = () => {
     const [searchedUser, setSearchedUser] = useState('');
     const history = useHistory('');
     const authCtx = useContext(AuthContext);
+    const dispatch = useDispatch();
 
 
     setInterval(() => {
@@ -23,6 +26,7 @@ const Header = () => {
         fetchNotifications()
         .then(res => {
             console.log(res);
+            dispatch(notificationsActions.setNotifications(res));
         }).catch(err => {
             console.log(err);
         })

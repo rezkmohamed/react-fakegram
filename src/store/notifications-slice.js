@@ -5,14 +5,24 @@ const initialStateValue = {
     newNotifications: false
 };
 
+
+const checkNewNotification = (notifications) => {
+    notifications.forEach(notification => {
+        if(notification.seen){
+            return true;
+        }
+    });
+
+    return false;
+};
+
 const notificationsSlice = createSlice({
     name: 'notifications',
     initialState: { value: initialStateValue},
     reducers: {
         setNotifications: (state, action) => {
-            /**
-             * TODO
-             */
+            state.value.notifications = [...action.payload];
+            state.value.newNotifications = checkNewNotification(action.payload);
         },
         setNotificationsAsSeen: (state, action) => {
             /**
