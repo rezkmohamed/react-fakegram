@@ -24,7 +24,7 @@ const NotificationsPage = (props) => {
         }).catch(err => {
             window.alert('ERRORREEEEE::::: ' + err.message);
             setIsLoading(false);
-        })
+        });
     }, []);
 
     return (
@@ -37,15 +37,12 @@ const NotificationsPage = (props) => {
                 }
                 {
                     !isLoading &&
-                    <Notification />
+                    notifications.map(notification => {
+                        return(
+                            <Notification notification={notification} />
+                        )
+                    })
                 }
-                {/* <Notification />
-                <Notification />
-                <Notification />
-                <Notification />
-                <Notification />
-                <Notification />
-                <Notification /> */}
             </div>
         </React.Fragment>
     );

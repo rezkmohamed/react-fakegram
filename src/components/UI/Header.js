@@ -30,7 +30,7 @@ const Header = () => {
         }).catch(err => {
             console.log(err);
         })
-    }, 3000);
+    }, 30000);
 
     const onHandleSearchUser = (event) => {
         console.log(event.target.value);
