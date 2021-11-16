@@ -10,15 +10,15 @@ const transformNotificationObj = (notification) => {
     }
     switch(notification.notificationType){
         case "LIKE":
-            notification.notificationMessage = "ha messo like al post";
+            notification.notificationMessage = " ha messo like al post";
             notification.link = `/posts/detail/${notification.post.idPost}`;
             break;
         case "COMMENT":
-            notification.notificationMessage = "ha commentato il tuo post";
+            notification.notificationMessage = " ha commentato il tuo post";
             notification.link = `/posts/detail/${notification.post.idPost}`;
             break;
         case "FOLLOW":
-            notification.notificationMessage = "ha iniziato a seguirti";
+            notification.notificationMessage = " ha iniziato a seguirti";
             notification.link = `/profiles/${notification.profileNotificator.id}`;
             break;
         case "QUESTION":
