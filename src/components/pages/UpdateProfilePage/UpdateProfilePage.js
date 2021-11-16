@@ -31,6 +31,23 @@ const UpdateProfilePage = () => {
     const [message, setMessage] = useState("");
 
 
+    /**
+     * variabili per manipolare il file che sarà l'immagine
+     * del profilo
+     */
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [fileIsOkay, setFileIsOkay] = useState(false);
+    const [fileIsSended, setFileIsSended] = useState(false);
+    const [fileIsSelected, setFileIsSelected] = useState(false);
+    const [fileName, setFileName] = useState("");
+
+    const onFileChanged = (event) => {
+        setSelectedFile(event.target.files[0]);
+        console.log(selectedFile);
+        setFileIsSelected(true);
+        // setFileName(selectedFile.name);
+    };
+
 
 
     const submitUpdateGeneralData = (event) => {
@@ -99,24 +116,25 @@ const UpdateProfilePage = () => {
 
     const submitUpdateProfilePicture = (event) => {
         event.preventDefault(); 
-        console.log(newProfilePicture.current.value);
+        console.log(selectedFile);
 
-        setRequestUpdateProfilePictureisSent(false);
-        setUpdateProfilePictureIsValid(false);
-        updateProfilePic(newProfilePicture.current.value)
-        .then(res => {
-            if(res){
-                setUpdateProfilePictureIsValid(true);
-                setMessage('YEAH BRO')
-            }
-            setRequestUpdateProfilePictureisSent(true);
+        // console.log(newProfilePicture.current.value);
+        // setRequestUpdateProfilePictureisSent(false);
+        // setUpdateProfilePictureIsValid(false);
+        // updateProfilePic(newProfilePicture.current.value)
+        // .then(res => {
+        //     if(res){
+        //         setUpdateProfilePictureIsValid(true);
+        //         setMessage('YEAH BRO')
+        //     }
+        //     setRequestUpdateProfilePictureisSent(true);
 
-        }).catch(err => {
-            console.log(err);
-            setUpdateProfilePictureIsValid(false);
-            setRequestUpdateProfilePictureisSent(true);
-            setMessage('NOOOOO ERRORE BRO, ' + err.message);
-        })
+        // }).catch(err => {
+        //     console.log(err);
+        //     setUpdateProfilePictureIsValid(false);
+        //     setRequestUpdateProfilePictureisSent(true);
+        //     setMessage('NOOOOO ERRORE BRO, ' + err.message);
+        // })
     };
 
 
@@ -224,7 +242,24 @@ const UpdateProfilePage = () => {
                         }
                         <form onSubmit={submitUpdateProfilePicture}>
                             <h3>Nuova immagine del profilo:</h3>
-                            <input 
+                            <div className="custom-file mb-2">
+                                <input 
+                                    type="file"
+                                    className="custom-file-input"
+                                    name="proPic"
+                                    id="customFile"
+                                    onChange={onFileChanged}
+                                    required />
+                                <label 
+                                    className="custom-file-label"
+                                    for="customFile">
+                                    <span >Scegli file</span>
+                                    {/* <span >{{fileName}}</span> */}
+                                </label>
+                                    <button 
+                                    className={`btn btn-primary ${classes['btn-primary']}`}>Carica la foto</button>
+                            </div>
+                            {/* <input 
                                     type="text"
                                     id="email"
                                     formcontrolname="email"
@@ -234,7 +269,7 @@ const UpdateProfilePage = () => {
                                     type="submit"
                                     className={`btn btn-primary ${classes['btn-primary']}`}>
                                     cambia immagine
-                            </button>
+                            </button> */}
                         </form>
                     </div>
                     <div className="col-3"></div>

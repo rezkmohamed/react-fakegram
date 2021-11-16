@@ -223,3 +223,26 @@ export const updateProfilePic = (proPic) => {
 
     return updateProPic();
 }
+
+export const uploadProfilePic = (uploadData) => {
+    const token = localStorage.getItem('token');
+    const uploadProfilePicReq = async () => {
+        const response = await fetch(urlBase + "propic", {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(uploadData)
+        });
+
+        if(!response.ok){
+            console.log('error: ' + response.status);
+            throw new Error('Error: ' + response.status);
+        }
+
+        return true;
+    }
+
+    return uploadProfilePicReq();
+};
