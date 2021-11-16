@@ -1,4 +1,5 @@
 import noProPic from "../assets/no-pro-pic.png";
+import questionImg from "../assets/questionimg.png";
 
 const urlBase = 'http://localhost:8080/notifications/';
 
@@ -22,6 +23,7 @@ const transformNotificationObj = (notification) => {
             break;
         case "QUESTION":
             notification.notificationMessage = "qualcuno ha una domanda per te";
+            notification.profileNotificator.proPic = questionImg;
             notification.link = "/pending";
             break;
         default: 
