@@ -4,12 +4,11 @@ import classes from "./QuestionCard.module.scss";
 import { setQuestionToPending } from '../../services/question-service';
 
 const QuestionCard = ({question}) => {
-
     const hideQuestion = () => {
         const questionToHide = document.getElementById(`${question.idQuestion}`);
         console.log(questionToHide);
         questionToHide.style["display"] = "none";
-    }
+    };
 
     const onRemoveQuestion = () => {
         const isSure = window.confirm('SICURO?');

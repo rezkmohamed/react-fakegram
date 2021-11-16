@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Provider } from 'react-redux';
-import { Route } from 'react-router';
+import { Redirect,Route } from 'react-router';
 import './App.css';
 import store from './store';
 import AddNewPost from './components/pages/AddNewPost/AddNewPost';
@@ -85,7 +85,15 @@ function App() {
       {
         <Route path="/chat" exact component={ChatComponent} />
       }
-      {/* {     
+            {
+        !authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
+        <Route path='*'>
+          <Redirect to='/login' />
+        </Route>
+      } 
+
+      {/* 
+      {     
         authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
         <Route path='*'>
           <Redirect to='/' />
@@ -96,7 +104,8 @@ function App() {
         <Route path='*'>
           <Redirect to='/login' />
         </Route>
-      } */}
+      } 
+      */}
       </Provider>
     </React.Fragment>
   );
