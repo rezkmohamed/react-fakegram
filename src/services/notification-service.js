@@ -20,6 +20,10 @@ const transformNotificationObj = (notification) => {
             notification.notificationMessage = "ha iniziato a seguirti";
             notification.link = `/profiles/${notification.profileNotificator.id}`;
             break;
+        case "QUESTION":
+            notification.notificationMessage = "qualcuno ha una domanda per te";
+            notification.link = "/pending";
+            break;
         default: 
             return;
     }
