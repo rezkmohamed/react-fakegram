@@ -13,6 +13,25 @@ const AddNewPost = () => {
     const [addPostIsValid, setAddPostIsValid] = useState(false);
     const [message, setMessage] = useState("Post aggiunto con successo!");
 
+    /**
+     * variabili per manipolare il file che sarà l'immagine
+     * del post
+     */
+
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [fileIsSelected, setFileIsSelected] = useState(false);
+    const [fileName, setFileName] = useState("");
+
+
+    const onFileChanged = (event) => {
+        setSelectedFile(event.target.files[0]);
+        console.log(selectedFile);
+        setFileIsSelected(true);
+        setFileName(event.target.files[0].name);
+    };
+
+
+
     const handleImgPost = (event) => {
         setImgPost(event.target.value.toString());
     }
@@ -22,17 +41,23 @@ const AddNewPost = () => {
     }
 
     const handleAddNewPost = () => {
-        console.log(imgPost);
-        console.log(postDescription);
-        addNewPost(imgPost, postDescription)
-        .then(response => {
-            setFormIsSubmitted(true);
-            setAddPostIsValid(true);
-        }).catch(err => {
-            setFormIsSubmitted(true);
-            setAddPostIsValid(false);
-            setMessage(err.message);
-        });
+        let formData = new FormData();
+        formData.append('myFile', selectedFile);
+        formData.append('description', postDescription);
+        console.log(formData);
+
+
+        // console.log(imgPost);
+        // console.log(postDescription);
+        // addNewPost(imgPost, postDescription)
+        // .then(response => {
+        //     setFormIsSubmitted(true);
+        //     setAddPostIsValid(true);
+        // }).catch(err => {
+        //     setFormIsSubmitted(true);
+        //     setAddPostIsValid(false);
+        //     setMessage(err.message);
+        // });
     }
 
     return(
@@ -50,24 +75,30 @@ const AddNewPost = () => {
                             formIsSubmitted && !addPostIsValid &&
                             <ErrorMessage message={message} />
                         }
-                            {/* <div className="alert alert-danger" role="alert">
-                            Errore nel caricamento della foto!
-                            </div> */}
-
-                            {/* <div className="alert alert-success" role="alert" >
-                                Foto caricata con successo!
-                            </div> */}
-
                                 <h3 className={globalClasses['text-center']}>Aggiungi foto</h3>
-                                <input
-                                        type="text"
-                                        className={globalClasses['form-control']}
-                                        name="descrizione"
-                                        value={imgPost}
-                                        onChange={handleImgPost}
-                                        placeholder="url foto..."
-                                        required />
 
+
+                                <div className="custom-file mb-2">
+                                <input 
+                                    type="file"
+                                    className="custom-file-input"
+                                    name="proPic"
+                                    id="customFile"
+                                    onChange={onFileChanged}
+                                    required />
+                                <label 
+                                    className="custom-file-label"
+                                    for="customFile">
+                                    {
+                                        !fileIsSelected &&
+                                        <span >Scegli file</span>
+                                    }
+                                    {
+                                        fileIsSelected &&
+                                        <span >{fileName}</span>
+                                    }
+                                </label>
+                                </div>
 
                                 <h3 className={globalClasses['text-center']}>Aggiungi una descrizione</h3>
                                 <input

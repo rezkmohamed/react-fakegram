@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import Header from "../../UI/Header";
 import classes from "./UpdateProfilePage.module.css";
 import globalClasses from "../../../assets/global-styles/bootstrap.min.module.css";
-import { updateGeneralDataForProfile, updatePasswordForProfile, updateProfilePic, uploadProfilePic } from "../../../services/profile-service";
+import { updateGeneralDataForProfile, updatePasswordForProfile, uploadProfilePic } from "../../../services/profile-service";
 import SuccessMessage from "../../UI/SuccessMessage";
 import ErrorMessage from "../../UI/ErrorMessage";
 
@@ -14,7 +14,7 @@ const UpdateProfilePage = () => {
     const oldPasswordInputRef = useRef();
     const newPasswordInputRef = useRef();
     const confirmNewPasswordInputRef = useRef();
-    const newProfilePicture = useRef();
+    // const newProfilePicture = useRef();
 
     const [updateGeneralDataIsValid, setUpdateGeneralDataIsValid] = useState(false);
     const [requestGeneralDataIsSent, setRequestGeneralDataIsSent] = useState(false);
@@ -25,8 +25,8 @@ const UpdateProfilePage = () => {
     const [updatePasswordIsValid, setUpdatePasswordIsValid] = useState(false);
     const [requestUpdatePasswordIsSent, setRequestUpdatePasswordIsSent] = useState(false);
 
-    const [updateProfilePictureIsValid, setUpdateProfilePictureIsValid] = useState(false);
-    const [requestUpdateProfilePictureIsSent, setRequestUpdateProfilePictureisSent] = useState(false);
+    // const [updateProfilePictureIsValid, setUpdateProfilePictureIsValid] = useState(false);
+    // const [requestUpdateProfilePictureIsSent, setRequestUpdateProfilePictureisSent] = useState(false);
 
     const [message, setMessage] = useState("");
 
@@ -225,14 +225,14 @@ const UpdateProfilePage = () => {
                 <div className="row">
                     <div className="col-3"></div>
                     <div className="col-6">
-                        {
+                        {/* {
                             requestUpdateProfilePictureIsSent && updateProfilePictureIsValid &&
                             <SuccessMessage message={message} />
                         }
                         {
                             requestUpdateProfilePictureIsSent && !updateProfilePictureIsValid &&
                             <ErrorMessage message={message} />
-                        }
+                        } */}
                         <form onSubmit={submitUpdateProfilePicture} enctype="multipart/form-data">
                             {
                                 fileIsSended && fileIsOkay &&
@@ -266,17 +266,6 @@ const UpdateProfilePage = () => {
                                     <button 
                                     className={`btn btn-primary ${classes['btn-primary']}`}>Carica la foto</button>
                             </div>
-                            {/* <input 
-                                    type="text"
-                                    id="email"
-                                    formcontrolname="email"
-                                    ref={newProfilePicture}
-                                    className="form-control" />
-                            <button
-                                    type="submit"
-                                    className={`btn btn-primary ${classes['btn-primary']}`}>
-                                    cambia immagine
-                            </button> */}
                         </form>
                     </div>
                     <div className="col-3"></div>
