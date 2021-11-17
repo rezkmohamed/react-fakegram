@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import Header from "../../UI/Header";
 import globalClasses from "../../../assets/global-styles/bootstrap.min.module.css";
 import classes from './AddNewPost.module.scss';
-import { addNewPost } from "../../../services/post-service";
+// import { addNewPost } from "../../../services/post-service";
 import SuccessMessage from "../../UI/SuccessMessage";
 import ErrorMessage from "../../UI/ErrorMessage";
+import { addNewPostWithFileImg } from "../../../services/post-service";
+
 
 const AddNewPost = () => {
-    const [imgPost, setImgPost] = useState('');
+    // const [imgPost, setImgPost] = useState('');
     const [postDescription, setPostDescription] = useState('');
     const [formIsSubmitted, setFormIsSubmitted] = useState(false);
     const [addPostIsValid, setAddPostIsValid] = useState(false);
@@ -29,24 +31,31 @@ const AddNewPost = () => {
         setFileIsSelected(true);
         setFileName(event.target.files[0].name);
     };
-
-
-
-    const handleImgPost = (event) => {
-        setImgPost(event.target.value.toString());
-    }
+    // const handleImgPost = (event) => {
+    //     setImgPost(event.target.value.toString());
+    // }
 
     const handleDescriptionPost = (event) => {
         setPostDescription(event.target.value);
-    }
+    };
 
     const handleAddNewPost = () => {
         let formData = new FormData();
         formData.append('myFile', selectedFile);
         formData.append('description', postDescription);
         console.log(formData);
+        setFormIsSubmitted(false);
 
 
+        addNewPostWithFileImg(formData)
+        .then(res => {
+            setFormIsSubmitted(true);
+            setAddPostIsValid(true);
+        }).catch(err => {
+            setFormIsSubmitted(true);
+            setAddPostIsValid(false);
+            setMessage('SCEMO VENDI BROSCIUTTO, ERRORE::::  '+ err.message);
+        });
         // console.log(imgPost);
         // console.log(postDescription);
         // addNewPost(imgPost, postDescription)
@@ -58,7 +67,7 @@ const AddNewPost = () => {
         //     setAddPostIsValid(false);
         //     setMessage(err.message);
         // });
-    }
+    };
 
     return(
         <React.Fragment>
