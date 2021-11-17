@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import Header from "../../UI/Header";
 import classes from "./UpdateProfilePage.module.css";
 import globalClasses from "../../../assets/global-styles/bootstrap.min.module.css";
-import { updateGeneralDataForProfile, updatePasswordForProfile, updateProfilePic } from "../../../services/profile-service";
+import { updateGeneralDataForProfile, updatePasswordForProfile, updateProfilePic, uploadProfilePic } from "../../../services/profile-service";
 import SuccessMessage from "../../UI/SuccessMessage";
 import ErrorMessage from "../../UI/ErrorMessage";
 
@@ -47,8 +47,6 @@ const UpdateProfilePage = () => {
         setFileIsSelected(true);
         // setFileName(selectedFile.name);
     };
-
-
 
     const submitUpdateGeneralData = (event) => {
         event.preventDefault();
@@ -117,6 +115,18 @@ const UpdateProfilePage = () => {
     const submitUpdateProfilePicture = (event) => {
         event.preventDefault(); 
         console.log(selectedFile);
+        let formData = new FormData();
+
+        formData.append('myFile', selectedFile);
+
+        uploadProfilePic(formData)
+        .then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+        });
+
+
 
         // console.log(newProfilePicture.current.value);
         // setRequestUpdateProfilePictureisSent(false);
@@ -153,7 +163,6 @@ const UpdateProfilePage = () => {
                             requestGeneralDataIsSent && !updateGeneralDataIsValid &&
                             <ErrorMessage message={message} />
                         }
-
                         <form onSubmit={submitUpdateGeneralData} encType="multipart/form-data">
                             <h3>Nickname:</h3>
                             <input 
@@ -240,7 +249,7 @@ const UpdateProfilePage = () => {
                             requestUpdateProfilePictureIsSent && !updateProfilePictureIsValid &&
                             <ErrorMessage message={message} />
                         }
-                        <form onSubmit={submitUpdateProfilePicture}>
+                        <form onSubmit={submitUpdateProfilePicture} enctype="multipart/form-data">
                             <h3>Nuova immagine del profilo:</h3>
                             <div className="custom-file mb-2">
                                 <input 
