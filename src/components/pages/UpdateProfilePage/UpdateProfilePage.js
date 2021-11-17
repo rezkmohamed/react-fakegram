@@ -45,7 +45,27 @@ const UpdateProfilePage = () => {
         setSelectedFile(event.target.files[0]);
         console.log(selectedFile);
         setFileIsSelected(true);
-        // setFileName(selectedFile.name);
+        setFileName(event.target.files[0].name);
+    };
+
+    const submitUpdateProfilePicture = (event) => {
+        event.preventDefault(); 
+        setFileIsSended(false);
+        console.log(selectedFile);
+        let formData = new FormData();
+
+        formData.append('myFile', selectedFile);
+
+        uploadProfilePic(formData)
+        .then(res => {
+            setFileIsSended(true);
+            setFileIsOkay(true);
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+            setFileIsSended(true);
+            setFileIsOkay(false);
+        });
     };
 
     const submitUpdateGeneralData = (event) => {
@@ -111,42 +131,6 @@ const UpdateProfilePage = () => {
             setMessage(err.message);
         });
     };
-
-    const submitUpdateProfilePicture = (event) => {
-        event.preventDefault(); 
-        console.log(selectedFile);
-        let formData = new FormData();
-
-        formData.append('myFile', selectedFile);
-
-        uploadProfilePic(formData)
-        .then(res => {
-            console.log(res);
-        }).catch(err => {
-            console.log(err);
-        });
-
-
-
-        // console.log(newProfilePicture.current.value);
-        // setRequestUpdateProfilePictureisSent(false);
-        // setUpdateProfilePictureIsValid(false);
-        // updateProfilePic(newProfilePicture.current.value)
-        // .then(res => {
-        //     if(res){
-        //         setUpdateProfilePictureIsValid(true);
-        //         setMessage('YEAH BRO')
-        //     }
-        //     setRequestUpdateProfilePictureisSent(true);
-
-        // }).catch(err => {
-        //     console.log(err);
-        //     setUpdateProfilePictureIsValid(false);
-        //     setRequestUpdateProfilePictureisSent(true);
-        //     setMessage('NOOOOO ERRORE BRO, ' + err.message);
-        // })
-    };
-
 
     return(
         <React.Fragment>
@@ -250,6 +234,14 @@ const UpdateProfilePage = () => {
                             <ErrorMessage message={message} />
                         }
                         <form onSubmit={submitUpdateProfilePicture} enctype="multipart/form-data">
+                            {
+                                fileIsSended && fileIsOkay &&
+                                <SuccessMessage message={"grandeee"} />
+                            }
+                            {
+                                fileIsSended && !fileIsOkay &&
+                                <ErrorMessage message={"errore cambio immggg"} />
+                            }
                             <h3>Nuova immagine del profilo:</h3>
                             <div className="custom-file mb-2">
                                 <input 
@@ -262,8 +254,14 @@ const UpdateProfilePage = () => {
                                 <label 
                                     className="custom-file-label"
                                     for="customFile">
-                                    <span >Scegli file</span>
-                                    {/* <span >{{fileName}}</span> */}
+                                    {
+                                        !fileIsSelected &&
+                                        <span >Scegli file</span>
+                                    }
+                                    {
+                                        fileIsSelected &&
+                                        <span >{fileName}</span>
+                                    }
                                 </label>
                                     <button 
                                     className={`btn btn-primary ${classes['btn-primary']}`}>Carica la foto</button>

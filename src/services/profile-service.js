@@ -231,9 +231,6 @@ export const uploadProfilePic = (uploadData) => {
             method: 'POST',
             headers: {
                 'Authorization': 'Bearer ' + token,
-                // 'Content-type': 'multipart/form-data: boundary=<calculated when request is sent>',
-                // 'Content-Type': 'application/x-www-form-urlencoded'
-                // 'Content-Type': 'multipart/form-data',
             },
             body: uploadData
         });
