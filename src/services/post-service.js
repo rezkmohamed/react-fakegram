@@ -94,3 +94,25 @@ export const addNewPost = (img, description) => {
 
     return addPost();
 }
+
+export const addNewPostWithFileImg = (uploadData) => {
+    const token = localStorage.getItem('token');
+    const addNewPostWithFileImgReq = async () => {
+        const response = await fetch(urlBase + "newpost", {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            },
+            body: uploadData
+        });
+
+        if(!response.ok){
+            console.log('error: ' + response.status);
+            throw new Error('Error: ' + response.status);
+        }
+
+        return true;
+    }
+
+    return addNewPostWithFileImgReq();
+};
