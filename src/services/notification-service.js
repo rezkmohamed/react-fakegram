@@ -54,3 +54,23 @@ export const fetchNotifications = () => {
 
     return fetchNotificationsReq();
 };
+
+export const setNotificationsAsSeen = () => {
+    const token = localStorage.getItem('token');
+    const setNotificationsAsSeenReq = async () => {
+        const response = await fetch(urlBase + "setseen", {
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            }
+        });
+
+        if(!response.ok){
+            console.log('error: ' + response.status);
+            throw new Error('Error: ' + response.status);
+        }
+
+        return true;
+    }
+
+    return setNotificationsAsSeenReq();
+};
