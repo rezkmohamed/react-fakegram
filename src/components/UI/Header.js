@@ -10,16 +10,20 @@ import houseDoor from '../../icons/house-door.svg';
 import AuthContext from "../../services/auth-context";
 import questionIcon from "../../icons/patch-question.svg";
 import bellIcon from "../../icons/bell.svg";
+import bellFillIcon from "../../icons/bell-fill.svg";
 import { fetchNotifications } from "../../services/notification-service";
 import { useDispatch } from "react-redux";
 import { notificationsActions } from "../../store/notifications-slice";
+import { useSelector } from "react-redux";
+
 
 const Header = () => {
     const [searchedUser, setSearchedUser] = useState('');
     const history = useHistory('');
     const authCtx = useContext(AuthContext);
     const dispatch = useDispatch();
-
+    const newNotifications = useSelector((state) => state.notifications.value.newNotifications);
+    console.log(newNotifications);
 
     setInterval(() => {
         console.log('fetching notifications...');
@@ -79,12 +83,24 @@ const Header = () => {
                         </Link>
                     </div>
 
-                    <div className={styles['navigation-icon']}>
-                        <Link to="/notifications" className={styles['navigation-link']}>
-                            <img src={bellIcon} alt="link"/>
-                        </Link>
-                    </div>
+                    {
+                        !newNotifications &&
+                        <div className={styles['navigation-icon']}>
+                            <Link to="/notifications" className={styles['navigation-link']}>
+                                <img src={bellIcon} alt="link"/>
+                            </Link>
+                        </div>
+                    }
 
+                    
+                    {
+                        newNotifications &&
+                        <div className={styles['navigation-icon']}>
+                            <Link to="/notifications" className={styles['navigation-link']}>
+                                <img src={bellFillIcon} alt="link"/>
+                            </Link>
+                        </div>
+                    }
 
                     <div className={styles['navigation-icon']}>
                         <Link to="/pending" className={styles['navigation-link']}>

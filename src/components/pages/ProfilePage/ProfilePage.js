@@ -78,7 +78,7 @@ const ProfilePage = () => {
                 setError("Error");
                 setIsLoadingPosts(false);
             });
-    
+
             checkIsFollowed(idProfile)
             .then(response => {
                 if(response){
@@ -98,6 +98,8 @@ const ProfilePage = () => {
                 setIsLoadingProfile(false);
                 setIsLoadingPosts(false);
             })
+
+            
         }
     }, [idProfile, isMyProfile]);
 

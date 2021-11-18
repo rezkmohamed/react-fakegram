@@ -7,11 +7,11 @@ const initialStateValue = {
 
 
 const checkNewNotification = (notifications) => {
-    notifications.forEach(notification => {
-        if(notification.seen){
+    for(let notification of notifications) {
+        if(!notification.seen){
             return true;
         }
-    });
+    }
 
     return false;
 };
