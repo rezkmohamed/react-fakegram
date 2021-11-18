@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Provider } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 import { Redirect,Route } from 'react-router';
 import './App.css';
 import store from './store';
@@ -18,13 +18,15 @@ import SearchPage from './components/pages/SearchPage/SearchPage';
 import UpdateProfilePage from './components/pages/UpdateProfilePage/UpdateProfilePage';
 import AuthContext from './services/auth-context';
 import NotificationsPage from './components/pages/NotificationsPage/NotificationsPage';
+import { conversationsActions } from './store/conversations-slice';
 
 function App() {
   const authCtx = useContext(AuthContext);
+  const dispatch = useDispatch();
 
   return (
     <React.Fragment>
-      <Provider store={store}>
+      {/* <Provider store={store}> */}
       {
         authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
         <Route path="/" exact component={Homepage}/>
@@ -81,19 +83,19 @@ function App() {
         authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
         <Route path="/answerquestion" exact component={AnswerToPendingQuestionPage} />
       }
-
       {
-        <Route path="/chat" exact component={ChatComponent} />
+        <Route path="/chat" onLeave={() => {
+          dispatch(conversationsActions.setSelectedConversation(null));
+        }} exact component={ChatComponent} />
       }
-            {
+      {
         !authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
         <Route path='*'>
           <Redirect to='/login' />
         </Route>
-      } 
-
-      {/* 
-      {     
+      }
+      {/*
+      {
         authCtx.isLoggedIn && !authCtx.pendingStorageCheck &&
         <Route path='*'>
           <Redirect to='/' />
@@ -104,9 +106,9 @@ function App() {
         <Route path='*'>
           <Redirect to='/login' />
         </Route>
-      } 
+      }
       */}
-      </Provider>
+      {/* </Provider> */}
     </React.Fragment>
   );
 }

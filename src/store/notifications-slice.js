@@ -16,6 +16,7 @@ const checkNewNotification = (notifications) => {
     return false;
 };
 
+
 const notificationsSlice = createSlice({
     name: 'notifications',
     initialState: { value: initialStateValue},
@@ -24,10 +25,8 @@ const notificationsSlice = createSlice({
             state.value.notifications = [...action.payload];
             state.value.newNotifications = checkNewNotification(action.payload);
         },
-        setNotificationsAsSeen: (state, action) => {
-            /**
-             * TODO
-             */
+        setNotificationsAsSeen: (state) => {
+            state.value.newNotifications = false;
         }
     }
 });

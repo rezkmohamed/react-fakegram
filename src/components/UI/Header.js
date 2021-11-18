@@ -23,7 +23,6 @@ const Header = () => {
     const authCtx = useContext(AuthContext);
     const dispatch = useDispatch();
     const newNotifications = useSelector((state) => state.notifications.value.newNotifications);
-    console.log(newNotifications);
 
     setInterval(() => {
         console.log('fetching notifications...');

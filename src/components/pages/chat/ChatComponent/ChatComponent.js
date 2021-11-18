@@ -8,7 +8,6 @@ import { fetchProfileLogged } from '../../../../services/profile-service';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { conversationsActions } from '../../../../store/conversations-slice';
-
 const ChatComponent = () => {
     const dispatch = useDispatch();
     // const conversations = useSelector((state) => state.conversations.value.conversations);
@@ -18,14 +17,13 @@ const ChatComponent = () => {
     const [profile, setProfile] = useState(null);
     const selectedConversation = useSelector((state) => state.conversations.value.conversationSelected);
     const [lastMessageSelectedConversation, setLastMessageSelectedConversation] = useState('');
-    
+
     useEffect(() => {
         setIsLoadingConversations(true);
         setError(false);
         let id = localStorage.getItem('id');
         setIdProfile(id);
         openWebSocket();
-
 
         fetchConversationsForProfile()
         .then(response => {
@@ -55,6 +53,11 @@ const ChatComponent = () => {
             setIsLoadingConversations(false);
             setError(true);
         });
+
+        return () => {
+            dispatch(conversationsActions.setSelectedConversation(null));
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [idProfile]);
 
 
@@ -74,7 +77,7 @@ const ChatComponent = () => {
                             <div className={classes['chat-placeholder']}>
                                 <h2>Nessuna conversazione selezionata</h2>
                                 <p>fakeGram ti permette di messaggiare con altre persone. Ricordati di <br /> mantenere un comportamento corretto e rispettoso.</p>
-                            </div> 
+                            </div>
                         }
                         {
                             selectedConversation &&

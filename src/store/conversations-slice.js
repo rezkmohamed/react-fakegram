@@ -20,6 +20,7 @@ const conversationsSlice = createSlice({
             /**
              * copia del payload
              */
+            console.log('setting conversationSelected: ' + action.payload);
             state.value.conversationSelected = JSON.parse(JSON.stringify(action.payload));
             ;
         },
