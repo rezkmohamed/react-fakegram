@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Header from '../../UI/Header';
 import Notification from '../../UI/Notification';
 import classes from './NotificationsPage.module.scss';
-import { fetchNotifications } from '../../../services/notification-service';
+import { fetchNotifications, setNotificationsAsSeen } from '../../../services/notification-service';
 import { notificationsActions } from '../../../store/notifications-slice';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react/cjs/react.development';
@@ -23,6 +23,13 @@ const NotificationsPage = () => {
         }).catch(err => {
             window.alert('ERRORREEEEE::::: ' + err.message);
             setIsLoading(false);
+        });
+
+        setNotificationsAsSeen()
+        .then(res => {
+            dispatch(notificationsActions.setNotificationsAsSeen());
+        }).catch(err => {
+            window.alert('PROBLEMA CON IL SETTAGGIO A VISUALIZZATO DELLE NOTIFICHE. ERRORE::::: ' + err.message);
         });
     }, []);
 
