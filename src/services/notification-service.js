@@ -59,6 +59,7 @@ export const setNotificationsAsSeen = () => {
     const token = localStorage.getItem('token');
     const setNotificationsAsSeenReq = async () => {
         const response = await fetch(urlBase + "setseen", {
+            method: 'PUT',
             headers: {
                 'Authorization': 'Bearer ' + token,
             }
